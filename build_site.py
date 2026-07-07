@@ -52,7 +52,6 @@ def make_nav(active):
 
     return html
 
-
 def base_html(title, active, body):
     return f"""
 <!DOCTYPE html>
