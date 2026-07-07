@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import json
 
 os.makedirs("site", exist_ok=True)
 
@@ -45,12 +46,12 @@ def make_nav(active):
     ]
 
     html = ""
-
     for href, label in links:
         cls = "active" if label == active else ""
         html += f'<a class="{cls}" href="{href}">{label}</a>'
 
     return html
+
 
 def base_html(title, active, body):
     return f"""
@@ -59,6 +60,8 @@ def base_html(title, active, body):
 <head>
 <meta charset="UTF-8">
 <title>{title}</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 body {{
@@ -111,6 +114,29 @@ main {{
     background: #111827;
     padding: 24px;
     border-radius: 18px;
+    margin-bottom: 34px;
+}}
+
+.chart-grid {{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 34px;
+}}
+
+.chart-card {{
+    background: #111827;
+    padding: 24px;
+    border-radius: 18px;
+}}
+
+.chart-card h2 {{
+    margin-top: 0;
+    color: #facc15;
+}}
+
+canvas {{
+    max-height: 360px;
 }}
 
 .section-header {{
@@ -160,7 +186,6 @@ th {{
     background: #1e293b;
     padding: 12px;
     cursor: pointer;
-    user-select: none;
 }}
 
 td {{
@@ -193,7 +218,7 @@ tr:hover {{
 
 .home-grid {{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 24px;
 }}
 
@@ -226,15 +251,6 @@ tr:hover {{
     border-radius: 18px;
     padding: 28px;
     width: 360px;
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
-}}
-
-.modal h2 {{
-    margin-top: 0;
-}}
-
-.modal p {{
-    color: #cbd5e1;
 }}
 
 .close-btn {{
@@ -249,7 +265,11 @@ tr:hover {{
     cursor: pointer;
 }}
 
-@media (max-width: 900px) {{
+@media (max-width: 1000px) {{
+    .chart-grid {{
+        grid-template-columns: 1fr;
+    }}
+
     .home-grid {{
         grid-template-columns: 1fr;
     }}
@@ -281,8 +301,36 @@ tr:hover {{
 """
 
 
+def make_chart_data(df, name_col):
+    pick_top = df.sort_values("pick_rate", ascending=False).head(10)
+    avg_top = df.sort_values("avg_place", ascending=True).head(10)
+    win_top = df.sort_values("win_rate", ascending=False).head(10)
+    scatter = df[df["games"] >= 100].copy()
+
+    return {
+        "pick_labels": pick_top[name_col].tolist(),
+        "pick_values": pick_top["pick_rate"].tolist(),
+
+        "avg_labels": avg_top[name_col].tolist(),
+        "avg_values": avg_top["avg_place"].tolist(),
+
+        "win_labels": win_top[name_col].tolist(),
+        "win_values": win_top["win_rate"].tolist(),
+
+        "scatter_values": [
+            {
+                "x": float(row["pick_rate"]),
+                "y": float(row["avg_place"]),
+                "name": str(row[name_col]),
+            }
+            for _, row in scatter.iterrows()
+        ],
+    }
+
+
 def make_table_page(page):
     df = pd.read_csv(page["file"])
+    chart_data = make_chart_data(df, page["name_col"])
 
     rows = ""
 
@@ -313,10 +361,34 @@ def make_table_page(page):
         </tr>
         """
 
+    chart_json = json.dumps(chart_data, ensure_ascii=False)
+
     html = base_html(
         title=page["title"],
         active=page["active"],
         body=f"""
+        <div class="chart-grid">
+            <div class="chart-card">
+                <h2>채용률 TOP 10</h2>
+                <canvas id="pickChart"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h2>평균 등수 TOP 10</h2>
+                <canvas id="avgChart"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h2>승률 TOP 10</h2>
+                <canvas id="winChart"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h2>채용률 vs 평균 등수</h2>
+                <canvas id="scatterChart"></canvas>
+            </div>
+        </div>
+
         <section class="card">
             <div class="section-header">
                 <h2>{page["title"]}</h2>
@@ -336,374 +408,4 @@ def make_table_page(page):
                 <thead>
                     <tr>
                         <th onclick="sortTable(0, 'text')">이름</th>
-                        <th onclick="sortTable(1, 'text')">티어</th>
-                        <th onclick="sortTable(2, 'number')">게임 수</th>
-                        <th onclick="sortTable(3, 'number')">채용률</th>
-                        <th onclick="sortTable(4, 'number')">평균 등수</th>
-                        <th onclick="sortTable(5, 'number')">TOP4률</th>
-                        <th onclick="sortTable(6, 'number')">1등률</th>
-                        <th onclick="sortTable(7, 'number')">점수</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {rows}
-                </tbody>
-            </table>
-        </section>
-
-        <div id="modalBg" class="modal-bg" onclick="closeModal()">
-            <div class="modal" onclick="event.stopPropagation()">
-                <h2 id="modalName"></h2>
-                <p id="modalTier"></p>
-                <p id="modalGames"></p>
-                <p id="modalPick"></p>
-                <p id="modalAvg"></p>
-                <p id="modalTop4"></p>
-                <p id="modalWin"></p>
-                <p id="modalScore"></p>
-                <button class="close-btn" onclick="closeModal()">닫기</button>
-            </div>
-        </div>
-
-        <script>
-        let currentTier = "ALL";
-        let sortDirections = {{}};
-
-        function filterTier(tier) {{
-            currentTier = tier;
-            applyFilters();
-        }}
-
-        document.getElementById("searchInput").addEventListener("input", applyFilters);
-
-        function applyFilters() {{
-            const search = document.getElementById("searchInput").value.toLowerCase();
-            const rows = document.querySelectorAll(".tier-row");
-
-            rows.forEach(row => {{
-                const tierMatch = currentTier === "ALL" || row.dataset.tier === currentTier;
-                const nameMatch = row.dataset.name.includes(search);
-
-                row.style.display = tierMatch && nameMatch ? "" : "none";
-            }});
-        }}
-
-        function sortTable(colIndex, type) {{
-            const table = document.getElementById("dataTable");
-            const tbody = table.querySelector("tbody");
-            const rows = Array.from(tbody.querySelectorAll("tr"));
-
-            const key = colIndex;
-            sortDirections[key] = !sortDirections[key];
-
-            rows.sort((a, b) => {{
-                let aText = a.children[colIndex].innerText.replace("%", "").trim();
-                let bText = b.children[colIndex].innerText.replace("%", "").trim();
-
-                if (type === "number") {{
-                    aText = parseFloat(aText);
-                    bText = parseFloat(bText);
-                }}
-
-                if (aText < bText) return sortDirections[key] ? -1 : 1;
-                if (aText > bText) return sortDirections[key] ? 1 : -1;
-                return 0;
-            }});
-
-            rows.forEach(row => tbody.appendChild(row));
-        }}
-
-        document.querySelectorAll(".tier-row").forEach(row => {{
-            row.addEventListener("click", () => {{
-                document.getElementById("modalName").innerText = row.dataset.displayName;
-                document.getElementById("modalTier").innerText = "티어: " + row.dataset.tier;
-                document.getElementById("modalGames").innerText = "게임 수: " + row.dataset.games;
-                document.getElementById("modalPick").innerText = "채용률: " + row.dataset.pickRate + "%";
-                document.getElementById("modalAvg").innerText = "평균 등수: " + row.dataset.avgPlace;
-                document.getElementById("modalTop4").innerText = "TOP4률: " + row.dataset.top4 + "%";
-                document.getElementById("modalWin").innerText = "1등률: " + row.dataset.win + "%";
-                document.getElementById("modalScore").innerText = "점수: " + row.dataset.score;
-
-                document.getElementById("modalBg").style.display = "flex";
-            }});
-        }});
-
-        function closeModal() {{
-            document.getElementById("modalBg").style.display = "none";
-        }}
-        </script>
-        """
-    )
-
-    with open(f"site/{page['output']}", "w", encoding="utf-8") as f:
-        f.write(html)
-
-
-index_html = base_html(
-    title="TFT 통계 홈",
-    active="홈",
-    body="""
-    <div class="home-grid">
-        <a class="home-card" href="units.html">
-            <h2>기물 티어표</h2>
-            <p>기물별 평균 등수, TOP4률, 1등률, 채용률을 확인합니다.</p>
-        </a>
-
-        <a class="home-card" href="items.html">
-            <h2>아이템 티어표</h2>
-            <p>아이템별 성능과 채용률을 확인합니다.</p>
-        </a>
-
-        <a class="home-card" href="traits.html">
-            <h2>시너지 티어표</h2>
-            <p>시너지별 평균 성적과 티어를 확인합니다.</p>
-        </a>
-        <a class="home-card" href="about.html">
-    <h2>프로젝트 소개</h2>
-    <p>
-        데이터 수집 과정, 분석 방법,
-        티어 계산 기준 및 프로젝트 설명을 확인합니다.
-    </p>
-</a>
-    </div>
-    """
-)
-
-with open("site/index.html", "w", encoding="utf-8") as f:
-    f.write(index_html)
-
-for page in PAGES:
-    make_table_page(page)
-
-about_html = base_html(
-    title="프로젝트 소개",
-    active="프로젝트 소개",
-    body="""
-    <section class="card">
-
-        <h2>📊 프로젝트 소개</h2>
-
-        <p>
-        Riot Games API를 이용하여 한국 TFT 챌린저 랭크 데이터를
-        수집하고 분석한 프로젝트입니다.
-        </p>
-
-        <hr>
-
-        <h2>📈 데이터 규모</h2>
-
-        <div class="home-grid">
-
-            <div class="home-card">
-                <h2>4,466</h2>
-                <p>수집 경기 수</p>
-            </div>
-
-            <div class="home-card">
-                <h2>35,539</h2>
-                <p>플레이어 데이터</p>
-            </div>
-
-            <div class="home-card">
-                <h2>3</h2>
-                <p>분석 카테고리</p>
-            </div>
-
-        </div>
-
-        <hr>
-
-        <h2>🧮 티어 계산 기준</h2>
-
-        <p>
-        티어 점수는 다음 데이터를 조합하여 계산했습니다.
-        </p>
-
-        <ul>
-            <li>평균 등수</li>
-            <li>TOP4 확률</li>
-            <li>1등 확률</li>
-            <li>채용률</li>
-        </ul>
-
-        <p>
-        성적이 좋고 많은 경기에서 사용된 데이터를
-        높은 티어로 평가했습니다.
-        </p>
-
-        <hr>
-
-        <h2>📖 표 보는 방법</h2>
-
-        <ul>
-            <li>게임 수 : 해당 데이터가 등장한 횟수</li>
-            <li>채용률 : 전체 경기 중 사용된 비율</li>
-            <li>평균 등수 : 평균 최종 등수</li>
-            <li>TOP4률 : 4등 이내 비율</li>
-            <li>1등률 : 우승 비율</li>
-            <li>점수 : 종합 평가 점수</li>
-        </ul>
-
-        <hr>
-
-        <h2>⚙️ 데이터 수집 및 분석 파이프라인</h2>
-
-        <div style="
-        background:#020617;
-        padding:30px;
-        border-radius:20px;
-        margin-top:20px;
-        ">
-
-        <div style="
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        font-size:22px;
-        line-height:2.2;
-        ">
-
-        <div>🎮 Riot API</div>
-        <div>↓</div>
-
-        <div>🏆 Challenger Summoner 수집</div>
-        <div>↓</div>
-
-        <div>🎯 Match ID 수집</div>
-        <div>↓</div>
-
-        <div>📁 Match Data 다운로드</div>
-        <div>↓</div>
-
-        <div>🧹 Parser 전처리</div>
-        <div>↓</div>
-
-        <div>📊 Pandas 통계 분석</div>
-        <div>↓</div>
-
-        <div>⭐ 티어 계산</div>
-        <div>↓</div>
-
-        <div>🌐 GitHub Pages 웹사이트 생성</div>
-
-        </div>
-        </div>
-
-        <hr>
-
-        <h2>📂 생성된 데이터</h2>
-
-        <ul>
-            <li>matches.jsonl</li>
-            <li>player_dataset.csv</li>
-            <li>unit_stats.csv</li>
-            <li>item_stats.csv</li>
-            <li>trait_stats.csv</li>
-            <li>unit_tier.csv</li>
-            <li>item_tier.csv</li>
-            <li>trait_tier.csv</li>
-        </ul>
-
-        <hr>
-
-        <h2>🛠 사용 기술</h2>
-
-        <ul>
-            <li>Python</li>
-            <li>Pandas</li>
-            <li>Riot API</li>
-            <li>HTML / CSS / JavaScript</li>
-            <li>GitHub Pages</li>
-        </ul>
-
-        <hr>
-
-        <h2>👨‍💻 제작자</h2>
-
-        <p>
-        엄정훈<br>
-        TFT Challenger Data Analysis Project
-        </p>
-
-    </section>
-    """
-)
-
-with open("site/about.html", "w", encoding="utf-8") as f:
-    f.write(about_html)
-
-print("사이트 생성 완료!")
-
-about_html = base_html(
-    title="프로젝트 소개",
-    active="프로젝트 소개",
-    body="""
-    <section class="card">
-        <h2>📊 프로젝트 소개</h2>
-        <p>Riot Games API를 이용하여 한국 TFT 챌린저 랭크 데이터를 수집하고 분석한 프로젝트입니다.</p>
-
-        <hr>
-
-        <h2>📈 데이터 규모</h2>
-        <ul>
-            <li>수집 경기 수: 4,466경기</li>
-            <li>플레이어 데이터: 35,539명</li>
-            <li>분석 카테고리: 기물, 아이템, 시너지</li>
-        </ul>
-
-        <hr>
-
-        <h2>🧮 티어 계산 기준</h2>
-        <p>평균 등수, TOP4률, 1등률, 채용률을 조합하여 티어 점수를 계산했습니다.</p>
-
-        <hr>
-
-        <h2>📖 표 보는 방법</h2>
-        <ul>
-            <li>게임 수: 해당 데이터가 등장한 횟수</li>
-            <li>채용률: 전체 데이터 중 사용된 비율</li>
-            <li>평균 등수: 평균 최종 등수</li>
-            <li>TOP4률: 4등 이내 비율</li>
-            <li>1등률: 우승 비율</li>
-            <li>점수: 종합 평가 점수</li>
-        </ul>
-
-        <hr>
-
-        <h2>⚙️ 데이터 수집 및 분석 파이프라인</h2>
-        <pre style="background:#020617; padding:20px; border-radius:15px; color:#facc15;">
-Riot API
-↓
-Challenger Summoner 수집
-↓
-Match ID 수집
-↓
-Match Data 다운로드
-↓
-Parser 전처리
-↓
-Pandas 통계 분석
-↓
-티어 계산
-↓
-GitHub Pages 웹사이트 생성
-        </pre>
-
-        <hr>
-
-        <h2>🛠 사용 기술</h2>
-        <ul>
-            <li>Python</li>
-            <li>Pandas</li>
-            <li>Riot API</li>
-            <li>HTML / CSS / JavaScript</li>
-            <li>GitHub Pages</li>
-        </ul>
-    </section>
-    """
-)
-
-with open("site/about.html", "w", encoding="utf-8") as f:
-    f.write(about_html)
-
-print("about.html 생성 완료!")
+                        <th onclick="sortTable(1, 'text')">티어
