@@ -44,7 +44,6 @@ def make_nav(active):
     ]
 
     html = ""
-
     for href, label in links:
         cls = "active" if label == active else ""
         html += f'<a class="{cls}" href="{href}">{label}</a>'
@@ -111,7 +110,6 @@ main {{
     background: #111827;
     padding: 24px;
     border-radius: 18px;
-    box-shadow: 0 0 25px rgba(0,0,0,0.25);
 }}
 
 .section-header {{
@@ -160,8 +158,6 @@ table {{
 th {{
     background: #1e293b;
     padding: 12px;
-    position: sticky;
-    top: 0;
 }}
 
 td {{
@@ -175,18 +171,8 @@ tr:hover {{
 }}
 
 .name-cell {{
-    display: flex;
-    align-items: center;
-    gap: 10px;
     text-align: left;
-}}
-
-.icon {{
-    width: 34px;
-    height: 34px;
-    border-radius: 8px;
-    object-fit: cover;
-    background: #020617;
+    font-weight: bold;
 }}
 
 .badge {{
@@ -195,30 +181,11 @@ tr:hover {{
     border-radius: 999px;
 }}
 
-.badge-S {{
-    background: #facc15;
-    color: #111827;
-}}
-
-.badge-A {{
-    background: #38bdf8;
-    color: #111827;
-}}
-
-.badge-B {{
-    background: #4ade80;
-    color: #111827;
-}}
-
-.badge-C {{
-    background: #c084fc;
-    color: #111827;
-}}
-
-.badge-D {{
-    background: #f87171;
-    color: #111827;
-}}
+.badge-S {{ background: #facc15; color: #111827; }}
+.badge-A {{ background: #38bdf8; color: #111827; }}
+.badge-B {{ background: #4ade80; color: #111827; }}
+.badge-C {{ background: #c084fc; color: #111827; }}
+.badge-D {{ background: #f87171; color: #111827; }}
 
 .home-grid {{
     display: grid;
@@ -237,10 +204,6 @@ tr:hover {{
 
 .home-card:hover {{
     background: #1e293b;
-}}
-
-.home-card h2 {{
-    margin-top: 0;
 }}
 
 @media (max-width: 900px) {{
@@ -284,19 +247,10 @@ def make_table_page(page):
         name = safe_text(row[page["name_col"]])
         raw = safe_text(row[page["raw_col"]])
         tier = safe_text(row["tier"])
-        icon = safe_text(row.get("icon_url", ""))
-
-        if icon and icon != "nan":
-            icon_html = f'<img class="icon" src="{icon}" onerror="this.style.display=\'none\'">'
-        else:
-            icon_html = ""
 
         rows += f"""
         <tr class="tier-row" data-tier="{tier}" data-name="{name.lower()} {raw.lower()}">
-            <td class="name-cell">
-                {icon_html}
-                <span>{name}</span>
-            </td>
+            <td class="name-cell">{name}</td>
             <td><span class="badge badge-{tier}">{tier}</span></td>
             <td>{row["games"]}</td>
             <td>{row["pick_rate"]}%</td>
@@ -404,4 +358,3 @@ for page in PAGES:
     make_table_page(page)
 
 print("사이트 생성 완료!")
-print("site/index.html, site/units.html, site/items.html, site/traits.html 생성 완료")

@@ -56,7 +56,6 @@ main {
     background: #111827;
     padding: 24px;
     border-radius: 18px;
-    box-shadow: 0 0 25px rgba(0,0,0,0.25);
 }
 
 .section-header {
@@ -105,8 +104,6 @@ table {
 th {
     background: #1e293b;
     padding: 12px;
-    position: sticky;
-    top: 0;
 }
 
 td {
@@ -120,18 +117,8 @@ tr:hover {
 }
 
 .name-cell {
-    display: flex;
-    align-items: center;
-    gap: 10px;
     text-align: left;
-}
-
-.icon {
-    width: 34px;
-    height: 34px;
-    border-radius: 8px;
-    object-fit: cover;
-    background: #020617;
+    font-weight: bold;
 }
 
 .badge {
@@ -140,30 +127,11 @@ tr:hover {
     border-radius: 999px;
 }
 
-.badge-S {
-    background: #facc15;
-    color: #111827;
-}
-
-.badge-A {
-    background: #38bdf8;
-    color: #111827;
-}
-
-.badge-B {
-    background: #4ade80;
-    color: #111827;
-}
-
-.badge-C {
-    background: #c084fc;
-    color: #111827;
-}
-
-.badge-D {
-    background: #f87171;
-    color: #111827;
-}
+.badge-S { background: #facc15; color: #111827; }
+.badge-A { background: #38bdf8; color: #111827; }
+.badge-B { background: #4ade80; color: #111827; }
+.badge-C { background: #c084fc; color: #111827; }
+.badge-D { background: #f87171; color: #111827; }
 
 .home-grid {
     display: grid;
@@ -182,10 +150,6 @@ tr:hover {
 
 .home-card:hover {
     background: #1e293b;
-}
-
-.home-card h2 {
-    margin-top: 0;
 }
 
 @media (max-width: 900px) {
@@ -245,10 +209,7 @@ tr:hover {
                 <tbody>
                     
         <tr class="tier-row" data-tier="S" data-name="정령족 10 astronaut:10">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_astronaut.tft_set17.tex" onerror="this.style.display='none'">
-                <span>정령족 10</span>
-            </td>
+            <td class="name-cell">정령족 10</td>
             <td><span class="badge badge-S">S</span></td>
             <td>110</td>
             <td>0.31%</td>
@@ -259,10 +220,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="S" data-name="별돌보미 8 mountain:8">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_stargazer.tft_set17.tex" onerror="this.style.display='none'">
-                <span>별돌보미 8</span>
-            </td>
+            <td class="name-cell">별돌보미 8</td>
             <td><span class="badge badge-S">S</span></td>
             <td>196</td>
             <td>0.55%</td>
@@ -273,10 +231,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="S" data-name="우주 그루브 7 spacegroove:7">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_spacegroove.tft_set17.tex" onerror="this.style.display='none'">
-                <span>우주 그루브 7</span>
-            </td>
+            <td class="name-cell">우주 그루브 7</td>
             <td><span class="badge badge-S">S</span></td>
             <td>1028</td>
             <td>2.89%</td>
@@ -287,10 +242,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="S" data-name="파티광 1 blitzcrankuniquetrait:1">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_partyanimal.tft_set17.tex" onerror="this.style.display='none'">
-                <span>파티광 1</span>
-            </td>
+            <td class="name-cell">파티광 1</td>
             <td><span class="badge badge-S">S</span></td>
             <td>12361</td>
             <td>34.78%</td>
@@ -301,10 +253,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="S" data-name="별돌보미 7 mountain:7">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_stargazer.tft_set17.tex" onerror="this.style.display='none'">
-                <span>별돌보미 7</span>
-            </td>
+            <td class="name-cell">별돌보미 7</td>
             <td><span class="badge badge-S">S</span></td>
             <td>361</td>
             <td>1.02%</td>
@@ -315,10 +264,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="S" data-name="도전자 5 astrait:5">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_challenger.tft_set17.tex" onerror="this.style.display='none'">
-                <span>도전자 5</span>
-            </td>
+            <td class="name-cell">도전자 5</td>
             <td><span class="badge badge-S">S</span></td>
             <td>135</td>
             <td>0.38%</td>
@@ -329,10 +275,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="A" data-name="저격수 4 rangedtrait:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_6_sniper.tex" onerror="this.style.display='none'">
-                <span>저격수 4</span>
-            </td>
+            <td class="name-cell">저격수 4</td>
             <td><span class="badge badge-A">A</span></td>
             <td>135</td>
             <td>0.38%</td>
@@ -343,10 +286,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="A" data-name="전달자 3 manatrait:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_channeler.tft_set17.tex" onerror="this.style.display='none'">
-                <span>전달자 3</span>
-            </td>
+            <td class="name-cell">전달자 3</td>
             <td><span class="badge badge-A">A</span></td>
             <td>1328</td>
             <td>3.74%</td>
@@ -357,10 +297,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="A" data-name="메카 6 mecha:6">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_mecha.tft_set17.tex" onerror="this.style.display='none'">
-                <span>메카 6</span>
-            </td>
+            <td class="name-cell">메카 6</td>
             <td><span class="badge badge-A">A</span></td>
             <td>513</td>
             <td>1.44%</td>
@@ -371,10 +308,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="A" data-name="지휘관 1 sonauniquetrait:1">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_commander.tft_set17.tex" onerror="this.style.display='none'">
-                <span>지휘관 1</span>
-            </td>
+            <td class="name-cell">지휘관 1</td>
             <td><span class="badge badge-A">A</span></td>
             <td>6854</td>
             <td>19.29%</td>
@@ -385,10 +319,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="A" data-name="습격자 6 meleetrait:6">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_16_slayer.tex" onerror="this.style.display='none'">
-                <span>습격자 6</span>
-            </td>
+            <td class="name-cell">습격자 6</td>
             <td><span class="badge badge-A">A</span></td>
             <td>289</td>
             <td>0.81%</td>
@@ -399,10 +330,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="A" data-name="어둠의 여인 1 morganauniquetrait:1">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_darklady.tft_set17.tex" onerror="this.style.display='none'">
-                <span>어둠의 여인 1</span>
-            </td>
+            <td class="name-cell">어둠의 여인 1</td>
             <td><span class="badge badge-A">A</span></td>
             <td>8059</td>
             <td>22.68%</td>
@@ -413,10 +341,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="A" data-name="저격수 3 rangedtrait:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_6_sniper.tex" onerror="this.style.display='none'">
-                <span>저격수 3</span>
-            </td>
+            <td class="name-cell">저격수 3</td>
             <td><span class="badge badge-A">A</span></td>
             <td>604</td>
             <td>1.7%</td>
@@ -427,10 +352,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="A" data-name="암흑의 별 6 darkstar:6">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_darkstar.tft_set17.tex" onerror="this.style.display='none'">
-                <span>암흑의 별 6</span>
-            </td>
+            <td class="name-cell">암흑의 별 6</td>
             <td><span class="badge badge-A">A</span></td>
             <td>2137</td>
             <td>6.01%</td>
@@ -441,10 +363,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="A" data-name="신성 결투가 1 fiorauniquetrait:1">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_divineduelist.tft_set17.tex" onerror="this.style.display='none'">
-                <span>신성 결투가 1</span>
-            </td>
+            <td class="name-cell">신성 결투가 1</td>
             <td><span class="badge badge-A">A</span></td>
             <td>5358</td>
             <td>15.08%</td>
@@ -455,10 +374,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="A" data-name="우주 그루브 1 spacegroove:1">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_spacegroove.tft_set17.tex" onerror="this.style.display='none'">
-                <span>우주 그루브 1</span>
-            </td>
+            <td class="name-cell">우주 그루브 1</td>
             <td><span class="badge badge-A">A</span></td>
             <td>11243</td>
             <td>31.64%</td>
@@ -469,10 +385,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="A" data-name="싸움꾼 6 hptank:6">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_brawler.tex" onerror="this.style.display='none'">
-                <span>싸움꾼 6</span>
-            </td>
+            <td class="name-cell">싸움꾼 6</td>
             <td><span class="badge badge-A">A</span></td>
             <td>718</td>
             <td>2.02%</td>
@@ -483,10 +396,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="A" data-name="선봉대 2 shieldtank:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_12_vanguard.tft_set12.tex" onerror="this.style.display='none'">
-                <span>선봉대 2</span>
-            </td>
+            <td class="name-cell">선봉대 2</td>
             <td><span class="badge badge-A">A</span></td>
             <td>11835</td>
             <td>33.3%</td>
@@ -497,10 +407,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="A" data-name="파멸자 1 vexuniquetrait:1">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_doomer.tft_set17.tex" onerror="this.style.display='none'">
-                <span>파멸자 1</span>
-            </td>
+            <td class="name-cell">파멸자 1</td>
             <td><span class="badge badge-A">A</span></td>
             <td>4324</td>
             <td>12.17%</td>
@@ -511,10 +418,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="A" data-name="암흑의 별 2 darkstar:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_darkstar.tft_set17.tex" onerror="this.style.display='none'">
-                <span>암흑의 별 2</span>
-            </td>
+            <td class="name-cell">암흑의 별 2</td>
             <td><span class="badge badge-A">A</span></td>
             <td>10460</td>
             <td>29.43%</td>
@@ -525,10 +429,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="A" data-name="도전자 4 astrait:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_challenger.tft_set17.tex" onerror="this.style.display='none'">
-                <span>도전자 4</span>
-            </td>
+            <td class="name-cell">도전자 4</td>
             <td><span class="badge badge-A">A</span></td>
             <td>442</td>
             <td>1.24%</td>
@@ -539,10 +440,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="A" data-name="전달자 2 manatrait:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_channeler.tft_set17.tex" onerror="this.style.display='none'">
-                <span>전달자 2</span>
-            </td>
+            <td class="name-cell">전달자 2</td>
             <td><span class="badge badge-A">A</span></td>
             <td>6679</td>
             <td>18.79%</td>
@@ -553,10 +451,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="A" data-name="요새 2 resisttank:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_9_bastion.tex" onerror="this.style.display='none'">
-                <span>요새 2</span>
-            </td>
+            <td class="name-cell">요새 2</td>
             <td><span class="badge badge-A">A</span></td>
             <td>14397</td>
             <td>40.51%</td>
@@ -567,10 +462,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="A" data-name="여행자 3 flextrait:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_voyager.tft_set17.tex" onerror="this.style.display='none'">
-                <span>여행자 3</span>
-            </td>
+            <td class="name-cell">여행자 3</td>
             <td><span class="badge badge-A">A</span></td>
             <td>2271</td>
             <td>6.39%</td>
@@ -581,10 +473,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="여행자 2 flextrait:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_voyager.tft_set17.tex" onerror="this.style.display='none'">
-                <span>여행자 2</span>
-            </td>
+            <td class="name-cell">여행자 2</td>
             <td><span class="badge badge-B">B</span></td>
             <td>10386</td>
             <td>29.22%</td>
@@ -595,10 +484,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="전달자 4 manatrait:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_channeler.tft_set17.tex" onerror="this.style.display='none'">
-                <span>전달자 4</span>
-            </td>
+            <td class="name-cell">전달자 4</td>
             <td><span class="badge badge-B">B</span></td>
             <td>99</td>
             <td>0.28%</td>
@@ -609,10 +495,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="습격자 2 meleetrait:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_16_slayer.tex" onerror="this.style.display='none'">
-                <span>습격자 2</span>
-            </td>
+            <td class="name-cell">습격자 2</td>
             <td><span class="badge badge-B">B</span></td>
             <td>6160</td>
             <td>17.33%</td>
@@ -623,10 +506,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="저격수 2 rangedtrait:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_6_sniper.tex" onerror="this.style.display='none'">
-                <span>저격수 2</span>
-            </td>
+            <td class="name-cell">저격수 2</td>
             <td><span class="badge badge-B">B</span></td>
             <td>4345</td>
             <td>12.23%</td>
@@ -637,10 +517,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="메카 4 mecha:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_mecha.tft_set17.tex" onerror="this.style.display='none'">
-                <span>메카 4</span>
-            </td>
+            <td class="name-cell">메카 4</td>
             <td><span class="badge badge-B">B</span></td>
             <td>1076</td>
             <td>3.03%</td>
@@ -651,10 +528,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="선봉대 4 shieldtank:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_12_vanguard.tft_set12.tex" onerror="this.style.display='none'">
-                <span>선봉대 4</span>
-            </td>
+            <td class="name-cell">선봉대 4</td>
             <td><span class="badge badge-B">B</span></td>
             <td>4789</td>
             <td>13.48%</td>
@@ -665,10 +539,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="길잡이 3 summontrait:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_shepherd.tft_set17.tex" onerror="this.style.display='none'">
-                <span>길잡이 3</span>
-            </td>
+            <td class="name-cell">길잡이 3</td>
             <td><span class="badge badge-B">B</span></td>
             <td>6640</td>
             <td>18.68%</td>
@@ -679,10 +550,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="요새 4 resisttank:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_9_bastion.tex" onerror="this.style.display='none'">
-                <span>요새 4</span>
-            </td>
+            <td class="name-cell">요새 4</td>
             <td><span class="badge badge-B">B</span></td>
             <td>674</td>
             <td>1.9%</td>
@@ -693,10 +561,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="최신상 1 gravestrait:1">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_factorynew.tft_set17.tex" onerror="this.style.display='none'">
-                <span>최신상 1</span>
-            </td>
+            <td class="name-cell">최신상 1</td>
             <td><span class="badge badge-B">B</span></td>
             <td>4273</td>
             <td>12.02%</td>
@@ -707,10 +572,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="여행자 4 flextrait:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_voyager.tft_set17.tex" onerror="this.style.display='none'">
-                <span>여행자 4</span>
-            </td>
+            <td class="name-cell">여행자 4</td>
             <td><span class="badge badge-B">B</span></td>
             <td>359</td>
             <td>1.01%</td>
@@ -721,10 +583,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="파티광 2 blitzcrankuniquetrait:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_partyanimal.tft_set17.tex" onerror="this.style.display='none'">
-                <span>파티광 2</span>
-            </td>
+            <td class="name-cell">파티광 2</td>
             <td><span class="badge badge-B">B</span></td>
             <td>53</td>
             <td>0.15%</td>
@@ -735,10 +594,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="싸움꾼 2 hptank:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_brawler.tex" onerror="this.style.display='none'">
-                <span>싸움꾼 2</span>
-            </td>
+            <td class="name-cell">싸움꾼 2</td>
             <td><span class="badge badge-B">B</span></td>
             <td>12693</td>
             <td>35.72%</td>
@@ -749,10 +605,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="초능력 2 psyops:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_psyops.tft_set17.tex" onerror="this.style.display='none'">
-                <span>초능력 2</span>
-            </td>
+            <td class="name-cell">초능력 2</td>
             <td><span class="badge badge-B">B</span></td>
             <td>4023</td>
             <td>11.32%</td>
@@ -763,10 +616,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="n.o.v.a. 5 drx:5">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_nova.tft_set17.tex" onerror="this.style.display='none'">
-                <span>N.O.V.A. 5</span>
-            </td>
+            <td class="name-cell">N.O.V.A. 5</td>
             <td><span class="badge badge-B">B</span></td>
             <td>1132</td>
             <td>3.19%</td>
@@ -777,10 +627,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="예언자 1 tahmkenchuniquetrait:1">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_12_arcana.tft_set12.tex" onerror="this.style.display='none'">
-                <span>예언자 1</span>
-            </td>
+            <td class="name-cell">예언자 1</td>
             <td><span class="badge badge-B">B</span></td>
             <td>10394</td>
             <td>29.25%</td>
@@ -791,10 +638,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="초능력 4 psyops:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_psyops.tft_set17.tex" onerror="this.style.display='none'">
-                <span>초능력 4</span>
-            </td>
+            <td class="name-cell">초능력 4</td>
             <td><span class="badge badge-B">B</span></td>
             <td>575</td>
             <td>1.62%</td>
@@ -805,10 +649,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="n.o.v.a. 2 drx:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_nova.tft_set17.tex" onerror="this.style.display='none'">
-                <span>N.O.V.A. 2</span>
-            </td>
+            <td class="name-cell">N.O.V.A. 2</td>
             <td><span class="badge badge-B">B</span></td>
             <td>8548</td>
             <td>24.05%</td>
@@ -819,10 +660,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="도전자 3 astrait:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_challenger.tft_set17.tex" onerror="this.style.display='none'">
-                <span>도전자 3</span>
-            </td>
+            <td class="name-cell">도전자 3</td>
             <td><span class="badge badge-B">B</span></td>
             <td>1533</td>
             <td>4.31%</td>
@@ -833,10 +671,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="n.o.v.a. 3 drx:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_nova.tft_set17.tex" onerror="this.style.display='none'">
-                <span>N.O.V.A. 3</span>
-            </td>
+            <td class="name-cell">N.O.V.A. 3</td>
             <td><span class="badge badge-B">B</span></td>
             <td>2853</td>
             <td>8.03%</td>
@@ -847,10 +682,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="선봉대 6 shieldtank:6">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_12_vanguard.tft_set12.tex" onerror="this.style.display='none'">
-                <span>선봉대 6</span>
-            </td>
+            <td class="name-cell">선봉대 6</td>
             <td><span class="badge badge-B">B</span></td>
             <td>313</td>
             <td>0.88%</td>
@@ -861,10 +693,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="복제자 2 aptrait:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_replicator.tft_set17.tex" onerror="this.style.display='none'">
-                <span>복제자 2</span>
-            </td>
+            <td class="name-cell">복제자 2</td>
             <td><span class="badge badge-B">B</span></td>
             <td>8269</td>
             <td>23.27%</td>
@@ -875,10 +704,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="시간 균열자 4 timebreaker:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_timebreaker.tft_set17.tex" onerror="this.style.display='none'">
-                <span>시간 균열자 4</span>
-            </td>
+            <td class="name-cell">시간 균열자 4</td>
             <td><span class="badge badge-B">B</span></td>
             <td>547</td>
             <td>1.54%</td>
@@ -889,10 +715,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="운명술사 4 fateweaver:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_fateweaver.tft_set17.tex" onerror="this.style.display='none'">
-                <span>운명술사 4</span>
-            </td>
+            <td class="name-cell">운명술사 4</td>
             <td><span class="badge badge-B">B</span></td>
             <td>216</td>
             <td>0.61%</td>
@@ -903,10 +726,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="불한당 2 assassintrait:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_rogue.tft_set17.tex" onerror="this.style.display='none'">
-                <span>불한당 2</span>
-            </td>
+            <td class="name-cell">불한당 2</td>
             <td><span class="badge badge-B">B</span></td>
             <td>4585</td>
             <td>12.9%</td>
@@ -917,10 +737,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="시간 균열자 2 timebreaker:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_timebreaker.tft_set17.tex" onerror="this.style.display='none'">
-                <span>시간 균열자 2</span>
-            </td>
+            <td class="name-cell">시간 균열자 2</td>
             <td><span class="badge badge-B">B</span></td>
             <td>5622</td>
             <td>15.82%</td>
@@ -931,10 +748,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="정령족 5 astronaut:5">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_astronaut.tft_set17.tex" onerror="this.style.display='none'">
-                <span>정령족 5</span>
-            </td>
+            <td class="name-cell">정령족 5</td>
             <td><span class="badge badge-B">B</span></td>
             <td>2838</td>
             <td>7.99%</td>
@@ -945,10 +759,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="우주 그루브 5 spacegroove:5">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_spacegroove.tft_set17.tex" onerror="this.style.display='none'">
-                <span>우주 그루브 5</span>
-            </td>
+            <td class="name-cell">우주 그루브 5</td>
             <td><span class="badge badge-B">B</span></td>
             <td>3140</td>
             <td>8.84%</td>
@@ -959,10 +770,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="불한당 3 assassintrait:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_rogue.tft_set17.tex" onerror="this.style.display='none'">
-                <span>불한당 3</span>
-            </td>
+            <td class="name-cell">불한당 3</td>
             <td><span class="badge badge-B">B</span></td>
             <td>626</td>
             <td>1.76%</td>
@@ -973,10 +781,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="태고족 3 primordian:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_primordian.tft_set17.tex" onerror="this.style.display='none'">
-                <span>태고족 3</span>
-            </td>
+            <td class="name-cell">태고족 3</td>
             <td><span class="badge badge-B">B</span></td>
             <td>1610</td>
             <td>4.53%</td>
@@ -987,10 +792,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="습격자 4 meleetrait:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_16_slayer.tex" onerror="this.style.display='none'">
-                <span>습격자 4</span>
-            </td>
+            <td class="name-cell">습격자 4</td>
             <td><span class="badge badge-B">B</span></td>
             <td>2098</td>
             <td>5.9%</td>
@@ -1001,10 +803,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="은하계 사냥꾼 1 zeduniquetrait:1">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_galaxyhunter.tft_set17.tex" onerror="this.style.display='none'">
-                <span>은하계 사냥꾼 1</span>
-            </td>
+            <td class="name-cell">은하계 사냥꾼 1</td>
             <td><span class="badge badge-B">B</span></td>
             <td>156</td>
             <td>0.44%</td>
@@ -1015,10 +814,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="태고족 2 primordian:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_primordian.tft_set17.tex" onerror="this.style.display='none'">
-                <span>태고족 2</span>
-            </td>
+            <td class="name-cell">태고족 2</td>
             <td><span class="badge badge-B">B</span></td>
             <td>857</td>
             <td>2.41%</td>
@@ -1029,10 +825,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="싸움꾼 4 hptank:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_brawler.tex" onerror="this.style.display='none'">
-                <span>싸움꾼 4</span>
-            </td>
+            <td class="name-cell">싸움꾼 4</td>
             <td><span class="badge badge-B">B</span></td>
             <td>2736</td>
             <td>7.7%</td>
@@ -1043,10 +836,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="선봉대 5 shieldtank:5">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_12_vanguard.tft_set12.tex" onerror="this.style.display='none'">
-                <span>선봉대 5</span>
-            </td>
+            <td class="name-cell">선봉대 5</td>
             <td><span class="badge badge-B">B</span></td>
             <td>145</td>
             <td>0.41%</td>
@@ -1057,10 +847,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="B" data-name="요새 3 resisttank:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_9_bastion.tex" onerror="this.style.display='none'">
-                <span>요새 3</span>
-            </td>
+            <td class="name-cell">요새 3</td>
             <td><span class="badge badge-B">B</span></td>
             <td>482</td>
             <td>1.36%</td>
@@ -1071,10 +858,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="불한당 4 assassintrait:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_rogue.tft_set17.tex" onerror="this.style.display='none'">
-                <span>불한당 4</span>
-            </td>
+            <td class="name-cell">불한당 4</td>
             <td><span class="badge badge-C">C</span></td>
             <td>64</td>
             <td>0.18%</td>
@@ -1085,10 +869,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="여행자 5 flextrait:5">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_voyager.tft_set17.tex" onerror="this.style.display='none'">
-                <span>여행자 5</span>
-            </td>
+            <td class="name-cell">여행자 5</td>
             <td><span class="badge badge-C">C</span></td>
             <td>121</td>
             <td>0.34%</td>
@@ -1099,10 +880,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="별돌보미 3 serpent:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_stargazer.tft_set17.tex" onerror="this.style.display='none'">
-                <span>별돌보미 3</span>
-            </td>
+            <td class="name-cell">별돌보미 3</td>
             <td><span class="badge badge-C">C</span></td>
             <td>721</td>
             <td>2.03%</td>
@@ -1113,10 +891,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="우주 그루브 2 spacegroove:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_spacegroove.tft_set17.tex" onerror="this.style.display='none'">
-                <span>우주 그루브 2</span>
-            </td>
+            <td class="name-cell">우주 그루브 2</td>
             <td><span class="badge badge-C">C</span></td>
             <td>839</td>
             <td>2.36%</td>
@@ -1127,10 +902,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="기동총격여신 1 missfortuneuniquetrait:1">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_gungoddess.tft_set17.tex" onerror="this.style.display='none'">
-                <span>기동총격여신 1</span>
-            </td>
+            <td class="name-cell">기동총격여신 1</td>
             <td><span class="badge badge-C">C</span></td>
             <td>994</td>
             <td>2.8%</td>
@@ -1141,10 +913,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="별돌보미 3 medallion:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_stargazer.tft_set17.tex" onerror="this.style.display='none'">
-                <span>별돌보미 3</span>
-            </td>
+            <td class="name-cell">별돌보미 3</td>
             <td><span class="badge badge-C">C</span></td>
             <td>660</td>
             <td>1.86%</td>
@@ -1155,10 +924,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="별돌보미 3 wolf:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_stargazer.tft_set17.tex" onerror="this.style.display='none'">
-                <span>별돌보미 3</span>
-            </td>
+            <td class="name-cell">별돌보미 3</td>
             <td><span class="badge badge-C">C</span></td>
             <td>390</td>
             <td>1.1%</td>
@@ -1169,10 +935,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="길잡이 5 summontrait:5">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_shepherd.tft_set17.tex" onerror="this.style.display='none'">
-                <span>길잡이 5</span>
-            </td>
+            <td class="name-cell">길잡이 5</td>
             <td><span class="badge badge-C">C</span></td>
             <td>1291</td>
             <td>3.63%</td>
@@ -1183,10 +946,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="운명술사 2 fateweaver:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_fateweaver.tft_set17.tex" onerror="this.style.display='none'">
-                <span>운명술사 2</span>
-            </td>
+            <td class="name-cell">운명술사 2</td>
             <td><span class="badge badge-C">C</span></td>
             <td>3203</td>
             <td>9.01%</td>
@@ -1197,10 +957,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="별돌보미 1 mountain:1">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_stargazer.tft_set17.tex" onerror="this.style.display='none'">
-                <span>별돌보미 1</span>
-            </td>
+            <td class="name-cell">별돌보미 1</td>
             <td><span class="badge badge-C">C</span></td>
             <td>61</td>
             <td>0.17%</td>
@@ -1211,10 +968,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="도전자 2 astrait:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_challenger.tft_set17.tex" onerror="this.style.display='none'">
-                <span>도전자 2</span>
-            </td>
+            <td class="name-cell">도전자 2</td>
             <td><span class="badge badge-C">C</span></td>
             <td>3596</td>
             <td>10.12%</td>
@@ -1225,10 +979,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="정령족 3 astronaut:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_astronaut.tft_set17.tex" onerror="this.style.display='none'">
-                <span>정령족 3</span>
-            </td>
+            <td class="name-cell">정령족 3</td>
             <td><span class="badge badge-C">C</span></td>
             <td>584</td>
             <td>1.64%</td>
@@ -1239,10 +990,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="별돌보미 3 shield:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_stargazer.tft_set17.tex" onerror="this.style.display='none'">
-                <span>별돌보미 3</span>
-            </td>
+            <td class="name-cell">별돌보미 3</td>
             <td><span class="badge badge-C">C</span></td>
             <td>556</td>
             <td>1.56%</td>
@@ -1253,10 +1001,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="복제자 4 aptrait:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_replicator.tft_set17.tex" onerror="this.style.display='none'">
-                <span>복제자 4</span>
-            </td>
+            <td class="name-cell">복제자 4</td>
             <td><span class="badge badge-C">C</span></td>
             <td>129</td>
             <td>0.36%</td>
@@ -1267,10 +1012,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="중재자 2 admin:2">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_arbiter.tft_set17.tex" onerror="this.style.display='none'">
-                <span>중재자 2</span>
-            </td>
+            <td class="name-cell">중재자 2</td>
             <td><span class="badge badge-C">C</span></td>
             <td>1737</td>
             <td>4.89%</td>
@@ -1281,10 +1023,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="empress 2 empress:2">
-            <td class="name-cell">
-                
-                <span>Empress 2</span>
-            </td>
+            <td class="name-cell">Empress 2</td>
             <td><span class="badge badge-C">C</span></td>
             <td>76</td>
             <td>0.21%</td>
@@ -1295,10 +1034,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="선봉대 3 shieldtank:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_12_vanguard.tft_set12.tex" onerror="this.style.display='none'">
-                <span>선봉대 3</span>
-            </td>
+            <td class="name-cell">선봉대 3</td>
             <td><span class="badge badge-C">C</span></td>
             <td>626</td>
             <td>1.76%</td>
@@ -1309,10 +1045,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="eltigre 1 eltigre:1">
-            <td class="name-cell">
-                
-                <span>ElTigre 1</span>
-            </td>
+            <td class="name-cell">ElTigre 1</td>
             <td><span class="badge badge-C">C</span></td>
             <td>61</td>
             <td>0.17%</td>
@@ -1323,10 +1056,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="별돌보미 3 huntress:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_stargazer.tft_set17.tex" onerror="this.style.display='none'">
-                <span>별돌보미 3</span>
-            </td>
+            <td class="name-cell">별돌보미 3</td>
             <td><span class="badge badge-C">C</span></td>
             <td>302</td>
             <td>0.85%</td>
@@ -1337,10 +1067,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="dragonfist 1 dragonfist:1">
-            <td class="name-cell">
-                
-                <span>DragonFist 1</span>
-            </td>
+            <td class="name-cell">DragonFist 1</td>
             <td><span class="badge badge-C">C</span></td>
             <td>55</td>
             <td>0.15%</td>
@@ -1351,10 +1078,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="별돌보미 3 fountain:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_stargazer.tft_set17.tex" onerror="this.style.display='none'">
-                <span>별돌보미 3</span>
-            </td>
+            <td class="name-cell">별돌보미 3</td>
             <td><span class="badge badge-C">C</span></td>
             <td>444</td>
             <td>1.25%</td>
@@ -1365,10 +1089,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="시간 균열자 3 timebreaker:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_timebreaker.tft_set17.tex" onerror="this.style.display='none'">
-                <span>시간 균열자 3</span>
-            </td>
+            <td class="name-cell">시간 균열자 3</td>
             <td><span class="badge badge-C">C</span></td>
             <td>441</td>
             <td>1.24%</td>
@@ -1379,10 +1100,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="ixtal 2 ixtal:2">
-            <td class="name-cell">
-                
-                <span>Ixtal 2</span>
-            </td>
+            <td class="name-cell">Ixtal 2</td>
             <td><span class="badge badge-C">C</span></td>
             <td>94</td>
             <td>0.26%</td>
@@ -1393,10 +1111,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="우주 그루브 6 spacegroove:6">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_spacegroove.tft_set17.tex" onerror="this.style.display='none'">
-                <span>우주 그루브 6</span>
-            </td>
+            <td class="name-cell">우주 그루브 6</td>
             <td><span class="badge badge-C">C</span></td>
             <td>140</td>
             <td>0.39%</td>
@@ -1407,10 +1122,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="길잡이 6 summontrait:6">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_shepherd.tft_set17.tex" onerror="this.style.display='none'">
-                <span>길잡이 6</span>
-            </td>
+            <td class="name-cell">길잡이 6</td>
             <td><span class="badge badge-C">C</span></td>
             <td>69</td>
             <td>0.19%</td>
@@ -1421,10 +1133,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="정령족 7 astronaut:7">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_astronaut.tft_set17.tex" onerror="this.style.display='none'">
-                <span>정령족 7</span>
-            </td>
+            <td class="name-cell">정령족 7</td>
             <td><span class="badge badge-C">C</span></td>
             <td>1040</td>
             <td>2.93%</td>
@@ -1435,10 +1144,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="highroller 2 highroller:2">
-            <td class="name-cell">
-                
-                <span>HighRoller 2</span>
-            </td>
+            <td class="name-cell">HighRoller 2</td>
             <td><span class="badge badge-C">C</span></td>
             <td>53</td>
             <td>0.15%</td>
@@ -1449,10 +1155,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="oldmentor 1 oldmentor:1">
-            <td class="name-cell">
-                
-                <span>OldMentor 1</span>
-            </td>
+            <td class="name-cell">OldMentor 1</td>
             <td><span class="badge badge-C">C</span></td>
             <td>80</td>
             <td>0.23%</td>
@@ -1463,10 +1166,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="highroller 1 highroller:1">
-            <td class="name-cell">
-                
-                <span>HighRoller 1</span>
-            </td>
+            <td class="name-cell">HighRoller 1</td>
             <td><span class="badge badge-C">C</span></td>
             <td>63</td>
             <td>0.18%</td>
@@ -1477,10 +1177,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="암흑의 별 3 darkstar:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_darkstar.tft_set17.tex" onerror="this.style.display='none'">
-                <span>암흑의 별 3</span>
-            </td>
+            <td class="name-cell">암흑의 별 3</td>
             <td><span class="badge badge-C">C</span></td>
             <td>487</td>
             <td>1.37%</td>
@@ -1491,10 +1188,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="별돌보미 5 serpent:5">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_stargazer.tft_set17.tex" onerror="this.style.display='none'">
-                <span>별돌보미 5</span>
-            </td>
+            <td class="name-cell">별돌보미 5</td>
             <td><span class="badge badge-C">C</span></td>
             <td>55</td>
             <td>0.15%</td>
@@ -1505,10 +1199,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="yordle 2 yordle:2">
-            <td class="name-cell">
-                
-                <span>Yordle 2</span>
-            </td>
+            <td class="name-cell">Yordle 2</td>
             <td><span class="badge badge-C">C</span></td>
             <td>64</td>
             <td>0.18%</td>
@@ -1519,10 +1210,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="conqueror 1 conqueror:1">
-            <td class="name-cell">
-                
-                <span>Conqueror 1</span>
-            </td>
+            <td class="name-cell">Conqueror 1</td>
             <td><span class="badge badge-C">C</span></td>
             <td>58</td>
             <td>0.16%</td>
@@ -1533,10 +1221,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="중재자 3 admin:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_arbiter.tft_set17.tex" onerror="this.style.display='none'">
-                <span>중재자 3</span>
-            </td>
+            <td class="name-cell">중재자 3</td>
             <td><span class="badge badge-C">C</span></td>
             <td>493</td>
             <td>1.39%</td>
@@ -1547,10 +1232,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="우주 그루브 3 spacegroove:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_spacegroove.tft_set17.tex" onerror="this.style.display='none'">
-                <span>우주 그루브 3</span>
-            </td>
+            <td class="name-cell">우주 그루브 3</td>
             <td><span class="badge badge-C">C</span></td>
             <td>305</td>
             <td>0.86%</td>
@@ -1561,10 +1243,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="C" data-name="길잡이 4 summontrait:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_shepherd.tft_set17.tex" onerror="this.style.display='none'">
-                <span>길잡이 4</span>
-            </td>
+            <td class="name-cell">길잡이 4</td>
             <td><span class="badge badge-C">C</span></td>
             <td>208</td>
             <td>0.59%</td>
@@ -1575,10 +1254,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="n.o.v.a. 4 drx:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_nova.tft_set17.tex" onerror="this.style.display='none'">
-                <span>N.O.V.A. 4</span>
-            </td>
+            <td class="name-cell">N.O.V.A. 4</td>
             <td><span class="badge badge-D">D</span></td>
             <td>224</td>
             <td>0.63%</td>
@@ -1589,10 +1265,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="별돌보미 4 wolf:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_stargazer.tft_set17.tex" onerror="this.style.display='none'">
-                <span>별돌보미 4</span>
-            </td>
+            <td class="name-cell">별돌보미 4</td>
             <td><span class="badge badge-D">D</span></td>
             <td>89</td>
             <td>0.25%</td>
@@ -1603,10 +1276,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="pentakill 1 pentakill:1">
-            <td class="name-cell">
-                
-                <span>Pentakill 1</span>
-            </td>
+            <td class="name-cell">Pentakill 1</td>
             <td><span class="badge badge-D">D</span></td>
             <td>60</td>
             <td>0.17%</td>
@@ -1617,10 +1287,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="암흑의 별 4 darkstar:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_darkstar.tft_set17.tex" onerror="this.style.display='none'">
-                <span>암흑의 별 4</span>
-            </td>
+            <td class="name-cell">암흑의 별 4</td>
             <td><span class="badge badge-D">D</span></td>
             <td>641</td>
             <td>1.8%</td>
@@ -1631,10 +1298,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="태고족 4 primordian:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_primordian.tft_set17.tex" onerror="this.style.display='none'">
-                <span>태고족 4</span>
-            </td>
+            <td class="name-cell">태고족 4</td>
             <td><span class="badge badge-D">D</span></td>
             <td>62</td>
             <td>0.17%</td>
@@ -1645,10 +1309,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="정령족 6 astronaut:6">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_astronaut.tft_set17.tex" onerror="this.style.display='none'">
-                <span>정령족 6</span>
-            </td>
+            <td class="name-cell">정령족 6</td>
             <td><span class="badge badge-D">D</span></td>
             <td>130</td>
             <td>0.37%</td>
@@ -1659,10 +1320,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="메카 3 mecha:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_mecha.tft_set17.tex" onerror="this.style.display='none'">
-                <span>메카 3</span>
-            </td>
+            <td class="name-cell">메카 3</td>
             <td><span class="badge badge-D">D</span></td>
             <td>263</td>
             <td>0.74%</td>
@@ -1673,10 +1331,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="초능력 3 psyops:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_psyops.tft_set17.tex" onerror="this.style.display='none'">
-                <span>초능력 3</span>
-            </td>
+            <td class="name-cell">초능력 3</td>
             <td><span class="badge badge-D">D</span></td>
             <td>125</td>
             <td>0.35%</td>
@@ -1687,10 +1342,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="conqueror 2 conqueror:2">
-            <td class="name-cell">
-                
-                <span>Conqueror 2</span>
-            </td>
+            <td class="name-cell">Conqueror 2</td>
             <td><span class="badge badge-D">D</span></td>
             <td>74</td>
             <td>0.21%</td>
@@ -1701,10 +1353,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="shimmerscale 1 shimmerscale:1">
-            <td class="name-cell">
-                
-                <span>Shimmerscale 1</span>
-            </td>
+            <td class="name-cell">Shimmerscale 1</td>
             <td><span class="badge badge-D">D</span></td>
             <td>85</td>
             <td>0.24%</td>
@@ -1715,10 +1364,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="별돌보미 6 mountain:6">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_stargazer.tft_set17.tex" onerror="this.style.display='none'">
-                <span>별돌보미 6</span>
-            </td>
+            <td class="name-cell">별돌보미 6</td>
             <td><span class="badge badge-D">D</span></td>
             <td>352</td>
             <td>0.99%</td>
@@ -1729,10 +1375,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="bastion 2 bastion:2">
-            <td class="name-cell">
-                
-                <span>Bastion 2</span>
-            </td>
+            <td class="name-cell">Bastion 2</td>
             <td><span class="badge badge-D">D</span></td>
             <td>57</td>
             <td>0.16%</td>
@@ -1743,10 +1386,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="싸움꾼 3 hptank:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_brawler.tex" onerror="this.style.display='none'">
-                <span>싸움꾼 3</span>
-            </td>
+            <td class="name-cell">싸움꾼 3</td>
             <td><span class="badge badge-D">D</span></td>
             <td>290</td>
             <td>0.82%</td>
@@ -1757,10 +1397,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="습격자 5 meleetrait:5">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_16_slayer.tex" onerror="this.style.display='none'">
-                <span>습격자 5</span>
-            </td>
+            <td class="name-cell">습격자 5</td>
             <td><span class="badge badge-D">D</span></td>
             <td>97</td>
             <td>0.27%</td>
@@ -1771,10 +1408,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="elderwood 1 elderwood:1">
-            <td class="name-cell">
-                
-                <span>Elderwood 1</span>
-            </td>
+            <td class="name-cell">Elderwood 1</td>
             <td><span class="badge badge-D">D</span></td>
             <td>50</td>
             <td>0.14%</td>
@@ -1785,10 +1419,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="정령족 4 astronaut:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_astronaut.tft_set17.tex" onerror="this.style.display='none'">
-                <span>정령족 4</span>
-            </td>
+            <td class="name-cell">정령족 4</td>
             <td><span class="badge badge-D">D</span></td>
             <td>88</td>
             <td>0.25%</td>
@@ -1799,10 +1430,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="습격자 3 meleetrait:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_16_slayer.tex" onerror="this.style.display='none'">
-                <span>습격자 3</span>
-            </td>
+            <td class="name-cell">습격자 3</td>
             <td><span class="badge badge-D">D</span></td>
             <td>290</td>
             <td>0.82%</td>
@@ -1813,10 +1441,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="암흑의 별 5 darkstar:5">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_darkstar.tft_set17.tex" onerror="this.style.display='none'">
-                <span>암흑의 별 5</span>
-            </td>
+            <td class="name-cell">암흑의 별 5</td>
             <td><span class="badge badge-D">D</span></td>
             <td>189</td>
             <td>0.53%</td>
@@ -1827,10 +1452,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="별돌보미 5 mountain:5">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_stargazer.tft_set17.tex" onerror="this.style.display='none'">
-                <span>별돌보미 5</span>
-            </td>
+            <td class="name-cell">별돌보미 5</td>
             <td><span class="badge badge-D">D</span></td>
             <td>161</td>
             <td>0.45%</td>
@@ -1841,10 +1463,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="동물특공대 3 animasquad:3">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_animatech.tft_set17.tex" onerror="this.style.display='none'">
-                <span>동물특공대 3</span>
-            </td>
+            <td class="name-cell">동물특공대 3</td>
             <td><span class="badge badge-D">D</span></td>
             <td>403</td>
             <td>1.13%</td>
@@ -1855,10 +1474,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="싸움꾼 5 hptank:5">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_brawler.tex" onerror="this.style.display='none'">
-                <span>싸움꾼 5</span>
-            </td>
+            <td class="name-cell">싸움꾼 5</td>
             <td><span class="badge badge-D">D</span></td>
             <td>93</td>
             <td>0.26%</td>
@@ -1869,10 +1485,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="별돌보미 4 mountain:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_stargazer.tft_set17.tex" onerror="this.style.display='none'">
-                <span>별돌보미 4</span>
-            </td>
+            <td class="name-cell">별돌보미 4</td>
             <td><span class="badge badge-D">D</span></td>
             <td>59</td>
             <td>0.17%</td>
@@ -1883,10 +1496,7 @@ tr:hover {
         </tr>
         
         <tr class="tier-row" data-tier="D" data-name="우주 그루브 4 spacegroove:4">
-            <td class="name-cell">
-                <img class="icon" src="https://raw.communitydragon.org/latest/assets/ux/traiticons/trait_icon_17_spacegroove.tft_set17.tex" onerror="this.style.display='none'">
-                <span>우주 그루브 4</span>
-            </td>
+            <td class="name-cell">우주 그루브 4</td>
             <td><span class="badge badge-D">D</span></td>
             <td>67</td>
             <td>0.19%</td>
