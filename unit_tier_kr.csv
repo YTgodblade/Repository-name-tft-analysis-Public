@@ -1,63 +1,63 @@
-﻿unit,unit_kr,games,avg_place,top4_rate,win_rate,pick_rate,score,tier
-Jhin,진,6241,3.73,64.73,20.11,17.56,243.96,S
-Blitzcrank,블리츠크랭크,12705,3.89,61.28,19.16,35.75,242.02,S
-Shen,쉔,6814,3.79,63.24,21.1,19.17,241.36,S
-Rhaast,라아스트,9094,3.83,63.23,18.14,25.59,241.33,S
-Bard,바드,7370,3.81,63.04,19.15,20.74,240.54,A
-Sona,소나,6995,3.95,60.86,15.55,19.68,231.74,A
-Morgana,모르가나,8189,4.04,58.87,17.4,23.04,228.36,A
-Fiora,피오라,5581,4.06,58.43,19.92,15.7,224.79,A
-Karma,카르마,11452,4.19,55.98,14.92,32.22,223.17,A
-Vex,벡스,4448,4.09,56.97,20.46,12.52,221.69,A
-Nunu,누누와 윌럼프,11538,4.37,51.82,15.14,32.47,213.06,A
-Mordekaiser,모데카이저,11237,4.39,51.94,13.53,31.62,211.44,A
-Galio,거대 메크 로봇,6295,4.3,54.09,14.5,17.71,211.21,A
-Graves,그레이브즈,4385,4.28,53.41,20.39,12.34,211.04,B
-Nami,나미,5150,4.34,52.95,14.25,14.49,207.53,B
-Ornn,오른,6402,4.38,51.52,14.9,18.01,206.64,B
-TahmKench,탐 켄치,10546,4.47,50.57,14.01,29.67,206.34,B
-Kindred,킨드레드,5111,4.37,54.35,8.67,14.38,205.29,B
-Viktor,빅토르,1001,4.31,53.45,12.79,2.82,204.22,B
-Akali,아칼리,6603,4.44,51.43,13.1,18.58,203.48,B
-AurelionSol,아우렐리온 솔,3625,4.42,51.42,16.0,10.2,201.71,B
-Samira,사미라,4288,4.44,50.07,15.65,12.07,200.98,B
-Maokai,마오카이,10878,4.57,49.17,10.42,30.61,200.58,B
-Aatrox,태고족 우두머리,8741,4.54,49.06,13.66,24.6,200.29,B
-Pyke,파이크,1646,4.39,52.25,10.63,4.63,200.15,B
-Gwen,그웬,4121,4.45,50.55,12.91,11.6,199.89,B
-Urgot,우르곳,4432,4.48,50.77,12.97,12.47,198.81,B
-Riven,리븐,4880,4.49,50.55,11.31,13.73,198.42,B
-Xayah,자야,3020,4.47,50.13,14.8,8.5,197.9,B
-Illaoi,일라오이,8466,4.57,48.44,10.58,23.82,197.68,B
-Chogath,초가스,3641,4.5,50.43,12.88,10.25,196.8,B
-Nasus,나서스,3977,4.51,48.73,13.58,11.19,196.31,C
-Pantheon,판테온,7222,4.58,48.59,11.8,20.32,196.06,C
-Zed,제드,165,4.13,58.18,17.58,0.46,194.65,C
-MasterYi,마스터 이,2937,4.52,50.83,8.78,8.26,194.31,C
-Rammus,람머스,5606,4.59,48.07,11.02,15.77,193.43,C
-Belveth,벨베스,5255,4.58,49.72,7.65,14.79,193.36,C
-RekSai,렉사이,2575,4.53,50.95,7.88,7.25,193.26,C
-Kaisa,카이사,2473,4.54,49.78,11.73,6.96,193.06,C
-Gragas,그라가스,3365,4.57,49.51,9.06,9.47,191.95,C
-Lissandra,리산드라,6533,4.64,47.16,10.67,18.38,191.63,C
-Jax,잭스,4551,4.64,46.78,11.45,12.81,189.45,C
-Veigar,베이가,2241,4.61,46.5,14.77,6.31,188.93,C
-Teemo,티모,1597,4.61,47.59,10.58,4.49,187.69,C
-Poppy,뽀삐,4253,4.71,45.61,10.72,11.97,185.12,C
-Leona,레오나,2973,4.69,46.59,8.71,8.37,184.57,C
-MissFortune,미스 포츈,1003,4.65,48.26,7.08,2.82,184.52,C
-Ezreal,이즈리얼,1258,4.7,46.74,13.35,3.54,183.11,C
-Corki,코르키,3128,4.72,45.4,9.37,8.8,183.01,C
-Talon,탈론,633,4.68,46.6,8.21,1.78,182.33,C
-Milio,밀리오,3570,4.74,45.6,7.84,10.05,182.27,D
-Caitlyn,케이틀린,1183,4.71,47.42,7.35,3.33,181.53,D
-Jinx,징크스,2554,4.76,47.42,7.28,7.19,180.56,D
-Lulu,룰루,1719,4.74,45.32,9.19,4.84,180.37,D
-TwistedFate,트위스티드 페이트,1854,4.74,45.36,8.36,5.22,180.37,D
-Gnar,나르,1598,4.76,44.62,11.76,4.5,179.54,D
-Leblanc,르블랑,3097,4.78,44.66,6.91,8.71,179.26,D
-Zoe,조이,666,4.82,43.39,9.01,1.87,174.57,D
-Briar,브라이어,1807,4.92,44.05,6.42,5.08,170.53,D
-Diana,다이애나,822,4.91,43.92,5.47,2.31,169.69,D
-Fizz,피즈,2481,4.95,41.03,8.75,6.98,169.35,D
-Aurora,오로라,633,5.71,29.38,7.74,1.78,125.57,D
+﻿unit,unit_kr,icon_url,games,avg_place,top4_rate,win_rate,pick_rate,score,tier
+Jhin,진,https://raw.communitydragon.org/latest/assets/characters/tft17_jhin/skins/base/images/tft17_jhin_splash_centered_37.tft_set17.tex,6241,3.73,64.73,20.11,17.56,243.96,S
+Blitzcrank,블리츠크랭크,https://raw.communitydragon.org/latest/assets/characters/tft17_blitzcrank/skins/base/images/tft17_blitzcrank_splash_uncentered_65.tft_set17.tex,12705,3.89,61.28,19.16,35.75,242.02,S
+Shen,쉔,https://raw.communitydragon.org/latest/assets/characters/tft17_shen/skins/base/images/tft17_shen_splash_centered_49.tft_set17.tex,6814,3.79,63.24,21.1,19.17,241.36,S
+Rhaast,라아스트,https://raw.communitydragon.org/latest/assets/characters/tft17_rhaast/skins/base/images/tft17_kaynsplash_uncentered.tft_set17.tex,9094,3.83,63.23,18.14,25.59,241.33,S
+Bard,바드,https://raw.communitydragon.org/latest/assets/characters/tft17_bard/skins/base/images/tft17_bard_splash_centered_8.tft_set17.tex,7370,3.81,63.04,19.15,20.74,240.54,A
+Sona,소나,https://raw.communitydragon.org/latest/assets/characters/tft17_sona/skins/base/images/tft17_sona_splash_centered_17.tft_set17.tex,6995,3.95,60.86,15.55,19.68,231.74,A
+Morgana,모르가나,https://raw.communitydragon.org/latest/assets/characters/tft17_morgana/skins/base/images/tft17_morgana_splash_centered_50.tft_set17.tex,8189,4.04,58.87,17.4,23.04,228.36,A
+Fiora,피오라,https://raw.communitydragon.org/latest/assets/characters/tft17_fiora/skins/base/images/tft17_fiora_splash_centered_51.tft_set17.tex,5581,4.06,58.43,19.92,15.7,224.79,A
+Karma,카르마,https://raw.communitydragon.org/latest/assets/characters/tft17_karma/skins/base/images/tft17_karma_splash_centered_8.tft_set17.tex,11452,4.19,55.98,14.92,32.22,223.17,A
+Vex,벡스,https://raw.communitydragon.org/latest/assets/characters/tft17_vex/skins/base/images/tft17_vex_splash_centered_10.tft_set17.tex,4448,4.09,56.97,20.46,12.52,221.69,A
+Nunu,누누와 윌럼프,https://raw.communitydragon.org/latest/assets/characters/tft17_nunu/skins/base/images/tft17_nunu_splash_centered_35.tft_set17.tex,11538,4.37,51.82,15.14,32.47,213.06,A
+Mordekaiser,모데카이저,https://raw.communitydragon.org/latest/assets/characters/tft17_mordekaiser/skins/base/images/tft17_mordekaiser_splash_centered_6.tft_set17.tex,11237,4.39,51.94,13.53,31.62,211.44,A
+Galio,거대 메크 로봇,https://raw.communitydragon.org/latest/assets/characters/tft17_galio/skins/base/images/tft17_galio.tft_set17.tex,6295,4.3,54.09,14.5,17.71,211.21,A
+Graves,그레이브즈,https://raw.communitydragon.org/latest/assets/characters/tft17_graves/skins/base/images/tft17_graves_splash_centered_18.tft_set17.tex,4385,4.28,53.41,20.39,12.34,211.04,B
+Nami,나미,https://raw.communitydragon.org/latest/assets/characters/tft17_nami/skins/base/images/tft17_nami_splash_centered_41.tft_set17.tex,5150,4.34,52.95,14.25,14.49,207.53,B
+Ornn,오른,https://raw.communitydragon.org/latest/assets/characters/tft17_ornn/skins/base/images/tft17_ornn_splash_centered_11.tft_set17.tex,6402,4.38,51.52,14.9,18.01,206.64,B
+TahmKench,탐 켄치,https://raw.communitydragon.org/latest/assets/characters/tft17_tahmkench/skins/base/images/tft17_tahmkench_splash_centered_11.tft_set17.tex,10546,4.47,50.57,14.01,29.67,206.34,B
+Kindred,킨드레드,https://raw.communitydragon.org/latest/assets/characters/tft17_kindred/skins/base/images/tft17_kindred_splash_centered_23.tft_set17.tex,5111,4.37,54.35,8.67,14.38,205.29,B
+Viktor,빅토르,https://raw.communitydragon.org/latest/assets/characters/tft17_viktor/skins/base/images/tft17_viktor_splash_centered_5.tft_set17.tex,1001,4.31,53.45,12.79,2.82,204.22,B
+Akali,아칼리,https://raw.communitydragon.org/latest/assets/characters/tft17_akali/skins/base/images/tft17_akali_splash_centered_68.tft_set17.tex,6603,4.44,51.43,13.1,18.58,203.48,B
+AurelionSol,아우렐리온 솔,https://raw.communitydragon.org/latest/assets/characters/tft17_aurelionsol/skins/base/images/tft17_aurelionsol_splash_centered_2.tft_set17.tex,3625,4.42,51.42,16.0,10.2,201.71,B
+Samira,사미라,https://raw.communitydragon.org/latest/assets/characters/tft17_samira/skins/base/images/tft17_samira_splash_centered_10.tft_set17.tex,4288,4.44,50.07,15.65,12.07,200.98,B
+Maokai,마오카이,https://raw.communitydragon.org/latest/assets/characters/tft17_maokai/skins/base/images/tft17_maokai_splash_centered_33.tft_set17.tex,10878,4.57,49.17,10.42,30.61,200.58,B
+Aatrox,태고족 우두머리,https://raw.communitydragon.org/latest/assets/characters/tft17_enemy_aatrox/skins/base/images/tft17_enemy_aatrox_splash_centered_33.tft_set17.tex,8741,4.54,49.06,13.66,24.6,200.29,B
+Pyke,파이크,https://raw.communitydragon.org/latest/assets/characters/tft17_pyke/skins/base/images/tft17_pyke_splash_centered_25.tft_set17.tex,1646,4.39,52.25,10.63,4.63,200.15,B
+Gwen,그웬,https://raw.communitydragon.org/latest/assets/characters/tft17_gwen/skins/base/images/tft17_gwen_splash_centered_1.tft_set17.tex,4121,4.45,50.55,12.91,11.6,199.89,B
+Urgot,우르곳,https://raw.communitydragon.org/latest/assets/characters/tft17_urgot/skins/base/images/tft17_urgot_splash_centered_32.tft_set17.tex,4432,4.48,50.77,12.97,12.47,198.81,B
+Riven,리븐,https://raw.communitydragon.org/latest/assets/characters/tft17_riven/skins/base/images/tft17_riven_splash_centered_18.tft_set17.tex,4880,4.49,50.55,11.31,13.73,198.42,B
+Xayah,자야,https://raw.communitydragon.org/latest/assets/characters/tft17_xayah/skins/base/images/tft17_xayah_splash_centered_1.tft_set17.tex,3020,4.47,50.13,14.8,8.5,197.9,B
+Illaoi,일라오이,https://raw.communitydragon.org/latest/assets/characters/tft17_illaoi/skins/base/images/tft17_illaoi_splash_centered_27.tft_set17.tex,8466,4.57,48.44,10.58,23.82,197.68,B
+Chogath,초가스,https://raw.communitydragon.org/latest/assets/characters/tft17_chogath/skins/base/images/tft17_chogath_splash_centered_7.tft_set17.tex,3641,4.5,50.43,12.88,10.25,196.8,B
+Nasus,나서스,https://raw.communitydragon.org/latest/assets/characters/tft17_nasus/skins/base/images/tft17_nasus_splash_centered_25.tft_set17.tex,3977,4.51,48.73,13.58,11.19,196.31,C
+Pantheon,판테온,https://raw.communitydragon.org/latest/assets/characters/tft17_pantheon/skins/base/images/tft17_pantheon_splash_centered_16.tft_set17.tex,7222,4.58,48.59,11.8,20.32,196.06,C
+Zed,제드,https://raw.communitydragon.org/latest/assets/characters/tft17_zed/skins/base/images/tft17_zed_splash_centered_68.tft_set17.tex,165,4.13,58.18,17.58,0.46,194.65,C
+MasterYi,마스터 이,https://raw.communitydragon.org/latest/assets/characters/tft17_masteryi/skins/base/images/tft17_masteryi_splash_centered_33.tft_set17.tex,2937,4.52,50.83,8.78,8.26,194.31,C
+Rammus,람머스,https://raw.communitydragon.org/latest/assets/characters/tft17_rammus/skins/base/images/tft17_rammus_splash_centered_17.tft_set17.tex,5606,4.59,48.07,11.02,15.77,193.43,C
+Belveth,벨베스,https://raw.communitydragon.org/latest/assets/characters/tft17_belveth/skins/base/images/tft17_belveth_splash_centered_19.tft_set17.tex,5255,4.58,49.72,7.65,14.79,193.36,C
+RekSai,렉사이,https://raw.communitydragon.org/latest/assets/characters/tft17_reksai/skins/base/images/tft17_reksai_splash_centered_26.tft_set17.tex,2575,4.53,50.95,7.88,7.25,193.26,C
+Kaisa,카이사,https://raw.communitydragon.org/latest/assets/characters/tft17_kaisa/skins/base/images/tft17_kaisa_splash_centered_69.tft_set17.tex,2473,4.54,49.78,11.73,6.96,193.06,C
+Gragas,그라가스,https://raw.communitydragon.org/latest/assets/characters/tft17_gragas/skins/base/images/tft17_gragas_splash_centered_10.tft_set17.tex,3365,4.57,49.51,9.06,9.47,191.95,C
+Lissandra,리산드라,https://raw.communitydragon.org/latest/assets/characters/tft17_lissandra/skins/base/images/tft17_lissandra_splash_centered_12.tft_set17.tex,6533,4.64,47.16,10.67,18.38,191.63,C
+Jax,잭스,https://raw.communitydragon.org/latest/assets/characters/tft17_jax/skins/base/images/tft17_jax.tft_set17.tex,4551,4.64,46.78,11.45,12.81,189.45,C
+Veigar,베이가,https://raw.communitydragon.org/latest/assets/characters/tft17_veigar/skins/base/images/tft17_veigar_splash_centered_32.tft_set17.tex,2241,4.61,46.5,14.77,6.31,188.93,C
+Teemo,티모,https://raw.communitydragon.org/latest/assets/characters/tft17_teemo/skins/base/images/tft17_teemo_splash_centered_47.tft_set17.tex,1597,4.61,47.59,10.58,4.49,187.69,C
+Poppy,뽀삐,https://raw.communitydragon.org/latest/assets/characters/tft17_poppy/skins/base/images/tft17_poppy_splash_centered_16.tft_set17.tex,4253,4.71,45.61,10.72,11.97,185.12,C
+Leona,레오나,https://raw.communitydragon.org/latest/assets/characters/tft17_leona/skins/base/images/tft17_leona_splash_centered_64.tft_set17.tex,2973,4.69,46.59,8.71,8.37,184.57,C
+MissFortune,미스 포츈,https://raw.communitydragon.org/latest/assets/characters/tft17_missfortune/skins/base/images/tft17_missfortune_splash_centered_16.tft_set17.tex,1003,4.65,48.26,7.08,2.82,184.52,C
+Ezreal,이즈리얼,https://raw.communitydragon.org/latest/assets/characters/tft17_ezreal/skins/base/images/tft17_ezreal_splash_centered_5.tft_set17.tex,1258,4.7,46.74,13.35,3.54,183.11,C
+Corki,코르키,https://raw.communitydragon.org/latest/assets/characters/tft17_corki/skins/base/images/tft17_corki_splash_centered_26.tft_set17.tex,3128,4.72,45.4,9.37,8.8,183.01,C
+Talon,탈론,https://raw.communitydragon.org/latest/assets/characters/tft17_talon/skins/base/images/tft17_talon_splash_centered_39.tft_set17.tex,633,4.68,46.6,8.21,1.78,182.33,C
+Milio,밀리오,https://raw.communitydragon.org/latest/assets/characters/tft17_milio/skins/base/images/tft17_milio_splash_centered_0.tft_set17.tex,3570,4.74,45.6,7.84,10.05,182.27,D
+Caitlyn,케이틀린,https://raw.communitydragon.org/latest/assets/characters/tft17_caitlyn/skins/base/images/tft17_caitlyn_splash_centered_48.tft_set17.tex,1183,4.71,47.42,7.35,3.33,181.53,D
+Jinx,징크스,https://raw.communitydragon.org/latest/assets/characters/tft17_jinx/skins/base/images/tft17_jinx_splash_centered_38.tft_set17.tex,2554,4.76,47.42,7.28,7.19,180.56,D
+Lulu,룰루,https://raw.communitydragon.org/latest/assets/characters/tft17_lulu/skins/base/images/tft17_lulu_splash_centered_14.tft_set17.tex,1719,4.74,45.32,9.19,4.84,180.37,D
+TwistedFate,트위스티드 페이트,https://raw.communitydragon.org/latest/assets/characters/tft17_twistedfate/skins/base/images/tft17_twistedfate_splash_centered_45.tft_set17.tex,1854,4.74,45.36,8.36,5.22,180.37,D
+Gnar,나르,https://raw.communitydragon.org/latest/assets/characters/tft17_gnar/skins/base/images/tft17_gnar_splash_centered_15.tft_set17.tex,1598,4.76,44.62,11.76,4.5,179.54,D
+Leblanc,르블랑,https://raw.communitydragon.org/latest/assets/characters/tft17_leblanc/skins/base/images/tft17_leblanc_splash_centered_29.tft_set17.tex,3097,4.78,44.66,6.91,8.71,179.26,D
+Zoe,조이,https://raw.communitydragon.org/latest/assets/characters/tft17_zoe/skins/base/images/tft17_zoe_splash_centered_43.tft_set17.tex,666,4.82,43.39,9.01,1.87,174.57,D
+Briar,브라이어,https://raw.communitydragon.org/latest/assets/characters/tft17_briar/skins/base/images/tft17_briar_splash_centered_10.tft_set17.tex,1807,4.92,44.05,6.42,5.08,170.53,D
+Diana,다이애나,https://raw.communitydragon.org/latest/assets/characters/tft17_diana/skins/base/images/tft17_dianasplash_pc.tft_set17.tex,822,4.91,43.92,5.47,2.31,169.69,D
+Fizz,피즈,https://raw.communitydragon.org/latest/assets/characters/tft17_fizz/skins/base/images/tft17_fizz_splash_centered_26.tft_set17.tex,2481,4.95,41.03,8.75,6.98,169.35,D
+Aurora,오로라,https://raw.communitydragon.org/latest/assets/characters/tft17_aurora/skins/base/images/tft17_aurora_splash_centered_1.tft_set17.tex,633,5.71,29.38,7.74,1.78,125.57,D

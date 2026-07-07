@@ -3,8 +3,6 @@ import os
 
 os.makedirs("site", exist_ok=True)
 
-CDRAGON_BASE = "https://raw.communitydragon.org/latest/game/"
-
 PAGES = [
     {
         "title": "기물 티어표",
@@ -12,7 +10,7 @@ PAGES = [
         "name_col": "unit_kr",
         "raw_col": "unit",
         "output": "units.html",
-        "kind": "unit",
+        "active": "기물",
     },
     {
         "title": "아이템 티어표",
@@ -20,7 +18,7 @@ PAGES = [
         "name_col": "item_kr",
         "raw_col": "item",
         "output": "items.html",
-        "kind": "item",
+        "active": "아이템",
     },
     {
         "title": "시너지 티어표",
@@ -28,29 +26,13 @@ PAGES = [
         "name_col": "trait_kr",
         "raw_col": "trait",
         "output": "traits.html",
-        "kind": "trait",
+        "active": "시너지",
     },
 ]
 
 
 def safe_text(value):
     return str(value).replace("<", "").replace(">", "")
-
-
-def icon_url(row, kind):
-    raw = str(row.get("raw_name", ""))
-
-    if kind == "unit":
-        return f"https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/{raw.lower()}/hud/{raw.lower()}_square.png"
-
-    if kind == "item":
-        return f"https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/{raw.lower()}.png"
-
-    if kind == "trait":
-        trait = raw.split(":")[0].lower()
-        return f"https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/{trait}.png"
-
-    return ""
 
 
 def make_nav(active):
@@ -68,103 +50,6 @@ def make_nav(active):
         html += f'<a class="{cls}" href="{href}">{label}</a>'
 
     return html
-
-
-def make_table_page(page):
-    df = pd.read_csv(page["file"])
-
-    df = df.copy()
-    df["raw_name"] = df[page["raw_col"]]
-
-    rows = ""
-
-    for _, row in df.iterrows():
-        name = safe_text(row[page["name_col"]])
-        raw = safe_text(row["raw_name"])
-        tier = safe_text(row["tier"])
-        url = icon_url(row, page["kind"])
-
-        rows += f"""
-        <tr class="tier-row" data-tier="{tier}" data-name="{name.lower()} {raw.lower()}">
-            <td class="name-cell">
-                <img class="icon" src="{url}" onerror="this.style.display='none'">
-                <span>{name}</span>
-            </td>
-            <td><span class="badge badge-{tier}">{tier}</span></td>
-            <td>{row["games"]}</td>
-            <td>{row["pick_rate"]}%</td>
-            <td>{row["avg_place"]}</td>
-            <td>{row["top4_rate"]}%</td>
-            <td>{row["win_rate"]}%</td>
-            <td>{row["score"]}</td>
-        </tr>
-        """
-
-    html = base_html(
-        title=page["title"],
-        active=page["title"].replace(" 티어표", ""),
-        body=f"""
-        <section class="card">
-            <div class="section-header">
-                <h2>{page["title"]}</h2>
-                <input id="searchInput" class="search" placeholder="검색어 입력">
-            </div>
-
-            <div class="filters">
-                <button onclick="filterTier('ALL')">전체</button>
-                <button onclick="filterTier('S')">S</button>
-                <button onclick="filterTier('A')">A</button>
-                <button onclick="filterTier('B')">B</button>
-                <button onclick="filterTier('C')">C</button>
-                <button onclick="filterTier('D')">D</button>
-            </div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>이름</th>
-                        <th>티어</th>
-                        <th>게임 수</th>
-                        <th>채용률</th>
-                        <th>평균 등수</th>
-                        <th>TOP4률</th>
-                        <th>1등률</th>
-                        <th>점수</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {rows}
-                </tbody>
-            </table>
-        </section>
-
-        <script>
-        let currentTier = "ALL";
-
-        function filterTier(tier) {{
-            currentTier = tier;
-            applyFilters();
-        }}
-
-        document.getElementById("searchInput").addEventListener("input", applyFilters);
-
-        function applyFilters() {{
-            const search = document.getElementById("searchInput").value.toLowerCase();
-            const rows = document.querySelectorAll(".tier-row");
-
-            rows.forEach(row => {{
-                const tierMatch = currentTier === "ALL" || row.dataset.tier === currentTier;
-                const nameMatch = row.dataset.name.includes(search);
-
-                row.style.display = tierMatch && nameMatch ? "" : "none";
-            }});
-        }}
-        </script>
-        """
-    )
-
-    with open(f"site/{page['output']}", "w", encoding="utf-8") as f:
-        f.write(html)
 
 
 def base_html(title, active, body):
@@ -388,6 +273,105 @@ tr:hover {{
 </body>
 </html>
 """
+
+
+def make_table_page(page):
+    df = pd.read_csv(page["file"])
+
+    rows = ""
+
+    for _, row in df.iterrows():
+        name = safe_text(row[page["name_col"]])
+        raw = safe_text(row[page["raw_col"]])
+        tier = safe_text(row["tier"])
+        icon = safe_text(row.get("icon_url", ""))
+
+        if icon and icon != "nan":
+            icon_html = f'<img class="icon" src="{icon}" onerror="this.style.display=\'none\'">'
+        else:
+            icon_html = ""
+
+        rows += f"""
+        <tr class="tier-row" data-tier="{tier}" data-name="{name.lower()} {raw.lower()}">
+            <td class="name-cell">
+                {icon_html}
+                <span>{name}</span>
+            </td>
+            <td><span class="badge badge-{tier}">{tier}</span></td>
+            <td>{row["games"]}</td>
+            <td>{row["pick_rate"]}%</td>
+            <td>{row["avg_place"]}</td>
+            <td>{row["top4_rate"]}%</td>
+            <td>{row["win_rate"]}%</td>
+            <td>{row["score"]}</td>
+        </tr>
+        """
+
+    html = base_html(
+        title=page["title"],
+        active=page["active"],
+        body=f"""
+        <section class="card">
+            <div class="section-header">
+                <h2>{page["title"]}</h2>
+                <input id="searchInput" class="search" placeholder="검색어 입력">
+            </div>
+
+            <div class="filters">
+                <button onclick="filterTier('ALL')">전체</button>
+                <button onclick="filterTier('S')">S</button>
+                <button onclick="filterTier('A')">A</button>
+                <button onclick="filterTier('B')">B</button>
+                <button onclick="filterTier('C')">C</button>
+                <button onclick="filterTier('D')">D</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>티어</th>
+                        <th>게임 수</th>
+                        <th>채용률</th>
+                        <th>평균 등수</th>
+                        <th>TOP4률</th>
+                        <th>1등률</th>
+                        <th>점수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {rows}
+                </tbody>
+            </table>
+        </section>
+
+        <script>
+        let currentTier = "ALL";
+
+        function filterTier(tier) {{
+            currentTier = tier;
+            applyFilters();
+        }}
+
+        document.getElementById("searchInput").addEventListener("input", applyFilters);
+
+        function applyFilters() {{
+            const search = document.getElementById("searchInput").value.toLowerCase();
+            const rows = document.querySelectorAll(".tier-row");
+
+            rows.forEach(row => {{
+                const tierMatch = currentTier === "ALL" || row.dataset.tier === currentTier;
+                const nameMatch = row.dataset.name.includes(search);
+
+                row.style.display = tierMatch && nameMatch ? "" : "none";
+            }});
+        }}
+        </script>
+        """
+    )
+
+    with open(f"site/{page['output']}", "w", encoding="utf-8") as f:
+        f.write(html)
 
 
 index_html = base_html(
