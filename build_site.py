@@ -41,12 +41,15 @@ def make_nav(active):
         ("units.html", "기물"),
         ("items.html", "아이템"),
         ("traits.html", "시너지"),
+        ("about.html", "프로젝트 소개"),
     ]
 
     html = ""
+
     for href, label in links:
         cls = "active" if label == active else ""
         html += f'<a class="{cls}" href="{href}">{label}</a>'
+
     return html
 
 
@@ -466,4 +469,235 @@ with open("site/index.html", "w", encoding="utf-8") as f:
 for page in PAGES:
     make_table_page(page)
 
+about_html = base_html(
+    title="프로젝트 소개",
+    active="프로젝트 소개",
+    body="""
+    <section class="card">
+
+        <h2>📊 프로젝트 소개</h2>
+
+        <p>
+        Riot Games API를 이용하여 한국 TFT 챌린저 랭크 데이터를
+        수집하고 분석한 프로젝트입니다.
+        </p>
+
+        <hr>
+
+        <h2>📈 데이터 규모</h2>
+
+        <div class="home-grid">
+
+            <div class="home-card">
+                <h2>4,466</h2>
+                <p>수집 경기 수</p>
+            </div>
+
+            <div class="home-card">
+                <h2>35,539</h2>
+                <p>플레이어 데이터</p>
+            </div>
+
+            <div class="home-card">
+                <h2>3</h2>
+                <p>분석 카테고리</p>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <h2>🧮 티어 계산 기준</h2>
+
+        <p>
+        티어 점수는 다음 데이터를 조합하여 계산했습니다.
+        </p>
+
+        <ul>
+            <li>평균 등수</li>
+            <li>TOP4 확률</li>
+            <li>1등 확률</li>
+            <li>채용률</li>
+        </ul>
+
+        <p>
+        성적이 좋고 많은 경기에서 사용된 데이터를
+        높은 티어로 평가했습니다.
+        </p>
+
+        <hr>
+
+        <h2>📖 표 보는 방법</h2>
+
+        <ul>
+            <li>게임 수 : 해당 데이터가 등장한 횟수</li>
+            <li>채용률 : 전체 경기 중 사용된 비율</li>
+            <li>평균 등수 : 평균 최종 등수</li>
+            <li>TOP4률 : 4등 이내 비율</li>
+            <li>1등률 : 우승 비율</li>
+            <li>점수 : 종합 평가 점수</li>
+        </ul>
+
+        <hr>
+
+        <h2>⚙️ 데이터 수집 및 분석 파이프라인</h2>
+
+        <div style="
+        background:#020617;
+        padding:30px;
+        border-radius:20px;
+        margin-top:20px;
+        ">
+
+        <div style="
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        font-size:22px;
+        line-height:2.2;
+        ">
+
+        <div>🎮 Riot API</div>
+        <div>↓</div>
+
+        <div>🏆 Challenger Summoner 수집</div>
+        <div>↓</div>
+
+        <div>🎯 Match ID 수집</div>
+        <div>↓</div>
+
+        <div>📁 Match Data 다운로드</div>
+        <div>↓</div>
+
+        <div>🧹 Parser 전처리</div>
+        <div>↓</div>
+
+        <div>📊 Pandas 통계 분석</div>
+        <div>↓</div>
+
+        <div>⭐ 티어 계산</div>
+        <div>↓</div>
+
+        <div>🌐 GitHub Pages 웹사이트 생성</div>
+
+        </div>
+        </div>
+
+        <hr>
+
+        <h2>📂 생성된 데이터</h2>
+
+        <ul>
+            <li>matches.jsonl</li>
+            <li>player_dataset.csv</li>
+            <li>unit_stats.csv</li>
+            <li>item_stats.csv</li>
+            <li>trait_stats.csv</li>
+            <li>unit_tier.csv</li>
+            <li>item_tier.csv</li>
+            <li>trait_tier.csv</li>
+        </ul>
+
+        <hr>
+
+        <h2>🛠 사용 기술</h2>
+
+        <ul>
+            <li>Python</li>
+            <li>Pandas</li>
+            <li>Riot API</li>
+            <li>HTML / CSS / JavaScript</li>
+            <li>GitHub Pages</li>
+        </ul>
+
+        <hr>
+
+        <h2>👨‍💻 제작자</h2>
+
+        <p>
+        엄정훈<br>
+        TFT Challenger Data Analysis Project
+        </p>
+
+    </section>
+    """
+)
+
+with open("site/about.html", "w", encoding="utf-8") as f:
+    f.write(about_html)
+
 print("사이트 생성 완료!")
+
+about_html = base_html(
+    title="프로젝트 소개",
+    active="프로젝트 소개",
+    body="""
+    <section class="card">
+        <h2>📊 프로젝트 소개</h2>
+        <p>Riot Games API를 이용하여 한국 TFT 챌린저 랭크 데이터를 수집하고 분석한 프로젝트입니다.</p>
+
+        <hr>
+
+        <h2>📈 데이터 규모</h2>
+        <ul>
+            <li>수집 경기 수: 4,466경기</li>
+            <li>플레이어 데이터: 35,539명</li>
+            <li>분석 카테고리: 기물, 아이템, 시너지</li>
+        </ul>
+
+        <hr>
+
+        <h2>🧮 티어 계산 기준</h2>
+        <p>평균 등수, TOP4률, 1등률, 채용률을 조합하여 티어 점수를 계산했습니다.</p>
+
+        <hr>
+
+        <h2>📖 표 보는 방법</h2>
+        <ul>
+            <li>게임 수: 해당 데이터가 등장한 횟수</li>
+            <li>채용률: 전체 데이터 중 사용된 비율</li>
+            <li>평균 등수: 평균 최종 등수</li>
+            <li>TOP4률: 4등 이내 비율</li>
+            <li>1등률: 우승 비율</li>
+            <li>점수: 종합 평가 점수</li>
+        </ul>
+
+        <hr>
+
+        <h2>⚙️ 데이터 수집 및 분석 파이프라인</h2>
+        <pre style="background:#020617; padding:20px; border-radius:15px; color:#facc15;">
+Riot API
+↓
+Challenger Summoner 수집
+↓
+Match ID 수집
+↓
+Match Data 다운로드
+↓
+Parser 전처리
+↓
+Pandas 통계 분석
+↓
+티어 계산
+↓
+GitHub Pages 웹사이트 생성
+        </pre>
+
+        <hr>
+
+        <h2>🛠 사용 기술</h2>
+        <ul>
+            <li>Python</li>
+            <li>Pandas</li>
+            <li>Riot API</li>
+            <li>HTML / CSS / JavaScript</li>
+            <li>GitHub Pages</li>
+        </ul>
+    </section>
+    """
+)
+
+with open("site/about.html", "w", encoding="utf-8") as f:
+    f.write(about_html)
+
+print("about.html 생성 완료!")

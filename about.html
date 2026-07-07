@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>TFT 통계 홈</title>
+<title>프로젝트 소개</title>
 
 <style>
 body {
@@ -215,27 +215,73 @@ tr:hover {
 <header>
     <h1>TFT Challenger Data Analysis</h1>
     <div class="subtitle">한국 챌린저 4466경기 / 35,539명 플레이어 분석</div>
-    <nav><a class="active" href="index.html">홈</a><a class="" href="units.html">기물</a><a class="" href="items.html">아이템</a><a class="" href="traits.html">시너지</a><a class="" href="about.html">프로젝트 소개</a></nav>
+    <nav><a class="" href="index.html">홈</a><a class="" href="units.html">기물</a><a class="" href="items.html">아이템</a><a class="" href="traits.html">시너지</a><a class="active" href="about.html">프로젝트 소개</a></nav>
 </header>
 
 <main>
 
-    <div class="home-grid">
-        <a class="home-card" href="units.html">
-            <h2>기물 티어표</h2>
-            <p>기물별 평균 등수, TOP4률, 1등률, 채용률을 확인합니다.</p>
-        </a>
+    <section class="card">
+        <h2>📊 프로젝트 소개</h2>
+        <p>Riot Games API를 이용하여 한국 TFT 챌린저 랭크 데이터를 수집하고 분석한 프로젝트입니다.</p>
 
-        <a class="home-card" href="items.html">
-            <h2>아이템 티어표</h2>
-            <p>아이템별 성능과 채용률을 확인합니다.</p>
-        </a>
+        <hr>
 
-        <a class="home-card" href="traits.html">
-            <h2>시너지 티어표</h2>
-            <p>시너지별 평균 성적과 티어를 확인합니다.</p>
-        </a>
-    </div>
+        <h2>📈 데이터 규모</h2>
+        <ul>
+            <li>수집 경기 수: 4,466경기</li>
+            <li>플레이어 데이터: 35,539명</li>
+            <li>분석 카테고리: 기물, 아이템, 시너지</li>
+        </ul>
+
+        <hr>
+
+        <h2>🧮 티어 계산 기준</h2>
+        <p>평균 등수, TOP4률, 1등률, 채용률을 조합하여 티어 점수를 계산했습니다.</p>
+
+        <hr>
+
+        <h2>📖 표 보는 방법</h2>
+        <ul>
+            <li>게임 수: 해당 데이터가 등장한 횟수</li>
+            <li>채용률: 전체 데이터 중 사용된 비율</li>
+            <li>평균 등수: 평균 최종 등수</li>
+            <li>TOP4률: 4등 이내 비율</li>
+            <li>1등률: 우승 비율</li>
+            <li>점수: 종합 평가 점수</li>
+        </ul>
+
+        <hr>
+
+        <h2>⚙️ 데이터 수집 및 분석 파이프라인</h2>
+        <pre style="background:#020617; padding:20px; border-radius:15px; color:#facc15;">
+Riot API
+↓
+Challenger Summoner 수집
+↓
+Match ID 수집
+↓
+Match Data 다운로드
+↓
+Parser 전처리
+↓
+Pandas 통계 분석
+↓
+티어 계산
+↓
+GitHub Pages 웹사이트 생성
+        </pre>
+
+        <hr>
+
+        <h2>🛠 사용 기술</h2>
+        <ul>
+            <li>Python</li>
+            <li>Pandas</li>
+            <li>Riot API</li>
+            <li>HTML / CSS / JavaScript</li>
+            <li>GitHub Pages</li>
+        </ul>
+    </section>
     
 </main>
 </body>
