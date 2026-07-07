@@ -12,10 +12,13 @@ PAGES = [
 def make_chart_block(csv_file, name_col, title):
     df = pd.read_csv(csv_file)
 
-    pick = df.sort_values("pick_rate", ascending=False).head(10)
-    avg = df.sort_values("avg_place", ascending=True).head(10)
-    win = df.sort_values("win_rate", ascending=False).head(10)
+    pick = df.sort_values("pick_rate", ascending=False).head(15)
+    avg = df.sort_values("avg_place", ascending=True).head(15)
+    win = df.sort_values("win_rate", ascending=False).head(15)
     scatter = df[df["games"] >= 100]
+
+    max_pick = float(pick["pick_rate"].max()) + 10
+    max_win = float(win["win_rate"].max()) + 10
 
     data = {
         "pickLabels": pick[name_col].tolist(),
@@ -31,7 +34,9 @@ def make_chart_block(csv_file, name_col, title):
                 "name": str(row[name_col])
             }
             for _, row in scatter.iterrows()
-        ]
+        ],
+        "maxPick": max_pick,
+        "maxWin": max_win
     }
 
     return f"""
@@ -57,7 +62,7 @@ def make_chart_block(csv_file, name_col, title):
 }}
 
 canvas {{
-    max-height: 360px;
+    max-height: 420px;
 }}
 
 @media (max-width: 900px) {{
@@ -69,17 +74,17 @@ canvas {{
 
 <div class="chart-grid">
     <div class="chart-card">
-        <h2>{title} 채용률 TOP 10</h2>
+        <h2>{title} 채용률 TOP 15</h2>
         <canvas id="pickChart"></canvas>
     </div>
 
     <div class="chart-card">
-        <h2>{title} 평균 등수 TOP 10</h2>
+        <h2>{title} 평균 등수 TOP 15</h2>
         <canvas id="avgChart"></canvas>
     </div>
 
     <div class="chart-card">
-        <h2>{title} 승률 TOP 10</h2>
+        <h2>{title} 승률 TOP 15</h2>
         <canvas id="winChart"></canvas>
     </div>
 
@@ -100,6 +105,19 @@ new Chart(document.getElementById("pickChart"), {{
             label: "채용률 (%)",
             data: chartData.pickValues
         }}]
+    }},
+    options: {{
+        indexAxis: "y",
+        scales: {{
+            x: {{
+                beginAtZero: true,
+                suggestedMax: chartData.maxPick,
+                title: {{
+                    display: true,
+                    text: "채용률 (%)"
+                }}
+            }}
+        }}
     }}
 }});
 
@@ -111,6 +129,19 @@ new Chart(document.getElementById("avgChart"), {{
             label: "평균 등수",
             data: chartData.avgValues
         }}]
+    }},
+    options: {{
+        indexAxis: "y",
+        scales: {{
+            x: {{
+                beginAtZero: true,
+                suggestedMax: 8,
+                title: {{
+                    display: true,
+                    text: "평균 등수"
+                }}
+            }}
+        }}
     }}
 }});
 
@@ -122,6 +153,19 @@ new Chart(document.getElementById("winChart"), {{
             label: "1등률 (%)",
             data: chartData.winValues
         }}]
+    }},
+    options: {{
+        indexAxis: "y",
+        scales: {{
+            x: {{
+                beginAtZero: true,
+                suggestedMax: chartData.maxWin,
+                title: {{
+                    display: true,
+                    text: "1등률 (%)"
+                }}
+            }}
+        }}
     }}
 }});
 
@@ -147,12 +191,15 @@ new Chart(document.getElementById("scatterChart"), {{
         }},
         scales: {{
             x: {{
+                beginAtZero: true,
                 title: {{
                     display: true,
                     text: "채용률 (%)"
                 }}
             }},
             y: {{
+                beginAtZero: true,
+                suggestedMax: 8,
                 title: {{
                     display: true,
                     text: "평균 등수"
