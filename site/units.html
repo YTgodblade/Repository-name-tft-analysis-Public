@@ -104,6 +104,8 @@ table {
 th {
     background: #1e293b;
     padding: 12px;
+    cursor: pointer;
+    user-select: none;
 }
 
 td {
@@ -114,6 +116,7 @@ td {
 
 tr:hover {
     background: #1e293b;
+    cursor: pointer;
 }
 
 .name-cell {
@@ -150,6 +153,45 @@ tr:hover {
 
 .home-card:hover {
     background: #1e293b;
+}
+
+.modal-bg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal {
+    background: #111827;
+    border: 1px solid #334155;
+    border-radius: 18px;
+    padding: 28px;
+    width: 360px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.modal h2 {
+    margin-top: 0;
+}
+
+.modal p {
+    color: #cbd5e1;
+}
+
+.close-btn {
+    margin-top: 16px;
+    width: 100%;
+    background: #facc15;
+    color: #111827;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 @media (max-width: 900px) {
@@ -193,22 +235,31 @@ tr:hover {
                 <button onclick="filterTier('D')">D</button>
             </div>
 
-            <table>
+            <table id="dataTable">
                 <thead>
                     <tr>
-                        <th>이름</th>
-                        <th>티어</th>
-                        <th>게임 수</th>
-                        <th>채용률</th>
-                        <th>평균 등수</th>
-                        <th>TOP4률</th>
-                        <th>1등률</th>
-                        <th>점수</th>
+                        <th onclick="sortTable(0, 'text')">이름</th>
+                        <th onclick="sortTable(1, 'text')">티어</th>
+                        <th onclick="sortTable(2, 'number')">게임 수</th>
+                        <th onclick="sortTable(3, 'number')">채용률</th>
+                        <th onclick="sortTable(4, 'number')">평균 등수</th>
+                        <th onclick="sortTable(5, 'number')">TOP4률</th>
+                        <th onclick="sortTable(6, 'number')">1등률</th>
+                        <th onclick="sortTable(7, 'number')">점수</th>
                     </tr>
                 </thead>
                 <tbody>
                     
-        <tr class="tier-row" data-tier="S" data-name="진 jhin">
+        <tr class="tier-row"
+            data-tier="S"
+            data-name="진 jhin"
+            data-display-name="진"
+            data-games="6241"
+            data-pick-rate="17.56"
+            data-avg-place="3.73"
+            data-top4="64.73"
+            data-win="20.11"
+            data-score="243.96">
             <td class="name-cell">진</td>
             <td><span class="badge badge-S">S</span></td>
             <td>6241</td>
@@ -219,7 +270,16 @@ tr:hover {
             <td>243.96</td>
         </tr>
         
-        <tr class="tier-row" data-tier="S" data-name="블리츠크랭크 blitzcrank">
+        <tr class="tier-row"
+            data-tier="S"
+            data-name="블리츠크랭크 blitzcrank"
+            data-display-name="블리츠크랭크"
+            data-games="12705"
+            data-pick-rate="35.75"
+            data-avg-place="3.89"
+            data-top4="61.28"
+            data-win="19.16"
+            data-score="242.02">
             <td class="name-cell">블리츠크랭크</td>
             <td><span class="badge badge-S">S</span></td>
             <td>12705</td>
@@ -230,7 +290,16 @@ tr:hover {
             <td>242.02</td>
         </tr>
         
-        <tr class="tier-row" data-tier="S" data-name="쉔 shen">
+        <tr class="tier-row"
+            data-tier="S"
+            data-name="쉔 shen"
+            data-display-name="쉔"
+            data-games="6814"
+            data-pick-rate="19.17"
+            data-avg-place="3.79"
+            data-top4="63.24"
+            data-win="21.1"
+            data-score="241.36">
             <td class="name-cell">쉔</td>
             <td><span class="badge badge-S">S</span></td>
             <td>6814</td>
@@ -241,7 +310,16 @@ tr:hover {
             <td>241.36</td>
         </tr>
         
-        <tr class="tier-row" data-tier="S" data-name="라아스트 rhaast">
+        <tr class="tier-row"
+            data-tier="S"
+            data-name="라아스트 rhaast"
+            data-display-name="라아스트"
+            data-games="9094"
+            data-pick-rate="25.59"
+            data-avg-place="3.83"
+            data-top4="63.23"
+            data-win="18.14"
+            data-score="241.33">
             <td class="name-cell">라아스트</td>
             <td><span class="badge badge-S">S</span></td>
             <td>9094</td>
@@ -252,7 +330,16 @@ tr:hover {
             <td>241.33</td>
         </tr>
         
-        <tr class="tier-row" data-tier="A" data-name="바드 bard">
+        <tr class="tier-row"
+            data-tier="A"
+            data-name="바드 bard"
+            data-display-name="바드"
+            data-games="7370"
+            data-pick-rate="20.74"
+            data-avg-place="3.81"
+            data-top4="63.04"
+            data-win="19.15"
+            data-score="240.54">
             <td class="name-cell">바드</td>
             <td><span class="badge badge-A">A</span></td>
             <td>7370</td>
@@ -263,7 +350,16 @@ tr:hover {
             <td>240.54</td>
         </tr>
         
-        <tr class="tier-row" data-tier="A" data-name="소나 sona">
+        <tr class="tier-row"
+            data-tier="A"
+            data-name="소나 sona"
+            data-display-name="소나"
+            data-games="6995"
+            data-pick-rate="19.68"
+            data-avg-place="3.95"
+            data-top4="60.86"
+            data-win="15.55"
+            data-score="231.74">
             <td class="name-cell">소나</td>
             <td><span class="badge badge-A">A</span></td>
             <td>6995</td>
@@ -274,7 +370,16 @@ tr:hover {
             <td>231.74</td>
         </tr>
         
-        <tr class="tier-row" data-tier="A" data-name="모르가나 morgana">
+        <tr class="tier-row"
+            data-tier="A"
+            data-name="모르가나 morgana"
+            data-display-name="모르가나"
+            data-games="8189"
+            data-pick-rate="23.04"
+            data-avg-place="4.04"
+            data-top4="58.87"
+            data-win="17.4"
+            data-score="228.36">
             <td class="name-cell">모르가나</td>
             <td><span class="badge badge-A">A</span></td>
             <td>8189</td>
@@ -285,7 +390,16 @@ tr:hover {
             <td>228.36</td>
         </tr>
         
-        <tr class="tier-row" data-tier="A" data-name="피오라 fiora">
+        <tr class="tier-row"
+            data-tier="A"
+            data-name="피오라 fiora"
+            data-display-name="피오라"
+            data-games="5581"
+            data-pick-rate="15.7"
+            data-avg-place="4.06"
+            data-top4="58.43"
+            data-win="19.92"
+            data-score="224.79">
             <td class="name-cell">피오라</td>
             <td><span class="badge badge-A">A</span></td>
             <td>5581</td>
@@ -296,7 +410,16 @@ tr:hover {
             <td>224.79</td>
         </tr>
         
-        <tr class="tier-row" data-tier="A" data-name="카르마 karma">
+        <tr class="tier-row"
+            data-tier="A"
+            data-name="카르마 karma"
+            data-display-name="카르마"
+            data-games="11452"
+            data-pick-rate="32.22"
+            data-avg-place="4.19"
+            data-top4="55.98"
+            data-win="14.92"
+            data-score="223.17">
             <td class="name-cell">카르마</td>
             <td><span class="badge badge-A">A</span></td>
             <td>11452</td>
@@ -307,7 +430,16 @@ tr:hover {
             <td>223.17</td>
         </tr>
         
-        <tr class="tier-row" data-tier="A" data-name="벡스 vex">
+        <tr class="tier-row"
+            data-tier="A"
+            data-name="벡스 vex"
+            data-display-name="벡스"
+            data-games="4448"
+            data-pick-rate="12.52"
+            data-avg-place="4.09"
+            data-top4="56.97"
+            data-win="20.46"
+            data-score="221.69">
             <td class="name-cell">벡스</td>
             <td><span class="badge badge-A">A</span></td>
             <td>4448</td>
@@ -318,7 +450,16 @@ tr:hover {
             <td>221.69</td>
         </tr>
         
-        <tr class="tier-row" data-tier="A" data-name="누누와 윌럼프 nunu">
+        <tr class="tier-row"
+            data-tier="A"
+            data-name="누누와 윌럼프 nunu"
+            data-display-name="누누와 윌럼프"
+            data-games="11538"
+            data-pick-rate="32.47"
+            data-avg-place="4.37"
+            data-top4="51.82"
+            data-win="15.14"
+            data-score="213.06">
             <td class="name-cell">누누와 윌럼프</td>
             <td><span class="badge badge-A">A</span></td>
             <td>11538</td>
@@ -329,7 +470,16 @@ tr:hover {
             <td>213.06</td>
         </tr>
         
-        <tr class="tier-row" data-tier="A" data-name="모데카이저 mordekaiser">
+        <tr class="tier-row"
+            data-tier="A"
+            data-name="모데카이저 mordekaiser"
+            data-display-name="모데카이저"
+            data-games="11237"
+            data-pick-rate="31.62"
+            data-avg-place="4.39"
+            data-top4="51.94"
+            data-win="13.53"
+            data-score="211.44">
             <td class="name-cell">모데카이저</td>
             <td><span class="badge badge-A">A</span></td>
             <td>11237</td>
@@ -340,7 +490,16 @@ tr:hover {
             <td>211.44</td>
         </tr>
         
-        <tr class="tier-row" data-tier="A" data-name="거대 메크 로봇 galio">
+        <tr class="tier-row"
+            data-tier="A"
+            data-name="거대 메크 로봇 galio"
+            data-display-name="거대 메크 로봇"
+            data-games="6295"
+            data-pick-rate="17.71"
+            data-avg-place="4.3"
+            data-top4="54.09"
+            data-win="14.5"
+            data-score="211.21">
             <td class="name-cell">거대 메크 로봇</td>
             <td><span class="badge badge-A">A</span></td>
             <td>6295</td>
@@ -351,7 +510,16 @@ tr:hover {
             <td>211.21</td>
         </tr>
         
-        <tr class="tier-row" data-tier="B" data-name="그레이브즈 graves">
+        <tr class="tier-row"
+            data-tier="B"
+            data-name="그레이브즈 graves"
+            data-display-name="그레이브즈"
+            data-games="4385"
+            data-pick-rate="12.34"
+            data-avg-place="4.28"
+            data-top4="53.41"
+            data-win="20.39"
+            data-score="211.04">
             <td class="name-cell">그레이브즈</td>
             <td><span class="badge badge-B">B</span></td>
             <td>4385</td>
@@ -362,7 +530,16 @@ tr:hover {
             <td>211.04</td>
         </tr>
         
-        <tr class="tier-row" data-tier="B" data-name="나미 nami">
+        <tr class="tier-row"
+            data-tier="B"
+            data-name="나미 nami"
+            data-display-name="나미"
+            data-games="5150"
+            data-pick-rate="14.49"
+            data-avg-place="4.34"
+            data-top4="52.95"
+            data-win="14.25"
+            data-score="207.53">
             <td class="name-cell">나미</td>
             <td><span class="badge badge-B">B</span></td>
             <td>5150</td>
@@ -373,7 +550,16 @@ tr:hover {
             <td>207.53</td>
         </tr>
         
-        <tr class="tier-row" data-tier="B" data-name="오른 ornn">
+        <tr class="tier-row"
+            data-tier="B"
+            data-name="오른 ornn"
+            data-display-name="오른"
+            data-games="6402"
+            data-pick-rate="18.01"
+            data-avg-place="4.38"
+            data-top4="51.52"
+            data-win="14.9"
+            data-score="206.64">
             <td class="name-cell">오른</td>
             <td><span class="badge badge-B">B</span></td>
             <td>6402</td>
@@ -384,7 +570,16 @@ tr:hover {
             <td>206.64</td>
         </tr>
         
-        <tr class="tier-row" data-tier="B" data-name="탐 켄치 tahmkench">
+        <tr class="tier-row"
+            data-tier="B"
+            data-name="탐 켄치 tahmkench"
+            data-display-name="탐 켄치"
+            data-games="10546"
+            data-pick-rate="29.67"
+            data-avg-place="4.47"
+            data-top4="50.57"
+            data-win="14.01"
+            data-score="206.34">
             <td class="name-cell">탐 켄치</td>
             <td><span class="badge badge-B">B</span></td>
             <td>10546</td>
@@ -395,7 +590,16 @@ tr:hover {
             <td>206.34</td>
         </tr>
         
-        <tr class="tier-row" data-tier="B" data-name="킨드레드 kindred">
+        <tr class="tier-row"
+            data-tier="B"
+            data-name="킨드레드 kindred"
+            data-display-name="킨드레드"
+            data-games="5111"
+            data-pick-rate="14.38"
+            data-avg-place="4.37"
+            data-top4="54.35"
+            data-win="8.67"
+            data-score="205.29">
             <td class="name-cell">킨드레드</td>
             <td><span class="badge badge-B">B</span></td>
             <td>5111</td>
@@ -406,7 +610,16 @@ tr:hover {
             <td>205.29</td>
         </tr>
         
-        <tr class="tier-row" data-tier="B" data-name="빅토르 viktor">
+        <tr class="tier-row"
+            data-tier="B"
+            data-name="빅토르 viktor"
+            data-display-name="빅토르"
+            data-games="1001"
+            data-pick-rate="2.82"
+            data-avg-place="4.31"
+            data-top4="53.45"
+            data-win="12.79"
+            data-score="204.22">
             <td class="name-cell">빅토르</td>
             <td><span class="badge badge-B">B</span></td>
             <td>1001</td>
@@ -417,7 +630,16 @@ tr:hover {
             <td>204.22</td>
         </tr>
         
-        <tr class="tier-row" data-tier="B" data-name="아칼리 akali">
+        <tr class="tier-row"
+            data-tier="B"
+            data-name="아칼리 akali"
+            data-display-name="아칼리"
+            data-games="6603"
+            data-pick-rate="18.58"
+            data-avg-place="4.44"
+            data-top4="51.43"
+            data-win="13.1"
+            data-score="203.48">
             <td class="name-cell">아칼리</td>
             <td><span class="badge badge-B">B</span></td>
             <td>6603</td>
@@ -428,7 +650,16 @@ tr:hover {
             <td>203.48</td>
         </tr>
         
-        <tr class="tier-row" data-tier="B" data-name="아우렐리온 솔 aurelionsol">
+        <tr class="tier-row"
+            data-tier="B"
+            data-name="아우렐리온 솔 aurelionsol"
+            data-display-name="아우렐리온 솔"
+            data-games="3625"
+            data-pick-rate="10.2"
+            data-avg-place="4.42"
+            data-top4="51.42"
+            data-win="16.0"
+            data-score="201.71">
             <td class="name-cell">아우렐리온 솔</td>
             <td><span class="badge badge-B">B</span></td>
             <td>3625</td>
@@ -439,7 +670,16 @@ tr:hover {
             <td>201.71</td>
         </tr>
         
-        <tr class="tier-row" data-tier="B" data-name="사미라 samira">
+        <tr class="tier-row"
+            data-tier="B"
+            data-name="사미라 samira"
+            data-display-name="사미라"
+            data-games="4288"
+            data-pick-rate="12.07"
+            data-avg-place="4.44"
+            data-top4="50.07"
+            data-win="15.65"
+            data-score="200.98">
             <td class="name-cell">사미라</td>
             <td><span class="badge badge-B">B</span></td>
             <td>4288</td>
@@ -450,7 +690,16 @@ tr:hover {
             <td>200.98</td>
         </tr>
         
-        <tr class="tier-row" data-tier="B" data-name="마오카이 maokai">
+        <tr class="tier-row"
+            data-tier="B"
+            data-name="마오카이 maokai"
+            data-display-name="마오카이"
+            data-games="10878"
+            data-pick-rate="30.61"
+            data-avg-place="4.57"
+            data-top4="49.17"
+            data-win="10.42"
+            data-score="200.58">
             <td class="name-cell">마오카이</td>
             <td><span class="badge badge-B">B</span></td>
             <td>10878</td>
@@ -461,7 +710,16 @@ tr:hover {
             <td>200.58</td>
         </tr>
         
-        <tr class="tier-row" data-tier="B" data-name="태고족 우두머리 aatrox">
+        <tr class="tier-row"
+            data-tier="B"
+            data-name="태고족 우두머리 aatrox"
+            data-display-name="태고족 우두머리"
+            data-games="8741"
+            data-pick-rate="24.6"
+            data-avg-place="4.54"
+            data-top4="49.06"
+            data-win="13.66"
+            data-score="200.29">
             <td class="name-cell">태고족 우두머리</td>
             <td><span class="badge badge-B">B</span></td>
             <td>8741</td>
@@ -472,7 +730,16 @@ tr:hover {
             <td>200.29</td>
         </tr>
         
-        <tr class="tier-row" data-tier="B" data-name="파이크 pyke">
+        <tr class="tier-row"
+            data-tier="B"
+            data-name="파이크 pyke"
+            data-display-name="파이크"
+            data-games="1646"
+            data-pick-rate="4.63"
+            data-avg-place="4.39"
+            data-top4="52.25"
+            data-win="10.63"
+            data-score="200.15">
             <td class="name-cell">파이크</td>
             <td><span class="badge badge-B">B</span></td>
             <td>1646</td>
@@ -483,7 +750,16 @@ tr:hover {
             <td>200.15</td>
         </tr>
         
-        <tr class="tier-row" data-tier="B" data-name="그웬 gwen">
+        <tr class="tier-row"
+            data-tier="B"
+            data-name="그웬 gwen"
+            data-display-name="그웬"
+            data-games="4121"
+            data-pick-rate="11.6"
+            data-avg-place="4.45"
+            data-top4="50.55"
+            data-win="12.91"
+            data-score="199.89">
             <td class="name-cell">그웬</td>
             <td><span class="badge badge-B">B</span></td>
             <td>4121</td>
@@ -494,7 +770,16 @@ tr:hover {
             <td>199.89</td>
         </tr>
         
-        <tr class="tier-row" data-tier="B" data-name="우르곳 urgot">
+        <tr class="tier-row"
+            data-tier="B"
+            data-name="우르곳 urgot"
+            data-display-name="우르곳"
+            data-games="4432"
+            data-pick-rate="12.47"
+            data-avg-place="4.48"
+            data-top4="50.77"
+            data-win="12.97"
+            data-score="198.81">
             <td class="name-cell">우르곳</td>
             <td><span class="badge badge-B">B</span></td>
             <td>4432</td>
@@ -505,7 +790,16 @@ tr:hover {
             <td>198.81</td>
         </tr>
         
-        <tr class="tier-row" data-tier="B" data-name="리븐 riven">
+        <tr class="tier-row"
+            data-tier="B"
+            data-name="리븐 riven"
+            data-display-name="리븐"
+            data-games="4880"
+            data-pick-rate="13.73"
+            data-avg-place="4.49"
+            data-top4="50.55"
+            data-win="11.31"
+            data-score="198.42">
             <td class="name-cell">리븐</td>
             <td><span class="badge badge-B">B</span></td>
             <td>4880</td>
@@ -516,7 +810,16 @@ tr:hover {
             <td>198.42</td>
         </tr>
         
-        <tr class="tier-row" data-tier="B" data-name="자야 xayah">
+        <tr class="tier-row"
+            data-tier="B"
+            data-name="자야 xayah"
+            data-display-name="자야"
+            data-games="3020"
+            data-pick-rate="8.5"
+            data-avg-place="4.47"
+            data-top4="50.13"
+            data-win="14.8"
+            data-score="197.9">
             <td class="name-cell">자야</td>
             <td><span class="badge badge-B">B</span></td>
             <td>3020</td>
@@ -527,7 +830,16 @@ tr:hover {
             <td>197.9</td>
         </tr>
         
-        <tr class="tier-row" data-tier="B" data-name="일라오이 illaoi">
+        <tr class="tier-row"
+            data-tier="B"
+            data-name="일라오이 illaoi"
+            data-display-name="일라오이"
+            data-games="8466"
+            data-pick-rate="23.82"
+            data-avg-place="4.57"
+            data-top4="48.44"
+            data-win="10.58"
+            data-score="197.68">
             <td class="name-cell">일라오이</td>
             <td><span class="badge badge-B">B</span></td>
             <td>8466</td>
@@ -538,7 +850,16 @@ tr:hover {
             <td>197.68</td>
         </tr>
         
-        <tr class="tier-row" data-tier="B" data-name="초가스 chogath">
+        <tr class="tier-row"
+            data-tier="B"
+            data-name="초가스 chogath"
+            data-display-name="초가스"
+            data-games="3641"
+            data-pick-rate="10.25"
+            data-avg-place="4.5"
+            data-top4="50.43"
+            data-win="12.88"
+            data-score="196.8">
             <td class="name-cell">초가스</td>
             <td><span class="badge badge-B">B</span></td>
             <td>3641</td>
@@ -549,7 +870,16 @@ tr:hover {
             <td>196.8</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="나서스 nasus">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="나서스 nasus"
+            data-display-name="나서스"
+            data-games="3977"
+            data-pick-rate="11.19"
+            data-avg-place="4.51"
+            data-top4="48.73"
+            data-win="13.58"
+            data-score="196.31">
             <td class="name-cell">나서스</td>
             <td><span class="badge badge-C">C</span></td>
             <td>3977</td>
@@ -560,7 +890,16 @@ tr:hover {
             <td>196.31</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="판테온 pantheon">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="판테온 pantheon"
+            data-display-name="판테온"
+            data-games="7222"
+            data-pick-rate="20.32"
+            data-avg-place="4.58"
+            data-top4="48.59"
+            data-win="11.8"
+            data-score="196.06">
             <td class="name-cell">판테온</td>
             <td><span class="badge badge-C">C</span></td>
             <td>7222</td>
@@ -571,7 +910,16 @@ tr:hover {
             <td>196.06</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="제드 zed">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="제드 zed"
+            data-display-name="제드"
+            data-games="165"
+            data-pick-rate="0.46"
+            data-avg-place="4.13"
+            data-top4="58.18"
+            data-win="17.58"
+            data-score="194.65">
             <td class="name-cell">제드</td>
             <td><span class="badge badge-C">C</span></td>
             <td>165</td>
@@ -582,7 +930,16 @@ tr:hover {
             <td>194.65</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="마스터 이 masteryi">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="마스터 이 masteryi"
+            data-display-name="마스터 이"
+            data-games="2937"
+            data-pick-rate="8.26"
+            data-avg-place="4.52"
+            data-top4="50.83"
+            data-win="8.78"
+            data-score="194.31">
             <td class="name-cell">마스터 이</td>
             <td><span class="badge badge-C">C</span></td>
             <td>2937</td>
@@ -593,7 +950,16 @@ tr:hover {
             <td>194.31</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="람머스 rammus">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="람머스 rammus"
+            data-display-name="람머스"
+            data-games="5606"
+            data-pick-rate="15.77"
+            data-avg-place="4.59"
+            data-top4="48.07"
+            data-win="11.02"
+            data-score="193.43">
             <td class="name-cell">람머스</td>
             <td><span class="badge badge-C">C</span></td>
             <td>5606</td>
@@ -604,7 +970,16 @@ tr:hover {
             <td>193.43</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="벨베스 belveth">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="벨베스 belveth"
+            data-display-name="벨베스"
+            data-games="5255"
+            data-pick-rate="14.79"
+            data-avg-place="4.58"
+            data-top4="49.72"
+            data-win="7.65"
+            data-score="193.36">
             <td class="name-cell">벨베스</td>
             <td><span class="badge badge-C">C</span></td>
             <td>5255</td>
@@ -615,7 +990,16 @@ tr:hover {
             <td>193.36</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="렉사이 reksai">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="렉사이 reksai"
+            data-display-name="렉사이"
+            data-games="2575"
+            data-pick-rate="7.25"
+            data-avg-place="4.53"
+            data-top4="50.95"
+            data-win="7.88"
+            data-score="193.26">
             <td class="name-cell">렉사이</td>
             <td><span class="badge badge-C">C</span></td>
             <td>2575</td>
@@ -626,7 +1010,16 @@ tr:hover {
             <td>193.26</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="카이사 kaisa">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="카이사 kaisa"
+            data-display-name="카이사"
+            data-games="2473"
+            data-pick-rate="6.96"
+            data-avg-place="4.54"
+            data-top4="49.78"
+            data-win="11.73"
+            data-score="193.06">
             <td class="name-cell">카이사</td>
             <td><span class="badge badge-C">C</span></td>
             <td>2473</td>
@@ -637,7 +1030,16 @@ tr:hover {
             <td>193.06</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="그라가스 gragas">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="그라가스 gragas"
+            data-display-name="그라가스"
+            data-games="3365"
+            data-pick-rate="9.47"
+            data-avg-place="4.57"
+            data-top4="49.51"
+            data-win="9.06"
+            data-score="191.95">
             <td class="name-cell">그라가스</td>
             <td><span class="badge badge-C">C</span></td>
             <td>3365</td>
@@ -648,7 +1050,16 @@ tr:hover {
             <td>191.95</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="리산드라 lissandra">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="리산드라 lissandra"
+            data-display-name="리산드라"
+            data-games="6533"
+            data-pick-rate="18.38"
+            data-avg-place="4.64"
+            data-top4="47.16"
+            data-win="10.67"
+            data-score="191.63">
             <td class="name-cell">리산드라</td>
             <td><span class="badge badge-C">C</span></td>
             <td>6533</td>
@@ -659,7 +1070,16 @@ tr:hover {
             <td>191.63</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="잭스 jax">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="잭스 jax"
+            data-display-name="잭스"
+            data-games="4551"
+            data-pick-rate="12.81"
+            data-avg-place="4.64"
+            data-top4="46.78"
+            data-win="11.45"
+            data-score="189.45">
             <td class="name-cell">잭스</td>
             <td><span class="badge badge-C">C</span></td>
             <td>4551</td>
@@ -670,7 +1090,16 @@ tr:hover {
             <td>189.45</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="베이가 veigar">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="베이가 veigar"
+            data-display-name="베이가"
+            data-games="2241"
+            data-pick-rate="6.31"
+            data-avg-place="4.61"
+            data-top4="46.5"
+            data-win="14.77"
+            data-score="188.93">
             <td class="name-cell">베이가</td>
             <td><span class="badge badge-C">C</span></td>
             <td>2241</td>
@@ -681,7 +1110,16 @@ tr:hover {
             <td>188.93</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="티모 teemo">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="티모 teemo"
+            data-display-name="티모"
+            data-games="1597"
+            data-pick-rate="4.49"
+            data-avg-place="4.61"
+            data-top4="47.59"
+            data-win="10.58"
+            data-score="187.69">
             <td class="name-cell">티모</td>
             <td><span class="badge badge-C">C</span></td>
             <td>1597</td>
@@ -692,7 +1130,16 @@ tr:hover {
             <td>187.69</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="뽀삐 poppy">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="뽀삐 poppy"
+            data-display-name="뽀삐"
+            data-games="4253"
+            data-pick-rate="11.97"
+            data-avg-place="4.71"
+            data-top4="45.61"
+            data-win="10.72"
+            data-score="185.12">
             <td class="name-cell">뽀삐</td>
             <td><span class="badge badge-C">C</span></td>
             <td>4253</td>
@@ -703,7 +1150,16 @@ tr:hover {
             <td>185.12</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="레오나 leona">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="레오나 leona"
+            data-display-name="레오나"
+            data-games="2973"
+            data-pick-rate="8.37"
+            data-avg-place="4.69"
+            data-top4="46.59"
+            data-win="8.71"
+            data-score="184.57">
             <td class="name-cell">레오나</td>
             <td><span class="badge badge-C">C</span></td>
             <td>2973</td>
@@ -714,7 +1170,16 @@ tr:hover {
             <td>184.57</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="미스 포츈 missfortune">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="미스 포츈 missfortune"
+            data-display-name="미스 포츈"
+            data-games="1003"
+            data-pick-rate="2.82"
+            data-avg-place="4.65"
+            data-top4="48.26"
+            data-win="7.08"
+            data-score="184.52">
             <td class="name-cell">미스 포츈</td>
             <td><span class="badge badge-C">C</span></td>
             <td>1003</td>
@@ -725,7 +1190,16 @@ tr:hover {
             <td>184.52</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="이즈리얼 ezreal">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="이즈리얼 ezreal"
+            data-display-name="이즈리얼"
+            data-games="1258"
+            data-pick-rate="3.54"
+            data-avg-place="4.7"
+            data-top4="46.74"
+            data-win="13.35"
+            data-score="183.11">
             <td class="name-cell">이즈리얼</td>
             <td><span class="badge badge-C">C</span></td>
             <td>1258</td>
@@ -736,7 +1210,16 @@ tr:hover {
             <td>183.11</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="코르키 corki">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="코르키 corki"
+            data-display-name="코르키"
+            data-games="3128"
+            data-pick-rate="8.8"
+            data-avg-place="4.72"
+            data-top4="45.4"
+            data-win="9.37"
+            data-score="183.01">
             <td class="name-cell">코르키</td>
             <td><span class="badge badge-C">C</span></td>
             <td>3128</td>
@@ -747,7 +1230,16 @@ tr:hover {
             <td>183.01</td>
         </tr>
         
-        <tr class="tier-row" data-tier="C" data-name="탈론 talon">
+        <tr class="tier-row"
+            data-tier="C"
+            data-name="탈론 talon"
+            data-display-name="탈론"
+            data-games="633"
+            data-pick-rate="1.78"
+            data-avg-place="4.68"
+            data-top4="46.6"
+            data-win="8.21"
+            data-score="182.33">
             <td class="name-cell">탈론</td>
             <td><span class="badge badge-C">C</span></td>
             <td>633</td>
@@ -758,7 +1250,16 @@ tr:hover {
             <td>182.33</td>
         </tr>
         
-        <tr class="tier-row" data-tier="D" data-name="밀리오 milio">
+        <tr class="tier-row"
+            data-tier="D"
+            data-name="밀리오 milio"
+            data-display-name="밀리오"
+            data-games="3570"
+            data-pick-rate="10.05"
+            data-avg-place="4.74"
+            data-top4="45.6"
+            data-win="7.84"
+            data-score="182.27">
             <td class="name-cell">밀리오</td>
             <td><span class="badge badge-D">D</span></td>
             <td>3570</td>
@@ -769,7 +1270,16 @@ tr:hover {
             <td>182.27</td>
         </tr>
         
-        <tr class="tier-row" data-tier="D" data-name="케이틀린 caitlyn">
+        <tr class="tier-row"
+            data-tier="D"
+            data-name="케이틀린 caitlyn"
+            data-display-name="케이틀린"
+            data-games="1183"
+            data-pick-rate="3.33"
+            data-avg-place="4.71"
+            data-top4="47.42"
+            data-win="7.35"
+            data-score="181.53">
             <td class="name-cell">케이틀린</td>
             <td><span class="badge badge-D">D</span></td>
             <td>1183</td>
@@ -780,7 +1290,16 @@ tr:hover {
             <td>181.53</td>
         </tr>
         
-        <tr class="tier-row" data-tier="D" data-name="징크스 jinx">
+        <tr class="tier-row"
+            data-tier="D"
+            data-name="징크스 jinx"
+            data-display-name="징크스"
+            data-games="2554"
+            data-pick-rate="7.19"
+            data-avg-place="4.76"
+            data-top4="47.42"
+            data-win="7.28"
+            data-score="180.56">
             <td class="name-cell">징크스</td>
             <td><span class="badge badge-D">D</span></td>
             <td>2554</td>
@@ -791,7 +1310,16 @@ tr:hover {
             <td>180.56</td>
         </tr>
         
-        <tr class="tier-row" data-tier="D" data-name="룰루 lulu">
+        <tr class="tier-row"
+            data-tier="D"
+            data-name="룰루 lulu"
+            data-display-name="룰루"
+            data-games="1719"
+            data-pick-rate="4.84"
+            data-avg-place="4.74"
+            data-top4="45.32"
+            data-win="9.19"
+            data-score="180.37">
             <td class="name-cell">룰루</td>
             <td><span class="badge badge-D">D</span></td>
             <td>1719</td>
@@ -802,7 +1330,16 @@ tr:hover {
             <td>180.37</td>
         </tr>
         
-        <tr class="tier-row" data-tier="D" data-name="트위스티드 페이트 twistedfate">
+        <tr class="tier-row"
+            data-tier="D"
+            data-name="트위스티드 페이트 twistedfate"
+            data-display-name="트위스티드 페이트"
+            data-games="1854"
+            data-pick-rate="5.22"
+            data-avg-place="4.74"
+            data-top4="45.36"
+            data-win="8.36"
+            data-score="180.37">
             <td class="name-cell">트위스티드 페이트</td>
             <td><span class="badge badge-D">D</span></td>
             <td>1854</td>
@@ -813,7 +1350,16 @@ tr:hover {
             <td>180.37</td>
         </tr>
         
-        <tr class="tier-row" data-tier="D" data-name="나르 gnar">
+        <tr class="tier-row"
+            data-tier="D"
+            data-name="나르 gnar"
+            data-display-name="나르"
+            data-games="1598"
+            data-pick-rate="4.5"
+            data-avg-place="4.76"
+            data-top4="44.62"
+            data-win="11.76"
+            data-score="179.54">
             <td class="name-cell">나르</td>
             <td><span class="badge badge-D">D</span></td>
             <td>1598</td>
@@ -824,7 +1370,16 @@ tr:hover {
             <td>179.54</td>
         </tr>
         
-        <tr class="tier-row" data-tier="D" data-name="르블랑 leblanc">
+        <tr class="tier-row"
+            data-tier="D"
+            data-name="르블랑 leblanc"
+            data-display-name="르블랑"
+            data-games="3097"
+            data-pick-rate="8.71"
+            data-avg-place="4.78"
+            data-top4="44.66"
+            data-win="6.91"
+            data-score="179.26">
             <td class="name-cell">르블랑</td>
             <td><span class="badge badge-D">D</span></td>
             <td>3097</td>
@@ -835,7 +1390,16 @@ tr:hover {
             <td>179.26</td>
         </tr>
         
-        <tr class="tier-row" data-tier="D" data-name="조이 zoe">
+        <tr class="tier-row"
+            data-tier="D"
+            data-name="조이 zoe"
+            data-display-name="조이"
+            data-games="666"
+            data-pick-rate="1.87"
+            data-avg-place="4.82"
+            data-top4="43.39"
+            data-win="9.01"
+            data-score="174.57">
             <td class="name-cell">조이</td>
             <td><span class="badge badge-D">D</span></td>
             <td>666</td>
@@ -846,7 +1410,16 @@ tr:hover {
             <td>174.57</td>
         </tr>
         
-        <tr class="tier-row" data-tier="D" data-name="브라이어 briar">
+        <tr class="tier-row"
+            data-tier="D"
+            data-name="브라이어 briar"
+            data-display-name="브라이어"
+            data-games="1807"
+            data-pick-rate="5.08"
+            data-avg-place="4.92"
+            data-top4="44.05"
+            data-win="6.42"
+            data-score="170.53">
             <td class="name-cell">브라이어</td>
             <td><span class="badge badge-D">D</span></td>
             <td>1807</td>
@@ -857,7 +1430,16 @@ tr:hover {
             <td>170.53</td>
         </tr>
         
-        <tr class="tier-row" data-tier="D" data-name="다이애나 diana">
+        <tr class="tier-row"
+            data-tier="D"
+            data-name="다이애나 diana"
+            data-display-name="다이애나"
+            data-games="822"
+            data-pick-rate="2.31"
+            data-avg-place="4.91"
+            data-top4="43.92"
+            data-win="5.47"
+            data-score="169.69">
             <td class="name-cell">다이애나</td>
             <td><span class="badge badge-D">D</span></td>
             <td>822</td>
@@ -868,7 +1450,16 @@ tr:hover {
             <td>169.69</td>
         </tr>
         
-        <tr class="tier-row" data-tier="D" data-name="피즈 fizz">
+        <tr class="tier-row"
+            data-tier="D"
+            data-name="피즈 fizz"
+            data-display-name="피즈"
+            data-games="2481"
+            data-pick-rate="6.98"
+            data-avg-place="4.95"
+            data-top4="41.03"
+            data-win="8.75"
+            data-score="169.35">
             <td class="name-cell">피즈</td>
             <td><span class="badge badge-D">D</span></td>
             <td>2481</td>
@@ -879,7 +1470,16 @@ tr:hover {
             <td>169.35</td>
         </tr>
         
-        <tr class="tier-row" data-tier="D" data-name="오로라 aurora">
+        <tr class="tier-row"
+            data-tier="D"
+            data-name="오로라 aurora"
+            data-display-name="오로라"
+            data-games="633"
+            data-pick-rate="1.78"
+            data-avg-place="5.71"
+            data-top4="29.38"
+            data-win="7.74"
+            data-score="125.57">
             <td class="name-cell">오로라</td>
             <td><span class="badge badge-D">D</span></td>
             <td>633</td>
@@ -894,8 +1494,23 @@ tr:hover {
             </table>
         </section>
 
+        <div id="modalBg" class="modal-bg" onclick="closeModal()">
+            <div class="modal" onclick="event.stopPropagation()">
+                <h2 id="modalName"></h2>
+                <p id="modalTier"></p>
+                <p id="modalGames"></p>
+                <p id="modalPick"></p>
+                <p id="modalAvg"></p>
+                <p id="modalTop4"></p>
+                <p id="modalWin"></p>
+                <p id="modalScore"></p>
+                <button class="close-btn" onclick="closeModal()">닫기</button>
+            </div>
+        </div>
+
         <script>
         let currentTier = "ALL";
+        let sortDirections = {};
 
         function filterTier(tier) {
             currentTier = tier;
@@ -914,6 +1529,50 @@ tr:hover {
 
                 row.style.display = tierMatch && nameMatch ? "" : "none";
             });
+        }
+
+        function sortTable(colIndex, type) {
+            const table = document.getElementById("dataTable");
+            const tbody = table.querySelector("tbody");
+            const rows = Array.from(tbody.querySelectorAll("tr"));
+
+            const key = colIndex;
+            sortDirections[key] = !sortDirections[key];
+
+            rows.sort((a, b) => {
+                let aText = a.children[colIndex].innerText.replace("%", "").trim();
+                let bText = b.children[colIndex].innerText.replace("%", "").trim();
+
+                if (type === "number") {
+                    aText = parseFloat(aText);
+                    bText = parseFloat(bText);
+                }
+
+                if (aText < bText) return sortDirections[key] ? -1 : 1;
+                if (aText > bText) return sortDirections[key] ? 1 : -1;
+                return 0;
+            });
+
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        document.querySelectorAll(".tier-row").forEach(row => {
+            row.addEventListener("click", () => {
+                document.getElementById("modalName").innerText = row.dataset.displayName;
+                document.getElementById("modalTier").innerText = "티어: " + row.dataset.tier;
+                document.getElementById("modalGames").innerText = "게임 수: " + row.dataset.games;
+                document.getElementById("modalPick").innerText = "채용률: " + row.dataset.pickRate + "%";
+                document.getElementById("modalAvg").innerText = "평균 등수: " + row.dataset.avgPlace;
+                document.getElementById("modalTop4").innerText = "TOP4률: " + row.dataset.top4 + "%";
+                document.getElementById("modalWin").innerText = "1등률: " + row.dataset.win + "%";
+                document.getElementById("modalScore").innerText = "점수: " + row.dataset.score;
+
+                document.getElementById("modalBg").style.display = "flex";
+            });
+        });
+
+        function closeModal() {
+            document.getElementById("modalBg").style.display = "none";
         }
         </script>
         

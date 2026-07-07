@@ -47,7 +47,6 @@ def make_nav(active):
     for href, label in links:
         cls = "active" if label == active else ""
         html += f'<a class="{cls}" href="{href}">{label}</a>'
-
     return html
 
 
@@ -158,6 +157,8 @@ table {{
 th {{
     background: #1e293b;
     padding: 12px;
+    cursor: pointer;
+    user-select: none;
 }}
 
 td {{
@@ -168,6 +169,7 @@ td {{
 
 tr:hover {{
     background: #1e293b;
+    cursor: pointer;
 }}
 
 .name-cell {{
@@ -204,6 +206,45 @@ tr:hover {{
 
 .home-card:hover {{
     background: #1e293b;
+}}
+
+.modal-bg {{
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}}
+
+.modal {{
+    background: #111827;
+    border: 1px solid #334155;
+    border-radius: 18px;
+    padding: 28px;
+    width: 360px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}}
+
+.modal h2 {{
+    margin-top: 0;
+}}
+
+.modal p {{
+    color: #cbd5e1;
+}}
+
+.close-btn {{
+    margin-top: 16px;
+    width: 100%;
+    background: #facc15;
+    color: #111827;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
 }}
 
 @media (max-width: 900px) {{
@@ -249,7 +290,16 @@ def make_table_page(page):
         tier = safe_text(row["tier"])
 
         rows += f"""
-        <tr class="tier-row" data-tier="{tier}" data-name="{name.lower()} {raw.lower()}">
+        <tr class="tier-row"
+            data-tier="{tier}"
+            data-name="{name.lower()} {raw.lower()}"
+            data-display-name="{name}"
+            data-games="{row['games']}"
+            data-pick-rate="{row['pick_rate']}"
+            data-avg-place="{row['avg_place']}"
+            data-top4="{row['top4_rate']}"
+            data-win="{row['win_rate']}"
+            data-score="{row['score']}">
             <td class="name-cell">{name}</td>
             <td><span class="badge badge-{tier}">{tier}</span></td>
             <td>{row["games"]}</td>
@@ -280,17 +330,17 @@ def make_table_page(page):
                 <button onclick="filterTier('D')">D</button>
             </div>
 
-            <table>
+            <table id="dataTable">
                 <thead>
                     <tr>
-                        <th>이름</th>
-                        <th>티어</th>
-                        <th>게임 수</th>
-                        <th>채용률</th>
-                        <th>평균 등수</th>
-                        <th>TOP4률</th>
-                        <th>1등률</th>
-                        <th>점수</th>
+                        <th onclick="sortTable(0, 'text')">이름</th>
+                        <th onclick="sortTable(1, 'text')">티어</th>
+                        <th onclick="sortTable(2, 'number')">게임 수</th>
+                        <th onclick="sortTable(3, 'number')">채용률</th>
+                        <th onclick="sortTable(4, 'number')">평균 등수</th>
+                        <th onclick="sortTable(5, 'number')">TOP4률</th>
+                        <th onclick="sortTable(6, 'number')">1등률</th>
+                        <th onclick="sortTable(7, 'number')">점수</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -299,8 +349,23 @@ def make_table_page(page):
             </table>
         </section>
 
+        <div id="modalBg" class="modal-bg" onclick="closeModal()">
+            <div class="modal" onclick="event.stopPropagation()">
+                <h2 id="modalName"></h2>
+                <p id="modalTier"></p>
+                <p id="modalGames"></p>
+                <p id="modalPick"></p>
+                <p id="modalAvg"></p>
+                <p id="modalTop4"></p>
+                <p id="modalWin"></p>
+                <p id="modalScore"></p>
+                <button class="close-btn" onclick="closeModal()">닫기</button>
+            </div>
+        </div>
+
         <script>
         let currentTier = "ALL";
+        let sortDirections = {{}};
 
         function filterTier(tier) {{
             currentTier = tier;
@@ -319,6 +384,50 @@ def make_table_page(page):
 
                 row.style.display = tierMatch && nameMatch ? "" : "none";
             }});
+        }}
+
+        function sortTable(colIndex, type) {{
+            const table = document.getElementById("dataTable");
+            const tbody = table.querySelector("tbody");
+            const rows = Array.from(tbody.querySelectorAll("tr"));
+
+            const key = colIndex;
+            sortDirections[key] = !sortDirections[key];
+
+            rows.sort((a, b) => {{
+                let aText = a.children[colIndex].innerText.replace("%", "").trim();
+                let bText = b.children[colIndex].innerText.replace("%", "").trim();
+
+                if (type === "number") {{
+                    aText = parseFloat(aText);
+                    bText = parseFloat(bText);
+                }}
+
+                if (aText < bText) return sortDirections[key] ? -1 : 1;
+                if (aText > bText) return sortDirections[key] ? 1 : -1;
+                return 0;
+            }});
+
+            rows.forEach(row => tbody.appendChild(row));
+        }}
+
+        document.querySelectorAll(".tier-row").forEach(row => {{
+            row.addEventListener("click", () => {{
+                document.getElementById("modalName").innerText = row.dataset.displayName;
+                document.getElementById("modalTier").innerText = "티어: " + row.dataset.tier;
+                document.getElementById("modalGames").innerText = "게임 수: " + row.dataset.games;
+                document.getElementById("modalPick").innerText = "채용률: " + row.dataset.pickRate + "%";
+                document.getElementById("modalAvg").innerText = "평균 등수: " + row.dataset.avgPlace;
+                document.getElementById("modalTop4").innerText = "TOP4률: " + row.dataset.top4 + "%";
+                document.getElementById("modalWin").innerText = "1등률: " + row.dataset.win + "%";
+                document.getElementById("modalScore").innerText = "점수: " + row.dataset.score;
+
+                document.getElementById("modalBg").style.display = "flex";
+            }});
+        }});
+
+        function closeModal() {{
+            document.getElementById("modalBg").style.display = "none";
         }}
         </script>
         """

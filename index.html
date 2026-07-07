@@ -104,6 +104,8 @@ table {
 th {
     background: #1e293b;
     padding: 12px;
+    cursor: pointer;
+    user-select: none;
 }
 
 td {
@@ -114,6 +116,7 @@ td {
 
 tr:hover {
     background: #1e293b;
+    cursor: pointer;
 }
 
 .name-cell {
@@ -150,6 +153,45 @@ tr:hover {
 
 .home-card:hover {
     background: #1e293b;
+}
+
+.modal-bg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal {
+    background: #111827;
+    border: 1px solid #334155;
+    border-radius: 18px;
+    padding: 28px;
+    width: 360px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.modal h2 {
+    margin-top: 0;
+}
+
+.modal p {
+    color: #cbd5e1;
+}
+
+.close-btn {
+    margin-top: 16px;
+    width: 100%;
+    background: #facc15;
+    color: #111827;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 @media (max-width: 900px) {
