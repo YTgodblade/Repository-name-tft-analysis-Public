@@ -17,6 +17,9 @@ def make_chart_block(csv_file, name_col, title):
     win = df.sort_values("win_rate", ascending=False).head(15)
     scatter = df[df["games"] >= 100]
 
+    print(f"\n[{title} 채용률 TOP 15]")
+    print(pick[[name_col, "pick_rate"]])
+
     data = {
         "pickLabels": pick[name_col].tolist(),
         "pickValues": pick["pick_rate"].tolist(),
@@ -31,9 +34,7 @@ def make_chart_block(csv_file, name_col, title):
                 "name": str(row[name_col])
             }
             for _, row in scatter.iterrows()
-        ],
-        "maxPick": float(pick["pick_rate"].max()) + 10,
-        "maxWin": float(win["win_rate"].max()) + 10
+        ]
     }
 
     return f"""
@@ -60,13 +61,13 @@ def make_chart_block(csv_file, name_col, title):
 
 .chart-box {{
     position: relative;
-    height: 720px;
+    height: 900px;
     width: 100%;
 }}
 
 .scatter-box {{
     position: relative;
-    height: 560px;
+    height: 650px;
     width: 100%;
 }}
 </style>
@@ -120,7 +121,8 @@ new Chart(document.getElementById("pickChart"), {{
         scales: {{
             x: {{
                 beginAtZero: true,
-                suggestedMax: chartData.maxPick,
+                min: 0,
+                max: 100,
                 title: {{
                     display: true,
                     text: "채용률 (%)"
@@ -151,7 +153,8 @@ new Chart(document.getElementById("avgChart"), {{
         scales: {{
             x: {{
                 beginAtZero: true,
-                suggestedMax: 8,
+                min: 0,
+                max: 8,
                 title: {{
                     display: true,
                     text: "평균 등수"
@@ -182,7 +185,8 @@ new Chart(document.getElementById("winChart"), {{
         scales: {{
             x: {{
                 beginAtZero: true,
-                suggestedMax: chartData.maxWin,
+                min: 0,
+                max: 100,
                 title: {{
                     display: true,
                     text: "1등률 (%)"
@@ -221,15 +225,16 @@ new Chart(document.getElementById("scatterChart"), {{
         }},
         scales: {{
             x: {{
-                beginAtZero: true,
+                min: 0,
+                max: 100,
                 title: {{
                     display: true,
                     text: "채용률 (%)"
                 }}
             }},
             y: {{
-                beginAtZero: true,
-                suggestedMax: 8,
+                min: 1,
+                max: 8,
                 title: {{
                     display: true,
                     text: "평균 등수"
