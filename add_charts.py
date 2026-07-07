@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 import shutil
+import re
 
 PAGES = [
     ("units.html", "unit_tier_kr.csv", "unit_kr", "기물"),
@@ -34,6 +35,7 @@ def make_chart_block(csv_file, name_col, title):
     }
 
     return f"""
+<!-- CHARTS_START -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
@@ -160,6 +162,7 @@ new Chart(document.getElementById("scatterChart"), {{
     }}
 }});
 </script>
+<!-- CHARTS_END -->
 """
 
 for html_file, csv_file, name_col, title in PAGES:
@@ -168,14 +171,20 @@ for html_file, csv_file, name_col, title in PAGES:
     with open(path, "r", encoding="utf-8") as f:
         html = f.read()
 
+    html = re.sub(
+        r"<!-- CHARTS_START -->.*?<!-- CHARTS_END -->",
+        "",
+        html,
+        flags=re.DOTALL
+    )
+
     chart_block = make_chart_block(csv_file, name_col, title)
 
-    if "chart-grid" not in html:
-        html = html.replace("<main>", "<main>\n" + chart_block)
+    html = html.replace("<main>", "<main>\n" + chart_block)
 
     with open(path, "w", encoding="utf-8") as f:
         f.write(html)
 
     shutil.copy(path, html_file)
 
-print("그래프 추가 완료!")
+print("그래프 재삽입 완료!")
