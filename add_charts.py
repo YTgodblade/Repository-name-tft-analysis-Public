@@ -55,6 +55,7 @@ def make_chart_block(csv_file, name_col, title):
     background: #111827;
     padding: 24px;
     border-radius: 18px;
+    min-height: 650px;
 }}
 
 .chart-card h2 {{
@@ -62,7 +63,7 @@ def make_chart_block(csv_file, name_col, title):
 }}
 
 canvas {{
-    max-height: 420px;
+    height: 560px !important;
 }}
 
 @media (max-width: 900px) {{
@@ -107,6 +108,7 @@ new Chart(document.getElementById("pickChart"), {{
         }}]
     }},
     options: {{
+        maintainAspectRatio: false,
         indexAxis: "y",
         scales: {{
             x: {{
@@ -131,6 +133,7 @@ new Chart(document.getElementById("avgChart"), {{
         }}]
     }},
     options: {{
+        maintainAspectRatio: false,
         indexAxis: "y",
         scales: {{
             x: {{
@@ -155,6 +158,7 @@ new Chart(document.getElementById("winChart"), {{
         }}]
     }},
     options: {{
+        maintainAspectRatio: false,
         indexAxis: "y",
         scales: {{
             x: {{
@@ -178,6 +182,7 @@ new Chart(document.getElementById("scatterChart"), {{
         }}]
     }},
     options: {{
+        maintainAspectRatio: false,
         parsing: false,
         plugins: {{
             tooltip: {{
