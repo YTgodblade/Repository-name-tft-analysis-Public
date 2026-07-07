@@ -1,0 +1,1928 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>시너지 티어표</title>
+
+<style>
+body {
+    margin: 0;
+    background: #0f172a;
+    color: #e5e7eb;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    padding: 30px 40px;
+    background: #020617;
+    border-bottom: 1px solid #1e293b;
+}
+
+h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.subtitle {
+    color: #94a3b8;
+    margin-top: 8px;
+}
+
+nav {
+    margin-top: 22px;
+}
+
+nav a {
+    color: #cbd5e1;
+    text-decoration: none;
+    margin-right: 12px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #111827;
+}
+
+nav a.active {
+    background: #facc15;
+    color: #111827;
+    font-weight: bold;
+}
+
+main {
+    padding: 40px;
+}
+
+.card {
+    background: #111827;
+    padding: 24px;
+    border-radius: 18px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.25);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+h2 {
+    color: #facc15;
+}
+
+.search {
+    background: #020617;
+    color: white;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 10px 14px;
+    width: 260px;
+}
+
+.filters {
+    margin: 18px 0;
+}
+
+.filters button {
+    background: #1e293b;
+    color: white;
+    border: 1px solid #334155;
+    padding: 8px 13px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 6px;
+}
+
+.filters button:hover {
+    background: #334155;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #1e293b;
+    padding: 12px;
+    position: sticky;
+    top: 0;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #334155;
+    text-align: center;
+}
+
+tr:hover {
+    background: #1e293b;
+}
+
+.name-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+}
+
+.icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: #020617;
+}
+
+.badge {
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 999px;
+}
+
+.badge-S {
+    background: #facc15;
+    color: #111827;
+}
+
+.badge-A {
+    background: #38bdf8;
+    color: #111827;
+}
+
+.badge-B {
+    background: #4ade80;
+    color: #111827;
+}
+
+.badge-C {
+    background: #c084fc;
+    color: #111827;
+}
+
+.badge-D {
+    background: #f87171;
+    color: #111827;
+}
+
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.home-card {
+    background: #111827;
+    padding: 28px;
+    border-radius: 18px;
+    text-decoration: none;
+    color: white;
+    border: 1px solid #1e293b;
+}
+
+.home-card:hover {
+    background: #1e293b;
+}
+
+.home-card h2 {
+    margin-top: 0;
+}
+
+@media (max-width: 900px) {
+    .home-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+<header>
+    <h1>TFT Challenger Data Analysis</h1>
+    <div class="subtitle">한국 챌린저 4466경기 / 35,539명 플레이어 분석</div>
+    <nav><a class="" href="index.html">홈</a><a class="" href="units.html">기물</a><a class="" href="items.html">아이템</a><a class="active" href="traits.html">시너지</a></nav>
+</header>
+
+<main>
+
+        <section class="card">
+            <div class="section-header">
+                <h2>시너지 티어표</h2>
+                <input id="searchInput" class="search" placeholder="검색어 입력">
+            </div>
+
+            <div class="filters">
+                <button onclick="filterTier('ALL')">전체</button>
+                <button onclick="filterTier('S')">S</button>
+                <button onclick="filterTier('A')">A</button>
+                <button onclick="filterTier('B')">B</button>
+                <button onclick="filterTier('C')">C</button>
+                <button onclick="filterTier('D')">D</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>티어</th>
+                        <th>게임 수</th>
+                        <th>채용률</th>
+                        <th>평균 등수</th>
+                        <th>TOP4률</th>
+                        <th>1등률</th>
+                        <th>점수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr class="tier-row" data-tier="S" data-name="정령족 10 astronaut:10">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/astronaut.png" onerror="this.style.display='none'">
+                <span>정령족 10</span>
+            </td>
+            <td><span class="badge badge-S">S</span></td>
+            <td>110</td>
+            <td>0.31%</td>
+            <td>1.68</td>
+            <td>95.45%</td>
+            <td>70.91%</td>
+            <td>338.94</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="S" data-name="별돌보미 8 mountain:8">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/mountain.png" onerror="this.style.display='none'">
+                <span>별돌보미 8</span>
+            </td>
+            <td><span class="badge badge-S">S</span></td>
+            <td>196</td>
+            <td>0.55%</td>
+            <td>2.55</td>
+            <td>89.8%</td>
+            <td>35.71%</td>
+            <td>286.8</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="S" data-name="우주 그루브 7 spacegroove:7">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/spacegroove.png" onerror="this.style.display='none'">
+                <span>우주 그루브 7</span>
+            </td>
+            <td><span class="badge badge-S">S</span></td>
+            <td>1028</td>
+            <td>2.89%</td>
+            <td>3.61</td>
+            <td>66.25%</td>
+            <td>21.98%</td>
+            <td>244.93</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="S" data-name="파티광 1 blitzcrankuniquetrait:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/blitzcrankuniquetrait.png" onerror="this.style.display='none'">
+                <span>파티광 1</span>
+            </td>
+            <td><span class="badge badge-S">S</span></td>
+            <td>12361</td>
+            <td>34.78%</td>
+            <td>3.91</td>
+            <td>60.77%</td>
+            <td>19.17%</td>
+            <td>240.48</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="S" data-name="별돌보미 7 mountain:7">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/mountain.png" onerror="this.style.display='none'">
+                <span>별돌보미 7</span>
+            </td>
+            <td><span class="badge badge-S">S</span></td>
+            <td>361</td>
+            <td>1.02%</td>
+            <td>3.52</td>
+            <td>69.81%</td>
+            <td>21.05%</td>
+            <td>239.56</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="S" data-name="도전자 5 astrait:5">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/astrait.png" onerror="this.style.display='none'">
+                <span>도전자 5</span>
+            </td>
+            <td><span class="badge badge-S">S</span></td>
+            <td>135</td>
+            <td>0.38%</td>
+            <td>3.35</td>
+            <td>76.3%</td>
+            <td>11.11%</td>
+            <td>237.76</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="저격수 4 rangedtrait:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/rangedtrait.png" onerror="this.style.display='none'">
+                <span>저격수 4</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>135</td>
+            <td>0.38%</td>
+            <td>3.41</td>
+            <td>77.04%</td>
+            <td>20.0%</td>
+            <td>236.76</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="전달자 3 manatrait:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/manatrait.png" onerror="this.style.display='none'">
+                <span>전달자 3</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>1328</td>
+            <td>3.74%</td>
+            <td>3.78</td>
+            <td>63.18%</td>
+            <td>21.16%</td>
+            <td>235.68</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="메카 6 mecha:6">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/mecha.png" onerror="this.style.display='none'">
+                <span>메카 6</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>513</td>
+            <td>1.44%</td>
+            <td>3.81</td>
+            <td>61.99%</td>
+            <td>30.8%</td>
+            <td>234.83</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="지휘관 1 sonauniquetrait:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/sonauniquetrait.png" onerror="this.style.display='none'">
+                <span>지휘관 1</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>6854</td>
+            <td>19.29%</td>
+            <td>3.97</td>
+            <td>60.36%</td>
+            <td>15.66%</td>
+            <td>230.46</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="습격자 6 meleetrait:6">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/meleetrait.png" onerror="this.style.display='none'">
+                <span>습격자 6</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>289</td>
+            <td>0.81%</td>
+            <td>3.52</td>
+            <td>70.24%</td>
+            <td>15.22%</td>
+            <td>228.44</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="어둠의 여인 1 morganauniquetrait:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/morganauniquetrait.png" onerror="this.style.display='none'">
+                <span>어둠의 여인 1</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>8059</td>
+            <td>22.68%</td>
+            <td>4.04</td>
+            <td>58.73%</td>
+            <td>17.53%</td>
+            <td>228.2</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="저격수 3 rangedtrait:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/rangedtrait.png" onerror="this.style.display='none'">
+                <span>저격수 3</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>604</td>
+            <td>1.7%</td>
+            <td>3.9</td>
+            <td>60.93%</td>
+            <td>19.87%</td>
+            <td>227.93</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="암흑의 별 6 darkstar:6">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/darkstar.png" onerror="this.style.display='none'">
+                <span>암흑의 별 6</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>2137</td>
+            <td>6.01%</td>
+            <td>3.97</td>
+            <td>60.93%</td>
+            <td>15.77%</td>
+            <td>225.34</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="신성 결투가 1 fiorauniquetrait:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/fiorauniquetrait.png" onerror="this.style.display='none'">
+                <span>신성 결투가 1</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>5358</td>
+            <td>15.08%</td>
+            <td>4.06</td>
+            <td>57.93%</td>
+            <td>20.21%</td>
+            <td>224.45</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="우주 그루브 1 spacegroove:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/spacegroove.png" onerror="this.style.display='none'">
+                <span>우주 그루브 1</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>11243</td>
+            <td>31.64%</td>
+            <td>4.18</td>
+            <td>55.47%</td>
+            <td>16.35%</td>
+            <td>223.57</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="싸움꾼 6 hptank:6">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/hptank.png" onerror="this.style.display='none'">
+                <span>싸움꾼 6</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>718</td>
+            <td>2.02%</td>
+            <td>4.0</td>
+            <td>60.31%</td>
+            <td>16.3%</td>
+            <td>222.16</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="선봉대 2 shieldtank:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/shieldtank.png" onerror="this.style.display='none'">
+                <span>선봉대 2</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>11835</td>
+            <td>33.3%</td>
+            <td>4.22</td>
+            <td>54.71%</td>
+            <td>16.9%</td>
+            <td>222.11</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="파멸자 1 vexuniquetrait:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/vexuniquetrait.png" onerror="this.style.display='none'">
+                <span>파멸자 1</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>4324</td>
+            <td>12.17%</td>
+            <td>4.1</td>
+            <td>56.43%</td>
+            <td>20.7%</td>
+            <td>220.94</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="암흑의 별 2 darkstar:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/darkstar.png" onerror="this.style.display='none'">
+                <span>암흑의 별 2</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>10460</td>
+            <td>29.43%</td>
+            <td>4.21</td>
+            <td>55.3%</td>
+            <td>14.89%</td>
+            <td>220.84</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="도전자 4 astrait:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/astrait.png" onerror="this.style.display='none'">
+                <span>도전자 4</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>442</td>
+            <td>1.24%</td>
+            <td>3.88</td>
+            <td>65.38%</td>
+            <td>10.41%</td>
+            <td>218.19</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="전달자 2 manatrait:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/manatrait.png" onerror="this.style.display='none'">
+                <span>전달자 2</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>6679</td>
+            <td>18.79%</td>
+            <td>4.2</td>
+            <td>55.14%</td>
+            <td>15.41%</td>
+            <td>217.14</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="요새 2 resisttank:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/resisttank.png" onerror="this.style.display='none'">
+                <span>요새 2</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>14397</td>
+            <td>40.51%</td>
+            <td>4.36</td>
+            <td>51.98%</td>
+            <td>14.88%</td>
+            <td>216.77</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="여행자 3 flextrait:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/flextrait.png" onerror="this.style.display='none'">
+                <span>여행자 3</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>2271</td>
+            <td>6.39%</td>
+            <td>4.15</td>
+            <td>56.67%</td>
+            <td>14.93%</td>
+            <td>215.04</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="여행자 2 flextrait:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/flextrait.png" onerror="this.style.display='none'">
+                <span>여행자 2</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>10386</td>
+            <td>29.22%</td>
+            <td>4.31</td>
+            <td>53.54%</td>
+            <td>13.66%</td>
+            <td>214.98</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="전달자 4 manatrait:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/manatrait.png" onerror="this.style.display='none'">
+                <span>전달자 4</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>99</td>
+            <td>0.28%</td>
+            <td>3.43</td>
+            <td>72.73%</td>
+            <td>21.21%</td>
+            <td>214.67</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="습격자 2 meleetrait:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/meleetrait.png" onerror="this.style.display='none'">
+                <span>습격자 2</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>6160</td>
+            <td>17.33%</td>
+            <td>4.24</td>
+            <td>54.46%</td>
+            <td>16.61%</td>
+            <td>214.59</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="저격수 2 rangedtrait:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/rangedtrait.png" onerror="this.style.display='none'">
+                <span>저격수 2</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>4345</td>
+            <td>12.23%</td>
+            <td>4.23</td>
+            <td>54.25%</td>
+            <td>17.1%</td>
+            <td>213.09</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="메카 4 mecha:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/mecha.png" onerror="this.style.display='none'">
+                <span>메카 4</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>1076</td>
+            <td>3.03%</td>
+            <td>4.18</td>
+            <td>56.78%</td>
+            <td>19.05%</td>
+            <td>213.06</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="선봉대 4 shieldtank:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/shieldtank.png" onerror="this.style.display='none'">
+                <span>선봉대 4</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>4789</td>
+            <td>13.48%</td>
+            <td>4.24</td>
+            <td>54.52%</td>
+            <td>13.49%</td>
+            <td>212.45</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="길잡이 3 summontrait:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/summontrait.png" onerror="this.style.display='none'">
+                <span>길잡이 3</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>6640</td>
+            <td>18.68%</td>
+            <td>4.3</td>
+            <td>53.16%</td>
+            <td>13.6%</td>
+            <td>211.14</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="요새 4 resisttank:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/resisttank.png" onerror="this.style.display='none'">
+                <span>요새 4</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>674</td>
+            <td>1.9%</td>
+            <td>4.19</td>
+            <td>57.72%</td>
+            <td>12.02%</td>
+            <td>210.98</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="최신상 1 gravestrait:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/gravestrait.png" onerror="this.style.display='none'">
+                <span>최신상 1</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>4273</td>
+            <td>12.02%</td>
+            <td>4.29</td>
+            <td>52.98%</td>
+            <td>20.59%</td>
+            <td>210.32</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="여행자 4 flextrait:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/flextrait.png" onerror="this.style.display='none'">
+                <span>여행자 4</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>359</td>
+            <td>1.01%</td>
+            <td>4.03</td>
+            <td>60.72%</td>
+            <td>14.76%</td>
+            <td>210.07</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="파티광 2 blitzcrankuniquetrait:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/blitzcrankuniquetrait.png" onerror="this.style.display='none'">
+                <span>파티광 2</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>53</td>
+            <td>0.15%</td>
+            <td>3.58</td>
+            <td>88.68%</td>
+            <td>5.66%</td>
+            <td>208.8</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="싸움꾼 2 hptank:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/hptank.png" onerror="this.style.display='none'">
+                <span>싸움꾼 2</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>12693</td>
+            <td>35.72%</td>
+            <td>4.47</td>
+            <td>50.46%</td>
+            <td>12.73%</td>
+            <td>208.47</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="초능력 2 psyops:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/psyops.png" onerror="this.style.display='none'">
+                <span>초능력 2</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>4023</td>
+            <td>11.32%</td>
+            <td>4.3</td>
+            <td>54.93%</td>
+            <td>11.81%</td>
+            <td>208.37</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="n.o.v.a. 5 drx:5">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/drx.png" onerror="this.style.display='none'">
+                <span>N.O.V.A. 5</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>1132</td>
+            <td>3.19%</td>
+            <td>4.29</td>
+            <td>55.92%</td>
+            <td>10.87%</td>
+            <td>205.73</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="예언자 1 tahmkenchuniquetrait:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/tahmkenchuniquetrait.png" onerror="this.style.display='none'">
+                <span>예언자 1</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>10394</td>
+            <td>29.25%</td>
+            <td>4.48</td>
+            <td>50.29%</td>
+            <td>14.08%</td>
+            <td>205.6</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="초능력 4 psyops:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/psyops.png" onerror="this.style.display='none'">
+                <span>초능력 4</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>575</td>
+            <td>1.62%</td>
+            <td>4.32</td>
+            <td>53.74%</td>
+            <td>8.87%</td>
+            <td>202.54</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="n.o.v.a. 2 drx:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/drx.png" onerror="this.style.display='none'">
+                <span>N.O.V.A. 2</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>8548</td>
+            <td>24.05%</td>
+            <td>4.53</td>
+            <td>49.04%</td>
+            <td>13.21%</td>
+            <td>200.47</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="도전자 3 astrait:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/astrait.png" onerror="this.style.display='none'">
+                <span>도전자 3</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>1533</td>
+            <td>4.31%</td>
+            <td>4.38</td>
+            <td>53.16%</td>
+            <td>7.89%</td>
+            <td>200.25</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="n.o.v.a. 3 drx:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/drx.png" onerror="this.style.display='none'">
+                <span>N.O.V.A. 3</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>2853</td>
+            <td>8.03%</td>
+            <td>4.42</td>
+            <td>52.23%</td>
+            <td>9.6%</td>
+            <td>199.8</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="선봉대 6 shieldtank:6">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/shieldtank.png" onerror="this.style.display='none'">
+                <span>선봉대 6</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>313</td>
+            <td>0.88%</td>
+            <td>4.21</td>
+            <td>57.19%</td>
+            <td>12.14%</td>
+            <td>199.44</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="복제자 2 aptrait:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/aptrait.png" onerror="this.style.display='none'">
+                <span>복제자 2</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>8269</td>
+            <td>23.27%</td>
+            <td>4.54</td>
+            <td>48.76%</td>
+            <td>12.23%</td>
+            <td>199.38</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="시간 균열자 4 timebreaker:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/timebreaker.png" onerror="this.style.display='none'">
+                <span>시간 균열자 4</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>547</td>
+            <td>1.54%</td>
+            <td>4.41</td>
+            <td>53.38%</td>
+            <td>14.26%</td>
+            <td>198.98</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="운명술사 4 fateweaver:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/fateweaver.png" onerror="this.style.display='none'">
+                <span>운명술사 4</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>216</td>
+            <td>0.61%</td>
+            <td>4.03</td>
+            <td>60.19%</td>
+            <td>8.8%</td>
+            <td>198.56</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="불한당 2 assassintrait:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/assassintrait.png" onerror="this.style.display='none'">
+                <span>불한당 2</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>4585</td>
+            <td>12.9%</td>
+            <td>4.51</td>
+            <td>49.77%</td>
+            <td>11.1%</td>
+            <td>196.81</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="시간 균열자 2 timebreaker:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/timebreaker.png" onerror="this.style.display='none'">
+                <span>시간 균열자 2</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>5622</td>
+            <td>15.82%</td>
+            <td>4.54</td>
+            <td>49.02%</td>
+            <td>10.74%</td>
+            <td>196.18</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="정령족 5 astronaut:5">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/astronaut.png" onerror="this.style.display='none'">
+                <span>정령족 5</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>2838</td>
+            <td>7.99%</td>
+            <td>4.48</td>
+            <td>49.96%</td>
+            <td>9.8%</td>
+            <td>196.14</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="우주 그루브 5 spacegroove:5">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/spacegroove.png" onerror="this.style.display='none'">
+                <span>우주 그루브 5</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>3140</td>
+            <td>8.84%</td>
+            <td>4.52</td>
+            <td>49.08%</td>
+            <td>13.22%</td>
+            <td>194.9</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="불한당 3 assassintrait:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/assassintrait.png" onerror="this.style.display='none'">
+                <span>불한당 3</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>626</td>
+            <td>1.76%</td>
+            <td>4.46</td>
+            <td>50.8%</td>
+            <td>9.58%</td>
+            <td>194.86</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="태고족 3 primordian:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/primordian.png" onerror="this.style.display='none'">
+                <span>태고족 3</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>1610</td>
+            <td>4.53%</td>
+            <td>4.48</td>
+            <td>51.49%</td>
+            <td>7.76%</td>
+            <td>194.81</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="습격자 4 meleetrait:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/meleetrait.png" onerror="this.style.display='none'">
+                <span>습격자 4</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>2098</td>
+            <td>5.9%</td>
+            <td>4.53</td>
+            <td>50.57%</td>
+            <td>8.91%</td>
+            <td>192.81</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="은하계 사냥꾼 1 zeduniquetrait:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/zeduniquetrait.png" onerror="this.style.display='none'">
+                <span>은하계 사냥꾼 1</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>156</td>
+            <td>0.44%</td>
+            <td>4.17</td>
+            <td>57.05%</td>
+            <td>16.67%</td>
+            <td>192.12</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="태고족 2 primordian:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/primordian.png" onerror="this.style.display='none'">
+                <span>태고족 2</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>857</td>
+            <td>2.41%</td>
+            <td>4.53</td>
+            <td>50.99%</td>
+            <td>6.77%</td>
+            <td>191.12</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="싸움꾼 4 hptank:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/hptank.png" onerror="this.style.display='none'">
+                <span>싸움꾼 4</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>2736</td>
+            <td>7.7%</td>
+            <td>4.58</td>
+            <td>49.16%</td>
+            <td>9.58%</td>
+            <td>190.74</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="선봉대 5 shieldtank:5">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/shieldtank.png" onerror="this.style.display='none'">
+                <span>선봉대 5</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>145</td>
+            <td>0.41%</td>
+            <td>4.17</td>
+            <td>53.79%</td>
+            <td>14.48%</td>
+            <td>190.7</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="요새 3 resisttank:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/resisttank.png" onerror="this.style.display='none'">
+                <span>요새 3</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>482</td>
+            <td>1.36%</td>
+            <td>4.39</td>
+            <td>51.87%</td>
+            <td>16.6%</td>
+            <td>189.93</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="불한당 4 assassintrait:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/assassintrait.png" onerror="this.style.display='none'">
+                <span>불한당 4</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>64</td>
+            <td>0.18%</td>
+            <td>3.88</td>
+            <td>68.75%</td>
+            <td>12.5%</td>
+            <td>189.2</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="여행자 5 flextrait:5">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/flextrait.png" onerror="this.style.display='none'">
+                <span>여행자 5</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>121</td>
+            <td>0.34%</td>
+            <td>4.24</td>
+            <td>52.07%</td>
+            <td>12.4%</td>
+            <td>186.24</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="별돌보미 3 serpent:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/serpent.png" onerror="this.style.display='none'">
+                <span>별돌보미 3</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>721</td>
+            <td>2.03%</td>
+            <td>4.62</td>
+            <td>46.74%</td>
+            <td>11.93%</td>
+            <td>186.22</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="우주 그루브 2 spacegroove:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/spacegroove.png" onerror="this.style.display='none'">
+                <span>우주 그루브 2</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>839</td>
+            <td>2.36%</td>
+            <td>4.64</td>
+            <td>49.34%</td>
+            <td>7.99%</td>
+            <td>185.34</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="기동총격여신 1 missfortuneuniquetrait:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/missfortuneuniquetrait.png" onerror="this.style.display='none'">
+                <span>기동총격여신 1</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>994</td>
+            <td>2.8%</td>
+            <td>4.64</td>
+            <td>48.39%</td>
+            <td>7.14%</td>
+            <td>185.07</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="별돌보미 3 medallion:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/medallion.png" onerror="this.style.display='none'">
+                <span>별돌보미 3</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>660</td>
+            <td>1.86%</td>
+            <td>4.64</td>
+            <td>45.91%</td>
+            <td>12.27%</td>
+            <td>184.97</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="별돌보미 3 wolf:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/wolf.png" onerror="this.style.display='none'">
+                <span>별돌보미 3</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>390</td>
+            <td>1.1%</td>
+            <td>4.51</td>
+            <td>48.72%</td>
+            <td>13.85%</td>
+            <td>182.33</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="길잡이 5 summontrait:5">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/summontrait.png" onerror="this.style.display='none'">
+                <span>길잡이 5</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>1291</td>
+            <td>3.63%</td>
+            <td>4.69</td>
+            <td>46.09%</td>
+            <td>7.05%</td>
+            <td>182.19</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="운명술사 2 fateweaver:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/fateweaver.png" onerror="this.style.display='none'">
+                <span>운명술사 2</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>3203</td>
+            <td>9.01%</td>
+            <td>4.74</td>
+            <td>45.55%</td>
+            <td>7.46%</td>
+            <td>181.76</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="별돌보미 1 mountain:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/mountain.png" onerror="this.style.display='none'">
+                <span>별돌보미 1</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>61</td>
+            <td>0.17%</td>
+            <td>4.03</td>
+            <td>62.3%</td>
+            <td>14.75%</td>
+            <td>180.21</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="도전자 2 astrait:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/astrait.png" onerror="this.style.display='none'">
+                <span>도전자 2</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>3596</td>
+            <td>10.12%</td>
+            <td>4.8</td>
+            <td>44.99%</td>
+            <td>7.37%</td>
+            <td>179.02</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="정령족 3 astronaut:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/astronaut.png" onerror="this.style.display='none'">
+                <span>정령족 3</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>584</td>
+            <td>1.64%</td>
+            <td>4.74</td>
+            <td>45.38%</td>
+            <td>8.56%</td>
+            <td>178.98</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="별돌보미 3 shield:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/shield.png" onerror="this.style.display='none'">
+                <span>별돌보미 3</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>556</td>
+            <td>1.56%</td>
+            <td>4.75</td>
+            <td>44.42%</td>
+            <td>10.25%</td>
+            <td>178.5</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="복제자 4 aptrait:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/aptrait.png" onerror="this.style.display='none'">
+                <span>복제자 4</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>129</td>
+            <td>0.36%</td>
+            <td>4.47</td>
+            <td>57.36%</td>
+            <td>10.85%</td>
+            <td>176.02</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="중재자 2 admin:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/admin.png" onerror="this.style.display='none'">
+                <span>중재자 2</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>1737</td>
+            <td>4.89%</td>
+            <td>4.85</td>
+            <td>43.75%</td>
+            <td>6.22%</td>
+            <td>173.83</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="empress 2 empress:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/empress.png" onerror="this.style.display='none'">
+                <span>Empress 2</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>76</td>
+            <td>0.21%</td>
+            <td>4.12</td>
+            <td>57.89%</td>
+            <td>10.53%</td>
+            <td>173.56</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="선봉대 3 shieldtank:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/shieldtank.png" onerror="this.style.display='none'">
+                <span>선봉대 3</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>626</td>
+            <td>1.76%</td>
+            <td>4.88</td>
+            <td>43.13%</td>
+            <td>10.54%</td>
+            <td>171.75</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="eltigre 1 eltigre:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/eltigre.png" onerror="this.style.display='none'">
+                <span>ElTigre 1</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>61</td>
+            <td>0.17%</td>
+            <td>4.18</td>
+            <td>52.46%</td>
+            <td>16.39%</td>
+            <td>170.08</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="별돌보미 3 huntress:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/huntress.png" onerror="this.style.display='none'">
+                <span>별돌보미 3</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>302</td>
+            <td>0.85%</td>
+            <td>4.74</td>
+            <td>44.04%</td>
+            <td>8.28%</td>
+            <td>168.21</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="dragonfist 1 dragonfist:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/dragonfist.png" onerror="this.style.display='none'">
+                <span>DragonFist 1</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>55</td>
+            <td>0.15%</td>
+            <td>4.2</td>
+            <td>50.91%</td>
+            <td>12.73%</td>
+            <td>167.88</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="별돌보미 3 fountain:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/fountain.png" onerror="this.style.display='none'">
+                <span>별돌보미 3</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>444</td>
+            <td>1.25%</td>
+            <td>4.75</td>
+            <td>44.14%</td>
+            <td>7.66%</td>
+            <td>167.77</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="시간 균열자 3 timebreaker:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/timebreaker.png" onerror="this.style.display='none'">
+                <span>시간 균열자 3</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>441</td>
+            <td>1.24%</td>
+            <td>4.8</td>
+            <td>43.31%</td>
+            <td>11.34%</td>
+            <td>165.76</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="ixtal 2 ixtal:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/ixtal.png" onerror="this.style.display='none'">
+                <span>Ixtal 2</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>94</td>
+            <td>0.26%</td>
+            <td>4.29</td>
+            <td>48.94%</td>
+            <td>26.6%</td>
+            <td>165.61</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="우주 그루브 6 spacegroove:6">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/spacegroove.png" onerror="this.style.display='none'">
+                <span>우주 그루브 6</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>140</td>
+            <td>0.39%</td>
+            <td>4.62</td>
+            <td>42.14%</td>
+            <td>12.14%</td>
+            <td>164.23</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="길잡이 6 summontrait:6">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/summontrait.png" onerror="this.style.display='none'">
+                <span>길잡이 6</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>69</td>
+            <td>0.19%</td>
+            <td>4.32</td>
+            <td>60.87%</td>
+            <td>5.8%</td>
+            <td>163.5</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="정령족 7 astronaut:7">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/astronaut.png" onerror="this.style.display='none'">
+                <span>정령족 7</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>1040</td>
+            <td>2.93%</td>
+            <td>5.05</td>
+            <td>39.04%</td>
+            <td>10.58%</td>
+            <td>162.5</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="highroller 2 highroller:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/highroller.png" onerror="this.style.display='none'">
+                <span>HighRoller 2</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>53</td>
+            <td>0.15%</td>
+            <td>4.3</td>
+            <td>52.83%</td>
+            <td>7.55%</td>
+            <td>162.42</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="oldmentor 1 oldmentor:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/oldmentor.png" onerror="this.style.display='none'">
+                <span>OldMentor 1</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>80</td>
+            <td>0.23%</td>
+            <td>4.34</td>
+            <td>52.5%</td>
+            <td>11.25%</td>
+            <td>161.09</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="highroller 1 highroller:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/highroller.png" onerror="this.style.display='none'">
+                <span>HighRoller 1</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>63</td>
+            <td>0.18%</td>
+            <td>4.35</td>
+            <td>50.79%</td>
+            <td>15.87%</td>
+            <td>160.98</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="암흑의 별 3 darkstar:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/darkstar.png" onerror="this.style.display='none'">
+                <span>암흑의 별 3</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>487</td>
+            <td>1.37%</td>
+            <td>4.88</td>
+            <td>39.84%</td>
+            <td>9.65%</td>
+            <td>160.43</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="별돌보미 5 serpent:5">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/serpent.png" onerror="this.style.display='none'">
+                <span>별돌보미 5</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>55</td>
+            <td>0.15%</td>
+            <td>4.38</td>
+            <td>50.91%</td>
+            <td>20.0%</td>
+            <td>160.33</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="yordle 2 yordle:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/yordle.png" onerror="this.style.display='none'">
+                <span>Yordle 2</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>64</td>
+            <td>0.18%</td>
+            <td>4.41</td>
+            <td>53.12%</td>
+            <td>14.06%</td>
+            <td>158.32</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="conqueror 1 conqueror:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/conqueror.png" onerror="this.style.display='none'">
+                <span>Conqueror 1</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>58</td>
+            <td>0.16%</td>
+            <td>4.43</td>
+            <td>53.45%</td>
+            <td>5.17%</td>
+            <td>155.63</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="중재자 3 admin:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/admin.png" onerror="this.style.display='none'">
+                <span>중재자 3</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>493</td>
+            <td>1.39%</td>
+            <td>5.04</td>
+            <td>38.54%</td>
+            <td>8.11%</td>
+            <td>151.74</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="우주 그루브 3 spacegroove:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/spacegroove.png" onerror="this.style.display='none'">
+                <span>우주 그루브 3</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>305</td>
+            <td>0.86%</td>
+            <td>5.09</td>
+            <td>39.34%</td>
+            <td>6.56%</td>
+            <td>148.96</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="길잡이 4 summontrait:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/summontrait.png" onerror="this.style.display='none'">
+                <span>길잡이 4</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>208</td>
+            <td>0.59%</td>
+            <td>4.94</td>
+            <td>41.35%</td>
+            <td>8.17%</td>
+            <td>147.27</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="n.o.v.a. 4 drx:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/drx.png" onerror="this.style.display='none'">
+                <span>N.O.V.A. 4</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>224</td>
+            <td>0.63%</td>
+            <td>4.96</td>
+            <td>44.2%</td>
+            <td>7.59%</td>
+            <td>147.03</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="별돌보미 4 wolf:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/wolf.png" onerror="this.style.display='none'">
+                <span>별돌보미 4</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>89</td>
+            <td>0.25%</td>
+            <td>4.61</td>
+            <td>49.44%</td>
+            <td>12.36%</td>
+            <td>146.9</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="pentakill 1 pentakill:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/pentakill.png" onerror="this.style.display='none'">
+                <span>Pentakill 1</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>60</td>
+            <td>0.17%</td>
+            <td>4.62</td>
+            <td>50.0%</td>
+            <td>11.67%</td>
+            <td>146.4</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="암흑의 별 4 darkstar:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/darkstar.png" onerror="this.style.display='none'">
+                <span>암흑의 별 4</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>641</td>
+            <td>1.8%</td>
+            <td>5.32</td>
+            <td>33.85%</td>
+            <td>6.71%</td>
+            <td>146.22</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="태고족 4 primordian:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/primordian.png" onerror="this.style.display='none'">
+                <span>태고족 4</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>62</td>
+            <td>0.17%</td>
+            <td>4.63</td>
+            <td>53.23%</td>
+            <td>4.84%</td>
+            <td>145.5</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="정령족 6 astronaut:6">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/astronaut.png" onerror="this.style.display='none'">
+                <span>정령족 6</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>130</td>
+            <td>0.37%</td>
+            <td>5.04</td>
+            <td>46.15%</td>
+            <td>6.15%</td>
+            <td>143.22</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="메카 3 mecha:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/mecha.png" onerror="this.style.display='none'">
+                <span>메카 3</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>263</td>
+            <td>0.74%</td>
+            <td>5.05</td>
+            <td>40.68%</td>
+            <td>13.69%</td>
+            <td>142.74</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="초능력 3 psyops:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/psyops.png" onerror="this.style.display='none'">
+                <span>초능력 3</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>125</td>
+            <td>0.35%</td>
+            <td>5.04</td>
+            <td>37.6%</td>
+            <td>4.0%</td>
+            <td>140.22</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="conqueror 2 conqueror:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/conqueror.png" onerror="this.style.display='none'">
+                <span>Conqueror 2</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>74</td>
+            <td>0.21%</td>
+            <td>4.77</td>
+            <td>45.95%</td>
+            <td>8.11%</td>
+            <td>136.99</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="shimmerscale 1 shimmerscale:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/shimmerscale.png" onerror="this.style.display='none'">
+                <span>Shimmerscale 1</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>85</td>
+            <td>0.24%</td>
+            <td>4.82</td>
+            <td>47.06%</td>
+            <td>12.94%</td>
+            <td>135.8</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="별돌보미 6 mountain:6">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/mountain.png" onerror="this.style.display='none'">
+                <span>별돌보미 6</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>352</td>
+            <td>0.99%</td>
+            <td>5.31</td>
+            <td>32.39%</td>
+            <td>4.26%</td>
+            <td>135.47</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="bastion 2 bastion:2">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/bastion.png" onerror="this.style.display='none'">
+                <span>Bastion 2</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>57</td>
+            <td>0.16%</td>
+            <td>4.86</td>
+            <td>49.12%</td>
+            <td>7.02%</td>
+            <td>133.2</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="싸움꾼 3 hptank:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/hptank.png" onerror="this.style.display='none'">
+                <span>싸움꾼 3</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>290</td>
+            <td>0.82%</td>
+            <td>5.26</td>
+            <td>35.52%</td>
+            <td>7.93%</td>
+            <td>129.57</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="습격자 5 meleetrait:5">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/meleetrait.png" onerror="this.style.display='none'">
+                <span>습격자 5</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>97</td>
+            <td>0.27%</td>
+            <td>4.89</td>
+            <td>42.27%</td>
+            <td>5.15%</td>
+            <td>129.32</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="elderwood 1 elderwood:1">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/elderwood.png" onerror="this.style.display='none'">
+                <span>Elderwood 1</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>50</td>
+            <td>0.14%</td>
+            <td>5.02</td>
+            <td>46.0%</td>
+            <td>14.0%</td>
+            <td>125.66</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="정령족 4 astronaut:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/astronaut.png" onerror="this.style.display='none'">
+                <span>정령족 4</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>88</td>
+            <td>0.25%</td>
+            <td>5.17</td>
+            <td>37.5%</td>
+            <td>5.68%</td>
+            <td>113.99</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="습격자 3 meleetrait:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/meleetrait.png" onerror="this.style.display='none'">
+                <span>습격자 3</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>290</td>
+            <td>0.82%</td>
+            <td>5.56</td>
+            <td>29.31%</td>
+            <td>4.14%</td>
+            <td>111.95</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="암흑의 별 5 darkstar:5">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/darkstar.png" onerror="this.style.display='none'">
+                <span>암흑의 별 5</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>189</td>
+            <td>0.53%</td>
+            <td>5.99</td>
+            <td>21.16%</td>
+            <td>1.06%</td>
+            <td>87.27</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="별돌보미 5 mountain:5">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/mountain.png" onerror="this.style.display='none'">
+                <span>별돌보미 5</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>161</td>
+            <td>0.45%</td>
+            <td>6.23</td>
+            <td>19.25%</td>
+            <td>6.21%</td>
+            <td>75.7</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="동물특공대 3 animasquad:3">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/animasquad.png" onerror="this.style.display='none'">
+                <span>동물특공대 3</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>403</td>
+            <td>1.13%</td>
+            <td>6.43</td>
+            <td>18.61%</td>
+            <td>5.46%</td>
+            <td>75.63</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="싸움꾼 5 hptank:5">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/hptank.png" onerror="this.style.display='none'">
+                <span>싸움꾼 5</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>93</td>
+            <td>0.26%</td>
+            <td>5.84</td>
+            <td>21.51%</td>
+            <td>4.3%</td>
+            <td>75.42</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="별돌보미 4 mountain:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/mountain.png" onerror="this.style.display='none'">
+                <span>별돌보미 4</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>59</td>
+            <td>0.17%</td>
+            <td>5.9</td>
+            <td>22.03%</td>
+            <td>5.08%</td>
+            <td>72.69</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="우주 그루브 4 spacegroove:4">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/game/assets/ux/tft/traiticons/spacegroove.png" onerror="this.style.display='none'">
+                <span>우주 그루브 4</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>67</td>
+            <td>0.19%</td>
+            <td>6.13</td>
+            <td>19.4%</td>
+            <td>2.99%</td>
+            <td>59.99</td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </section>
+
+        <script>
+        let currentTier = "ALL";
+
+        function filterTier(tier) {
+            currentTier = tier;
+            applyFilters();
+        }
+
+        document.getElementById("searchInput").addEventListener("input", applyFilters);
+
+        function applyFilters() {
+            const search = document.getElementById("searchInput").value.toLowerCase();
+            const rows = document.querySelectorAll(".tier-row");
+
+            rows.forEach(row => {
+                const tierMatch = currentTier === "ALL" || row.dataset.tier === currentTier;
+                const nameMatch = row.dataset.name.includes(search);
+
+                row.style.display = tierMatch && nameMatch ? "" : "none";
+            });
+        }
+        </script>
+        
+</main>
+</body>
+</html>

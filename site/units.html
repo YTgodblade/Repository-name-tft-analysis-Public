@@ -1,0 +1,1144 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>기물 티어표</title>
+
+<style>
+body {
+    margin: 0;
+    background: #0f172a;
+    color: #e5e7eb;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    padding: 30px 40px;
+    background: #020617;
+    border-bottom: 1px solid #1e293b;
+}
+
+h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.subtitle {
+    color: #94a3b8;
+    margin-top: 8px;
+}
+
+nav {
+    margin-top: 22px;
+}
+
+nav a {
+    color: #cbd5e1;
+    text-decoration: none;
+    margin-right: 12px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #111827;
+}
+
+nav a.active {
+    background: #facc15;
+    color: #111827;
+    font-weight: bold;
+}
+
+main {
+    padding: 40px;
+}
+
+.card {
+    background: #111827;
+    padding: 24px;
+    border-radius: 18px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.25);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+h2 {
+    color: #facc15;
+}
+
+.search {
+    background: #020617;
+    color: white;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 10px 14px;
+    width: 260px;
+}
+
+.filters {
+    margin: 18px 0;
+}
+
+.filters button {
+    background: #1e293b;
+    color: white;
+    border: 1px solid #334155;
+    padding: 8px 13px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 6px;
+}
+
+.filters button:hover {
+    background: #334155;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #1e293b;
+    padding: 12px;
+    position: sticky;
+    top: 0;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #334155;
+    text-align: center;
+}
+
+tr:hover {
+    background: #1e293b;
+}
+
+.name-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+}
+
+.icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: #020617;
+}
+
+.badge {
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 999px;
+}
+
+.badge-S {
+    background: #facc15;
+    color: #111827;
+}
+
+.badge-A {
+    background: #38bdf8;
+    color: #111827;
+}
+
+.badge-B {
+    background: #4ade80;
+    color: #111827;
+}
+
+.badge-C {
+    background: #c084fc;
+    color: #111827;
+}
+
+.badge-D {
+    background: #f87171;
+    color: #111827;
+}
+
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.home-card {
+    background: #111827;
+    padding: 28px;
+    border-radius: 18px;
+    text-decoration: none;
+    color: white;
+    border: 1px solid #1e293b;
+}
+
+.home-card:hover {
+    background: #1e293b;
+}
+
+.home-card h2 {
+    margin-top: 0;
+}
+
+@media (max-width: 900px) {
+    .home-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+<header>
+    <h1>TFT Challenger Data Analysis</h1>
+    <div class="subtitle">한국 챌린저 4466경기 / 35,539명 플레이어 분석</div>
+    <nav><a class="" href="index.html">홈</a><a class="active" href="units.html">기물</a><a class="" href="items.html">아이템</a><a class="" href="traits.html">시너지</a></nav>
+</header>
+
+<main>
+
+        <section class="card">
+            <div class="section-header">
+                <h2>기물 티어표</h2>
+                <input id="searchInput" class="search" placeholder="검색어 입력">
+            </div>
+
+            <div class="filters">
+                <button onclick="filterTier('ALL')">전체</button>
+                <button onclick="filterTier('S')">S</button>
+                <button onclick="filterTier('A')">A</button>
+                <button onclick="filterTier('B')">B</button>
+                <button onclick="filterTier('C')">C</button>
+                <button onclick="filterTier('D')">D</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>티어</th>
+                        <th>게임 수</th>
+                        <th>채용률</th>
+                        <th>평균 등수</th>
+                        <th>TOP4률</th>
+                        <th>1등률</th>
+                        <th>점수</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr class="tier-row" data-tier="S" data-name="진 jhin">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/jhin/hud/jhin_square.png" onerror="this.style.display='none'">
+                <span>진</span>
+            </td>
+            <td><span class="badge badge-S">S</span></td>
+            <td>6241</td>
+            <td>17.56%</td>
+            <td>3.73</td>
+            <td>64.73%</td>
+            <td>20.11%</td>
+            <td>243.96</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="S" data-name="블리츠크랭크 blitzcrank">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/blitzcrank/hud/blitzcrank_square.png" onerror="this.style.display='none'">
+                <span>블리츠크랭크</span>
+            </td>
+            <td><span class="badge badge-S">S</span></td>
+            <td>12705</td>
+            <td>35.75%</td>
+            <td>3.89</td>
+            <td>61.28%</td>
+            <td>19.16%</td>
+            <td>242.02</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="S" data-name="쉔 shen">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/shen/hud/shen_square.png" onerror="this.style.display='none'">
+                <span>쉔</span>
+            </td>
+            <td><span class="badge badge-S">S</span></td>
+            <td>6814</td>
+            <td>19.17%</td>
+            <td>3.79</td>
+            <td>63.24%</td>
+            <td>21.1%</td>
+            <td>241.36</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="S" data-name="라아스트 rhaast">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/rhaast/hud/rhaast_square.png" onerror="this.style.display='none'">
+                <span>라아스트</span>
+            </td>
+            <td><span class="badge badge-S">S</span></td>
+            <td>9094</td>
+            <td>25.59%</td>
+            <td>3.83</td>
+            <td>63.23%</td>
+            <td>18.14%</td>
+            <td>241.33</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="바드 bard">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/bard/hud/bard_square.png" onerror="this.style.display='none'">
+                <span>바드</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>7370</td>
+            <td>20.74%</td>
+            <td>3.81</td>
+            <td>63.04%</td>
+            <td>19.15%</td>
+            <td>240.54</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="소나 sona">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/sona/hud/sona_square.png" onerror="this.style.display='none'">
+                <span>소나</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>6995</td>
+            <td>19.68%</td>
+            <td>3.95</td>
+            <td>60.86%</td>
+            <td>15.55%</td>
+            <td>231.74</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="모르가나 morgana">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/morgana/hud/morgana_square.png" onerror="this.style.display='none'">
+                <span>모르가나</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>8189</td>
+            <td>23.04%</td>
+            <td>4.04</td>
+            <td>58.87%</td>
+            <td>17.4%</td>
+            <td>228.36</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="피오라 fiora">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/fiora/hud/fiora_square.png" onerror="this.style.display='none'">
+                <span>피오라</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>5581</td>
+            <td>15.7%</td>
+            <td>4.06</td>
+            <td>58.43%</td>
+            <td>19.92%</td>
+            <td>224.79</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="카르마 karma">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/karma/hud/karma_square.png" onerror="this.style.display='none'">
+                <span>카르마</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>11452</td>
+            <td>32.22%</td>
+            <td>4.19</td>
+            <td>55.98%</td>
+            <td>14.92%</td>
+            <td>223.17</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="벡스 vex">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/vex/hud/vex_square.png" onerror="this.style.display='none'">
+                <span>벡스</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>4448</td>
+            <td>12.52%</td>
+            <td>4.09</td>
+            <td>56.97%</td>
+            <td>20.46%</td>
+            <td>221.69</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="누누와 윌럼프 nunu">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/nunu/hud/nunu_square.png" onerror="this.style.display='none'">
+                <span>누누와 윌럼프</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>11538</td>
+            <td>32.47%</td>
+            <td>4.37</td>
+            <td>51.82%</td>
+            <td>15.14%</td>
+            <td>213.06</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="모데카이저 mordekaiser">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/mordekaiser/hud/mordekaiser_square.png" onerror="this.style.display='none'">
+                <span>모데카이저</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>11237</td>
+            <td>31.62%</td>
+            <td>4.39</td>
+            <td>51.94%</td>
+            <td>13.53%</td>
+            <td>211.44</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="A" data-name="거대 메크 로봇 galio">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/galio/hud/galio_square.png" onerror="this.style.display='none'">
+                <span>거대 메크 로봇</span>
+            </td>
+            <td><span class="badge badge-A">A</span></td>
+            <td>6295</td>
+            <td>17.71%</td>
+            <td>4.3</td>
+            <td>54.09%</td>
+            <td>14.5%</td>
+            <td>211.21</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="그레이브즈 graves">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/graves/hud/graves_square.png" onerror="this.style.display='none'">
+                <span>그레이브즈</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>4385</td>
+            <td>12.34%</td>
+            <td>4.28</td>
+            <td>53.41%</td>
+            <td>20.39%</td>
+            <td>211.04</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="나미 nami">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/nami/hud/nami_square.png" onerror="this.style.display='none'">
+                <span>나미</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>5150</td>
+            <td>14.49%</td>
+            <td>4.34</td>
+            <td>52.95%</td>
+            <td>14.25%</td>
+            <td>207.53</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="오른 ornn">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/ornn/hud/ornn_square.png" onerror="this.style.display='none'">
+                <span>오른</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>6402</td>
+            <td>18.01%</td>
+            <td>4.38</td>
+            <td>51.52%</td>
+            <td>14.9%</td>
+            <td>206.64</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="탐 켄치 tahmkench">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/tahmkench/hud/tahmkench_square.png" onerror="this.style.display='none'">
+                <span>탐 켄치</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>10546</td>
+            <td>29.67%</td>
+            <td>4.47</td>
+            <td>50.57%</td>
+            <td>14.01%</td>
+            <td>206.34</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="킨드레드 kindred">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/kindred/hud/kindred_square.png" onerror="this.style.display='none'">
+                <span>킨드레드</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>5111</td>
+            <td>14.38%</td>
+            <td>4.37</td>
+            <td>54.35%</td>
+            <td>8.67%</td>
+            <td>205.29</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="빅토르 viktor">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/viktor/hud/viktor_square.png" onerror="this.style.display='none'">
+                <span>빅토르</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>1001</td>
+            <td>2.82%</td>
+            <td>4.31</td>
+            <td>53.45%</td>
+            <td>12.79%</td>
+            <td>204.22</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="아칼리 akali">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/akali/hud/akali_square.png" onerror="this.style.display='none'">
+                <span>아칼리</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>6603</td>
+            <td>18.58%</td>
+            <td>4.44</td>
+            <td>51.43%</td>
+            <td>13.1%</td>
+            <td>203.48</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="아우렐리온 솔 aurelionsol">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/aurelionsol/hud/aurelionsol_square.png" onerror="this.style.display='none'">
+                <span>아우렐리온 솔</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>3625</td>
+            <td>10.2%</td>
+            <td>4.42</td>
+            <td>51.42%</td>
+            <td>16.0%</td>
+            <td>201.71</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="사미라 samira">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/samira/hud/samira_square.png" onerror="this.style.display='none'">
+                <span>사미라</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>4288</td>
+            <td>12.07%</td>
+            <td>4.44</td>
+            <td>50.07%</td>
+            <td>15.65%</td>
+            <td>200.98</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="마오카이 maokai">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/maokai/hud/maokai_square.png" onerror="this.style.display='none'">
+                <span>마오카이</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>10878</td>
+            <td>30.61%</td>
+            <td>4.57</td>
+            <td>49.17%</td>
+            <td>10.42%</td>
+            <td>200.58</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="태고족 우두머리 aatrox">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/aatrox/hud/aatrox_square.png" onerror="this.style.display='none'">
+                <span>태고족 우두머리</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>8741</td>
+            <td>24.6%</td>
+            <td>4.54</td>
+            <td>49.06%</td>
+            <td>13.66%</td>
+            <td>200.29</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="파이크 pyke">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/pyke/hud/pyke_square.png" onerror="this.style.display='none'">
+                <span>파이크</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>1646</td>
+            <td>4.63%</td>
+            <td>4.39</td>
+            <td>52.25%</td>
+            <td>10.63%</td>
+            <td>200.15</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="그웬 gwen">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/gwen/hud/gwen_square.png" onerror="this.style.display='none'">
+                <span>그웬</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>4121</td>
+            <td>11.6%</td>
+            <td>4.45</td>
+            <td>50.55%</td>
+            <td>12.91%</td>
+            <td>199.89</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="우르곳 urgot">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/urgot/hud/urgot_square.png" onerror="this.style.display='none'">
+                <span>우르곳</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>4432</td>
+            <td>12.47%</td>
+            <td>4.48</td>
+            <td>50.77%</td>
+            <td>12.97%</td>
+            <td>198.81</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="리븐 riven">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/riven/hud/riven_square.png" onerror="this.style.display='none'">
+                <span>리븐</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>4880</td>
+            <td>13.73%</td>
+            <td>4.49</td>
+            <td>50.55%</td>
+            <td>11.31%</td>
+            <td>198.42</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="자야 xayah">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/xayah/hud/xayah_square.png" onerror="this.style.display='none'">
+                <span>자야</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>3020</td>
+            <td>8.5%</td>
+            <td>4.47</td>
+            <td>50.13%</td>
+            <td>14.8%</td>
+            <td>197.9</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="일라오이 illaoi">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/illaoi/hud/illaoi_square.png" onerror="this.style.display='none'">
+                <span>일라오이</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>8466</td>
+            <td>23.82%</td>
+            <td>4.57</td>
+            <td>48.44%</td>
+            <td>10.58%</td>
+            <td>197.68</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="B" data-name="초가스 chogath">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/chogath/hud/chogath_square.png" onerror="this.style.display='none'">
+                <span>초가스</span>
+            </td>
+            <td><span class="badge badge-B">B</span></td>
+            <td>3641</td>
+            <td>10.25%</td>
+            <td>4.5</td>
+            <td>50.43%</td>
+            <td>12.88%</td>
+            <td>196.8</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="나서스 nasus">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/nasus/hud/nasus_square.png" onerror="this.style.display='none'">
+                <span>나서스</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>3977</td>
+            <td>11.19%</td>
+            <td>4.51</td>
+            <td>48.73%</td>
+            <td>13.58%</td>
+            <td>196.31</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="판테온 pantheon">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/pantheon/hud/pantheon_square.png" onerror="this.style.display='none'">
+                <span>판테온</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>7222</td>
+            <td>20.32%</td>
+            <td>4.58</td>
+            <td>48.59%</td>
+            <td>11.8%</td>
+            <td>196.06</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="제드 zed">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/zed/hud/zed_square.png" onerror="this.style.display='none'">
+                <span>제드</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>165</td>
+            <td>0.46%</td>
+            <td>4.13</td>
+            <td>58.18%</td>
+            <td>17.58%</td>
+            <td>194.65</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="마스터 이 masteryi">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/masteryi/hud/masteryi_square.png" onerror="this.style.display='none'">
+                <span>마스터 이</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>2937</td>
+            <td>8.26%</td>
+            <td>4.52</td>
+            <td>50.83%</td>
+            <td>8.78%</td>
+            <td>194.31</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="람머스 rammus">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/rammus/hud/rammus_square.png" onerror="this.style.display='none'">
+                <span>람머스</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>5606</td>
+            <td>15.77%</td>
+            <td>4.59</td>
+            <td>48.07%</td>
+            <td>11.02%</td>
+            <td>193.43</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="벨베스 belveth">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/belveth/hud/belveth_square.png" onerror="this.style.display='none'">
+                <span>벨베스</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>5255</td>
+            <td>14.79%</td>
+            <td>4.58</td>
+            <td>49.72%</td>
+            <td>7.65%</td>
+            <td>193.36</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="렉사이 reksai">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/reksai/hud/reksai_square.png" onerror="this.style.display='none'">
+                <span>렉사이</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>2575</td>
+            <td>7.25%</td>
+            <td>4.53</td>
+            <td>50.95%</td>
+            <td>7.88%</td>
+            <td>193.26</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="카이사 kaisa">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/kaisa/hud/kaisa_square.png" onerror="this.style.display='none'">
+                <span>카이사</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>2473</td>
+            <td>6.96%</td>
+            <td>4.54</td>
+            <td>49.78%</td>
+            <td>11.73%</td>
+            <td>193.06</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="그라가스 gragas">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/gragas/hud/gragas_square.png" onerror="this.style.display='none'">
+                <span>그라가스</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>3365</td>
+            <td>9.47%</td>
+            <td>4.57</td>
+            <td>49.51%</td>
+            <td>9.06%</td>
+            <td>191.95</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="리산드라 lissandra">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/lissandra/hud/lissandra_square.png" onerror="this.style.display='none'">
+                <span>리산드라</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>6533</td>
+            <td>18.38%</td>
+            <td>4.64</td>
+            <td>47.16%</td>
+            <td>10.67%</td>
+            <td>191.63</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="잭스 jax">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/jax/hud/jax_square.png" onerror="this.style.display='none'">
+                <span>잭스</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>4551</td>
+            <td>12.81%</td>
+            <td>4.64</td>
+            <td>46.78%</td>
+            <td>11.45%</td>
+            <td>189.45</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="베이가 veigar">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/veigar/hud/veigar_square.png" onerror="this.style.display='none'">
+                <span>베이가</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>2241</td>
+            <td>6.31%</td>
+            <td>4.61</td>
+            <td>46.5%</td>
+            <td>14.77%</td>
+            <td>188.93</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="티모 teemo">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/teemo/hud/teemo_square.png" onerror="this.style.display='none'">
+                <span>티모</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>1597</td>
+            <td>4.49%</td>
+            <td>4.61</td>
+            <td>47.59%</td>
+            <td>10.58%</td>
+            <td>187.69</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="뽀삐 poppy">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/poppy/hud/poppy_square.png" onerror="this.style.display='none'">
+                <span>뽀삐</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>4253</td>
+            <td>11.97%</td>
+            <td>4.71</td>
+            <td>45.61%</td>
+            <td>10.72%</td>
+            <td>185.12</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="레오나 leona">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/leona/hud/leona_square.png" onerror="this.style.display='none'">
+                <span>레오나</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>2973</td>
+            <td>8.37%</td>
+            <td>4.69</td>
+            <td>46.59%</td>
+            <td>8.71%</td>
+            <td>184.57</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="미스 포츈 missfortune">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/missfortune/hud/missfortune_square.png" onerror="this.style.display='none'">
+                <span>미스 포츈</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>1003</td>
+            <td>2.82%</td>
+            <td>4.65</td>
+            <td>48.26%</td>
+            <td>7.08%</td>
+            <td>184.52</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="이즈리얼 ezreal">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/ezreal/hud/ezreal_square.png" onerror="this.style.display='none'">
+                <span>이즈리얼</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>1258</td>
+            <td>3.54%</td>
+            <td>4.7</td>
+            <td>46.74%</td>
+            <td>13.35%</td>
+            <td>183.11</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="코르키 corki">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/corki/hud/corki_square.png" onerror="this.style.display='none'">
+                <span>코르키</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>3128</td>
+            <td>8.8%</td>
+            <td>4.72</td>
+            <td>45.4%</td>
+            <td>9.37%</td>
+            <td>183.01</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="C" data-name="탈론 talon">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/talon/hud/talon_square.png" onerror="this.style.display='none'">
+                <span>탈론</span>
+            </td>
+            <td><span class="badge badge-C">C</span></td>
+            <td>633</td>
+            <td>1.78%</td>
+            <td>4.68</td>
+            <td>46.6%</td>
+            <td>8.21%</td>
+            <td>182.33</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="밀리오 milio">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/milio/hud/milio_square.png" onerror="this.style.display='none'">
+                <span>밀리오</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>3570</td>
+            <td>10.05%</td>
+            <td>4.74</td>
+            <td>45.6%</td>
+            <td>7.84%</td>
+            <td>182.27</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="케이틀린 caitlyn">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/caitlyn/hud/caitlyn_square.png" onerror="this.style.display='none'">
+                <span>케이틀린</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>1183</td>
+            <td>3.33%</td>
+            <td>4.71</td>
+            <td>47.42%</td>
+            <td>7.35%</td>
+            <td>181.53</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="징크스 jinx">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/jinx/hud/jinx_square.png" onerror="this.style.display='none'">
+                <span>징크스</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>2554</td>
+            <td>7.19%</td>
+            <td>4.76</td>
+            <td>47.42%</td>
+            <td>7.28%</td>
+            <td>180.56</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="룰루 lulu">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/lulu/hud/lulu_square.png" onerror="this.style.display='none'">
+                <span>룰루</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>1719</td>
+            <td>4.84%</td>
+            <td>4.74</td>
+            <td>45.32%</td>
+            <td>9.19%</td>
+            <td>180.37</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="트위스티드 페이트 twistedfate">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/twistedfate/hud/twistedfate_square.png" onerror="this.style.display='none'">
+                <span>트위스티드 페이트</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>1854</td>
+            <td>5.22%</td>
+            <td>4.74</td>
+            <td>45.36%</td>
+            <td>8.36%</td>
+            <td>180.37</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="나르 gnar">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/gnar/hud/gnar_square.png" onerror="this.style.display='none'">
+                <span>나르</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>1598</td>
+            <td>4.5%</td>
+            <td>4.76</td>
+            <td>44.62%</td>
+            <td>11.76%</td>
+            <td>179.54</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="르블랑 leblanc">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/leblanc/hud/leblanc_square.png" onerror="this.style.display='none'">
+                <span>르블랑</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>3097</td>
+            <td>8.71%</td>
+            <td>4.78</td>
+            <td>44.66%</td>
+            <td>6.91%</td>
+            <td>179.26</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="조이 zoe">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/zoe/hud/zoe_square.png" onerror="this.style.display='none'">
+                <span>조이</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>666</td>
+            <td>1.87%</td>
+            <td>4.82</td>
+            <td>43.39%</td>
+            <td>9.01%</td>
+            <td>174.57</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="브라이어 briar">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/briar/hud/briar_square.png" onerror="this.style.display='none'">
+                <span>브라이어</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>1807</td>
+            <td>5.08%</td>
+            <td>4.92</td>
+            <td>44.05%</td>
+            <td>6.42%</td>
+            <td>170.53</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="다이애나 diana">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/diana/hud/diana_square.png" onerror="this.style.display='none'">
+                <span>다이애나</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>822</td>
+            <td>2.31%</td>
+            <td>4.91</td>
+            <td>43.92%</td>
+            <td>5.47%</td>
+            <td>169.69</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="피즈 fizz">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/fizz/hud/fizz_square.png" onerror="this.style.display='none'">
+                <span>피즈</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>2481</td>
+            <td>6.98%</td>
+            <td>4.95</td>
+            <td>41.03%</td>
+            <td>8.75%</td>
+            <td>169.35</td>
+        </tr>
+        
+        <tr class="tier-row" data-tier="D" data-name="오로라 aurora">
+            <td class="name-cell">
+                <img class="icon" src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/aurora/hud/aurora_square.png" onerror="this.style.display='none'">
+                <span>오로라</span>
+            </td>
+            <td><span class="badge badge-D">D</span></td>
+            <td>633</td>
+            <td>1.78%</td>
+            <td>5.71</td>
+            <td>29.38%</td>
+            <td>7.74%</td>
+            <td>125.57</td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </section>
+
+        <script>
+        let currentTier = "ALL";
+
+        function filterTier(tier) {
+            currentTier = tier;
+            applyFilters();
+        }
+
+        document.getElementById("searchInput").addEventListener("input", applyFilters);
+
+        function applyFilters() {
+            const search = document.getElementById("searchInput").value.toLowerCase();
+            const rows = document.querySelectorAll(".tier-row");
+
+            rows.forEach(row => {
+                const tierMatch = currentTier === "ALL" || row.dataset.tier === currentTier;
+                const nameMatch = row.dataset.name.includes(search);
+
+                row.style.display = tierMatch && nameMatch ? "" : "none";
+            });
+        }
+        </script>
+        
+</main>
+</body>
+</html>
