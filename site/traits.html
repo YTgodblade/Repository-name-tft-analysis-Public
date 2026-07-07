@@ -220,6 +220,134 @@ tr:hover {
 
 <main>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 34px;
+}
+
+.chart-card {
+    background: #111827;
+    padding: 24px;
+    border-radius: 18px;
+}
+
+.chart-card h2 {
+    color: #facc15;
+}
+
+canvas {
+    max-height: 360px;
+}
+
+@media (max-width: 900px) {
+    .chart-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<div class="chart-grid">
+    <div class="chart-card">
+        <h2>시너지 채용률 TOP 10</h2>
+        <canvas id="pickChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+        <h2>시너지 평균 등수 TOP 10</h2>
+        <canvas id="avgChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+        <h2>시너지 승률 TOP 10</h2>
+        <canvas id="winChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+        <h2>시너지 채용률 vs 평균 등수</h2>
+        <canvas id="scatterChart"></canvas>
+    </div>
+</div>
+
+<script>
+const chartData = {"pickLabels": ["요새 2", "싸움꾼 2", "파티광 1", "선봉대 2", "우주 그루브 1", "암흑의 별 2", "예언자 1", "여행자 2", "N.O.V.A. 2", "복제자 2"], "pickValues": [40.51, 35.72, 34.78, 33.3, 31.64, 29.43, 29.25, 29.22, 24.05, 23.27], "avgLabels": ["정령족 10", "별돌보미 8", "도전자 5", "저격수 4", "전달자 4", "별돌보미 7", "습격자 6", "파티광 2", "우주 그루브 7", "전달자 3"], "avgValues": [1.68, 2.55, 3.35, 3.41, 3.43, 3.52, 3.52, 3.58, 3.61, 3.78], "winLabels": ["정령족 10", "별돌보미 8", "메카 6", "Ixtal 2", "우주 그루브 7", "전달자 4", "전달자 3", "별돌보미 7", "파멸자 1", "최신상 1"], "winValues": [70.91, 35.71, 30.8, 26.6, 21.98, 21.21, 21.16, 21.05, 20.7, 20.59], "scatterValues": [{"x": 0.31, "y": 1.68, "name": "정령족 10"}, {"x": 0.55, "y": 2.55, "name": "별돌보미 8"}, {"x": 2.89, "y": 3.61, "name": "우주 그루브 7"}, {"x": 34.78, "y": 3.91, "name": "파티광 1"}, {"x": 1.02, "y": 3.52, "name": "별돌보미 7"}, {"x": 0.38, "y": 3.35, "name": "도전자 5"}, {"x": 0.38, "y": 3.41, "name": "저격수 4"}, {"x": 3.74, "y": 3.78, "name": "전달자 3"}, {"x": 1.44, "y": 3.81, "name": "메카 6"}, {"x": 19.29, "y": 3.97, "name": "지휘관 1"}, {"x": 0.81, "y": 3.52, "name": "습격자 6"}, {"x": 22.68, "y": 4.04, "name": "어둠의 여인 1"}, {"x": 1.7, "y": 3.9, "name": "저격수 3"}, {"x": 6.01, "y": 3.97, "name": "암흑의 별 6"}, {"x": 15.08, "y": 4.06, "name": "신성 결투가 1"}, {"x": 31.64, "y": 4.18, "name": "우주 그루브 1"}, {"x": 2.02, "y": 4.0, "name": "싸움꾼 6"}, {"x": 33.3, "y": 4.22, "name": "선봉대 2"}, {"x": 12.17, "y": 4.1, "name": "파멸자 1"}, {"x": 29.43, "y": 4.21, "name": "암흑의 별 2"}, {"x": 1.24, "y": 3.88, "name": "도전자 4"}, {"x": 18.79, "y": 4.2, "name": "전달자 2"}, {"x": 40.51, "y": 4.36, "name": "요새 2"}, {"x": 6.39, "y": 4.15, "name": "여행자 3"}, {"x": 29.22, "y": 4.31, "name": "여행자 2"}, {"x": 17.33, "y": 4.24, "name": "습격자 2"}, {"x": 12.23, "y": 4.23, "name": "저격수 2"}, {"x": 3.03, "y": 4.18, "name": "메카 4"}, {"x": 13.48, "y": 4.24, "name": "선봉대 4"}, {"x": 18.68, "y": 4.3, "name": "길잡이 3"}, {"x": 1.9, "y": 4.19, "name": "요새 4"}, {"x": 12.02, "y": 4.29, "name": "최신상 1"}, {"x": 1.01, "y": 4.03, "name": "여행자 4"}, {"x": 35.72, "y": 4.47, "name": "싸움꾼 2"}, {"x": 11.32, "y": 4.3, "name": "초능력 2"}, {"x": 3.19, "y": 4.29, "name": "N.O.V.A. 5"}, {"x": 29.25, "y": 4.48, "name": "예언자 1"}, {"x": 1.62, "y": 4.32, "name": "초능력 4"}, {"x": 24.05, "y": 4.53, "name": "N.O.V.A. 2"}, {"x": 4.31, "y": 4.38, "name": "도전자 3"}, {"x": 8.03, "y": 4.42, "name": "N.O.V.A. 3"}, {"x": 0.88, "y": 4.21, "name": "선봉대 6"}, {"x": 23.27, "y": 4.54, "name": "복제자 2"}, {"x": 1.54, "y": 4.41, "name": "시간 균열자 4"}, {"x": 0.61, "y": 4.03, "name": "운명술사 4"}, {"x": 12.9, "y": 4.51, "name": "불한당 2"}, {"x": 15.82, "y": 4.54, "name": "시간 균열자 2"}, {"x": 7.99, "y": 4.48, "name": "정령족 5"}, {"x": 8.84, "y": 4.52, "name": "우주 그루브 5"}, {"x": 1.76, "y": 4.46, "name": "불한당 3"}, {"x": 4.53, "y": 4.48, "name": "태고족 3"}, {"x": 5.9, "y": 4.53, "name": "습격자 4"}, {"x": 0.44, "y": 4.17, "name": "은하계 사냥꾼 1"}, {"x": 2.41, "y": 4.53, "name": "태고족 2"}, {"x": 7.7, "y": 4.58, "name": "싸움꾼 4"}, {"x": 0.41, "y": 4.17, "name": "선봉대 5"}, {"x": 1.36, "y": 4.39, "name": "요새 3"}, {"x": 0.34, "y": 4.24, "name": "여행자 5"}, {"x": 2.03, "y": 4.62, "name": "별돌보미 3"}, {"x": 2.36, "y": 4.64, "name": "우주 그루브 2"}, {"x": 2.8, "y": 4.64, "name": "기동총격여신 1"}, {"x": 1.86, "y": 4.64, "name": "별돌보미 3"}, {"x": 1.1, "y": 4.51, "name": "별돌보미 3"}, {"x": 3.63, "y": 4.69, "name": "길잡이 5"}, {"x": 9.01, "y": 4.74, "name": "운명술사 2"}, {"x": 10.12, "y": 4.8, "name": "도전자 2"}, {"x": 1.64, "y": 4.74, "name": "정령족 3"}, {"x": 1.56, "y": 4.75, "name": "별돌보미 3"}, {"x": 0.36, "y": 4.47, "name": "복제자 4"}, {"x": 4.89, "y": 4.85, "name": "중재자 2"}, {"x": 1.76, "y": 4.88, "name": "선봉대 3"}, {"x": 0.85, "y": 4.74, "name": "별돌보미 3"}, {"x": 1.25, "y": 4.75, "name": "별돌보미 3"}, {"x": 1.24, "y": 4.8, "name": "시간 균열자 3"}, {"x": 0.39, "y": 4.62, "name": "우주 그루브 6"}, {"x": 2.93, "y": 5.05, "name": "정령족 7"}, {"x": 1.37, "y": 4.88, "name": "암흑의 별 3"}, {"x": 1.39, "y": 5.04, "name": "중재자 3"}, {"x": 0.86, "y": 5.09, "name": "우주 그루브 3"}, {"x": 0.59, "y": 4.94, "name": "길잡이 4"}, {"x": 0.63, "y": 4.96, "name": "N.O.V.A. 4"}, {"x": 1.8, "y": 5.32, "name": "암흑의 별 4"}, {"x": 0.37, "y": 5.04, "name": "정령족 6"}, {"x": 0.74, "y": 5.05, "name": "메카 3"}, {"x": 0.35, "y": 5.04, "name": "초능력 3"}, {"x": 0.99, "y": 5.31, "name": "별돌보미 6"}, {"x": 0.82, "y": 5.26, "name": "싸움꾼 3"}, {"x": 0.82, "y": 5.56, "name": "습격자 3"}, {"x": 0.53, "y": 5.99, "name": "암흑의 별 5"}, {"x": 0.45, "y": 6.23, "name": "별돌보미 5"}, {"x": 1.13, "y": 6.43, "name": "동물특공대 3"}]};
+
+new Chart(document.getElementById("pickChart"), {
+    type: "bar",
+    data: {
+        labels: chartData.pickLabels,
+        datasets: [{
+            label: "채용률 (%)",
+            data: chartData.pickValues
+        }]
+    }
+});
+
+new Chart(document.getElementById("avgChart"), {
+    type: "bar",
+    data: {
+        labels: chartData.avgLabels,
+        datasets: [{
+            label: "평균 등수",
+            data: chartData.avgValues
+        }]
+    }
+});
+
+new Chart(document.getElementById("winChart"), {
+    type: "bar",
+    data: {
+        labels: chartData.winLabels,
+        datasets: [{
+            label: "1등률 (%)",
+            data: chartData.winValues
+        }]
+    }
+});
+
+new Chart(document.getElementById("scatterChart"), {
+    type: "scatter",
+    data: {
+        datasets: [{
+            label: "채용률 vs 평균 등수",
+            data: chartData.scatterValues
+        }]
+    },
+    options: {
+        parsing: false,
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        const p = context.raw;
+                        return p.name + " / 채용률: " + p.x + "% / 평균 등수: " + p.y;
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: "채용률 (%)"
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: "평균 등수"
+                }
+            }
+        }
+    }
+});
+</script>
+
+
         <section class="card">
             <div class="section-header">
                 <h2>시너지 티어표</h2>
