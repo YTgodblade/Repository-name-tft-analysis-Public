@@ -17,9 +17,6 @@ def make_chart_block(csv_file, name_col, title):
     win = df.sort_values("win_rate", ascending=False).head(15)
     scatter = df[df["games"] >= 100]
 
-    max_pick = float(pick["pick_rate"].max()) + 10
-    max_win = float(win["win_rate"].max()) + 10
-
     data = {
         "pickLabels": pick[name_col].tolist(),
         "pickValues": pick["pick_rate"].tolist(),
@@ -35,8 +32,8 @@ def make_chart_block(csv_file, name_col, title):
             }
             for _, row in scatter.iterrows()
         ],
-        "maxPick": max_pick,
-        "maxWin": max_win
+        "maxPick": float(pick["pick_rate"].max()) + 10,
+        "maxWin": float(win["win_rate"].max()) + 10
     }
 
     return f"""
@@ -46,52 +43,61 @@ def make_chart_block(csv_file, name_col, title):
 <style>
 .chart-grid {{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    margin-bottom: 34px;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-bottom: 40px;
 }}
 
 .chart-card {{
     background: #111827;
     padding: 24px;
     border-radius: 18px;
-    min-height: 650px;
 }}
 
 .chart-card h2 {{
     color: #facc15;
 }}
 
-canvas {{
-    height: 560px !important;
+.chart-box {{
+    position: relative;
+    height: 720px;
+    width: 100%;
 }}
 
-@media (max-width: 900px) {{
-    .chart-grid {{
-        grid-template-columns: 1fr;
-    }}
+.scatter-box {{
+    position: relative;
+    height: 560px;
+    width: 100%;
 }}
 </style>
 
 <div class="chart-grid">
     <div class="chart-card">
         <h2>{title} 채용률 TOP 15</h2>
-        <canvas id="pickChart"></canvas>
+        <div class="chart-box">
+            <canvas id="pickChart"></canvas>
+        </div>
     </div>
 
     <div class="chart-card">
         <h2>{title} 평균 등수 TOP 15</h2>
-        <canvas id="avgChart"></canvas>
+        <div class="chart-box">
+            <canvas id="avgChart"></canvas>
+        </div>
     </div>
 
     <div class="chart-card">
         <h2>{title} 승률 TOP 15</h2>
-        <canvas id="winChart"></canvas>
+        <div class="chart-box">
+            <canvas id="winChart"></canvas>
+        </div>
     </div>
 
     <div class="chart-card">
         <h2>{title} 채용률 vs 평균 등수</h2>
-        <canvas id="scatterChart"></canvas>
+        <div class="scatter-box">
+            <canvas id="scatterChart"></canvas>
+        </div>
     </div>
 </div>
 
@@ -108,6 +114,7 @@ new Chart(document.getElementById("pickChart"), {{
         }}]
     }},
     options: {{
+        responsive: true,
         maintainAspectRatio: false,
         indexAxis: "y",
         scales: {{
@@ -117,6 +124,11 @@ new Chart(document.getElementById("pickChart"), {{
                 title: {{
                     display: true,
                     text: "채용률 (%)"
+                }}
+            }},
+            y: {{
+                ticks: {{
+                    autoSkip: false
                 }}
             }}
         }}
@@ -133,6 +145,7 @@ new Chart(document.getElementById("avgChart"), {{
         }}]
     }},
     options: {{
+        responsive: true,
         maintainAspectRatio: false,
         indexAxis: "y",
         scales: {{
@@ -142,6 +155,11 @@ new Chart(document.getElementById("avgChart"), {{
                 title: {{
                     display: true,
                     text: "평균 등수"
+                }}
+            }},
+            y: {{
+                ticks: {{
+                    autoSkip: false
                 }}
             }}
         }}
@@ -158,6 +176,7 @@ new Chart(document.getElementById("winChart"), {{
         }}]
     }},
     options: {{
+        responsive: true,
         maintainAspectRatio: false,
         indexAxis: "y",
         scales: {{
@@ -167,6 +186,11 @@ new Chart(document.getElementById("winChart"), {{
                 title: {{
                     display: true,
                     text: "1등률 (%)"
+                }}
+            }},
+            y: {{
+                ticks: {{
+                    autoSkip: false
                 }}
             }}
         }}
@@ -182,6 +206,7 @@ new Chart(document.getElementById("scatterChart"), {{
         }}]
     }},
     options: {{
+        responsive: true,
         maintainAspectRatio: false,
         parsing: false,
         plugins: {{
