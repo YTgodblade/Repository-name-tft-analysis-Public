@@ -7,7 +7,6 @@ OUTPUT = "recommender.html"
 df = pd.read_csv(INPUT)
 
 data = []
-
 for _, row in df.iterrows():
     data.append({
         "meta_score": float(row.get("stability_score", 0)),
@@ -30,7 +29,6 @@ html = f"""
 <meta charset="UTF-8">
 <title>TFT 덱 추천기</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <style>
 body {{
     margin: 0;
@@ -38,26 +36,22 @@ body {{
     color: #e5e7eb;
     font-family: Arial, sans-serif;
 }}
-
 header {{
     padding: 34px;
     text-align: center;
     background: #111827;
 }}
-
 main {{
     max-width: 1200px;
     margin: 30px auto;
     padding: 20px;
 }}
-
 .card {{
     background: #111827;
     border-radius: 18px;
     padding: 24px;
     margin-bottom: 24px;
 }}
-
 textarea {{
     width: 100%;
     padding: 12px;
@@ -69,7 +63,6 @@ textarea {{
     color: white;
     font-size: 15px;
 }}
-
 button {{
     background: #facc15;
     color: #111827;
@@ -79,25 +72,6 @@ button {{
     font-weight: bold;
     cursor: pointer;
 }}
-
-.grid {{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-}}
-
-.stat {{
-    background: #020617;
-    border-radius: 14px;
-    padding: 18px;
-    text-align: center;
-}}
-
-.stat strong {{
-    color: #facc15;
-    font-size: 24px;
-}}
-
 .result {{
     border: 1px solid #374151;
     border-radius: 16px;
@@ -105,13 +79,11 @@ button {{
     margin-top: 18px;
     background: #020617;
 }}
-
 .rank {{
     color: #facc15;
     font-size: 22px;
     font-weight: bold;
 }}
-
 .tag {{
     display: inline-block;
     background: #1f2937;
@@ -119,29 +91,51 @@ button {{
     border-radius: 999px;
     margin: 4px;
 }}
-
 table {{
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }}
-
 th, td {{
     border-bottom: 1px solid #334155;
     padding: 10px;
     text-align: center;
 }}
-
 th {{
     background: #1e293b;
     color: #facc15;
 }}
-
 .chart-box {{
-    height: 360px;
+    height: 340px;
     margin-top: 20px;
 }}
-
+.progress-bg {{
+    background: #1f2937;
+    border-radius: 999px;
+    overflow: hidden;
+    height: 18px;
+    margin: 8px 0 16px;
+}}
+.progress-fill {{
+    background: #facc15;
+    height: 100%;
+}}
+.reason-grid {{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+}}
+.reason-box {{
+    background: #1f2937;
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+}}
+.reason-box strong {{
+    color: #facc15;
+    font-size: 22px;
+}}
 .small {{
     color: #9ca3af;
 }}
@@ -171,17 +165,17 @@ th {{
     </section>
 
     <section class="card">
-        <h2>추천 결과 시각화</h2>
-        <div class="chart-box">
-            <canvas id="scoreChart"></canvas>
-        </div>
-        <div class="chart-box">
-            <canvas id="detailChart"></canvas>
-        </div>
+        <h2>추천 점수 그래프</h2>
+        <div class="chart-box"><canvas id="scoreChart"></canvas></div>
     </section>
 
     <section class="card">
-        <h2>추천 TOP5 표</h2>
+        <h2>1위 덱 적합도 분석</h2>
+        <div class="chart-box"><canvas id="detailChart"></canvas></div>
+    </section>
+
+    <section class="card">
+        <h2>덱 비교표</h2>
         <div id="tableArea" class="small">입력 후 추천 받기를 눌러주세요.</div>
     </section>
 
@@ -214,6 +208,43 @@ function matchScore(current, target) {{
     return count / target.length * 100;
 }}
 
+function progressBar(value) {{
+    const safe = Math.max(0, Math.min(100, value));
+    return `
+        <div class="progress-bg">
+            <div class="progress-fill" style="width:${{safe}}%"></div>
+        </div>
+    `;
+}}
+
+function makeItemRecommend(r, currentItems) {{
+    if (currentItems.length === 0) return "<p class='small'>입력된 아이템이 없습니다.</p>";
+
+    let carry = r.main_carry || "메인 캐리";
+    let tank = r.main_tank || "메인 탱커";
+
+    let html = "";
+    currentItems.forEach((item, i) => {{
+        const target = i % 2 === 0 ? carry : tank;
+        html += `<span class="tag">${{item}} → ${{target}}</span>`;
+    }});
+
+    return html;
+}}
+
+function makeTraitStatus(r, currentTraits) {{
+    const targetTraits = r.traits.slice(0, 6);
+    let html = "";
+
+    targetTraits.forEach(t => {{
+        const traitName = t.replace(/[0-9]/g, "").trim();
+        const matched = currentTraits.some(c => c.includes(traitName));
+        html += `<span class="tag">${{matched ? "✅" : "⬜"}} ${{t}}</span>`;
+    }});
+
+    return html || "<p class='small'>핵심 시너지 정보가 없습니다.</p>";
+}}
+
 function drawCharts(top) {{
     const labels = top.map((_, i) => (i + 1) + "위");
 
@@ -223,7 +254,7 @@ function drawCharts(top) {{
     scoreChart = new Chart(document.getElementById("scoreChart"), {{
         type: "bar",
         data: {{
-            labels: labels,
+            labels,
             datasets: [{{
                 label: "추천 점수",
                 data: top.map(x => x.finalScore)
@@ -233,9 +264,7 @@ function drawCharts(top) {{
             responsive: true,
             maintainAspectRatio: false,
             scales: {{
-                y: {{
-                    beginAtZero: true
-                }}
+                y: {{ beginAtZero: true }}
             }}
         }}
     }});
@@ -247,24 +276,15 @@ function drawCharts(top) {{
         data: {{
             labels: ["기물", "핵심 기물", "아이템", "시너지", "덱 통계"],
             datasets: [{{
-                label: "1위 추천 덱 적합도",
-                data: [
-                    best.unitScore,
-                    best.coreScore,
-                    best.itemScore,
-                    best.traitScore,
-                    best.metaScore
-                ]
+                label: "적합도",
+                data: [best.unitScore, best.coreScore, best.itemScore, best.traitScore, best.metaScore]
             }}]
         }},
         options: {{
             responsive: true,
             maintainAspectRatio: false,
             scales: {{
-                y: {{
-                    beginAtZero: true,
-                    max: 100
-                }}
+                y: {{ beginAtZero: true, max: 100 }}
             }}
         }}
     }});
@@ -276,13 +296,14 @@ function makeTable(top) {{
         <thead>
             <tr>
                 <th>순위</th>
-                <th>점수</th>
+                <th>추천 점수</th>
+                <th>완성도</th>
                 <th>메인 캐리</th>
                 <th>메인 탱커</th>
                 <th>평균 등수</th>
                 <th>TOP4률</th>
                 <th>1등률</th>
-                <th>표본 수</th>
+                <th>표본</th>
             </tr>
         </thead>
         <tbody>
@@ -293,6 +314,7 @@ function makeTable(top) {{
         <tr>
             <td>${{i + 1}}위</td>
             <td>${{r.finalScore.toFixed(2)}}</td>
+            <td>${{r.completion.toFixed(1)}}%</td>
             <td>${{r.main_carry}}</td>
             <td>${{r.main_tank}}</td>
             <td>${{r.avg_place}}</td>
@@ -333,6 +355,7 @@ function recommendDecks() {{
 
         const missing = units.filter(u => !currentUnits.includes(u)).slice(0, 6);
         const matched = units.filter(u => currentUnits.includes(u));
+        const completion = units.length === 0 ? 0 : matched.length / units.length * 100;
 
         return {{
             ...comp,
@@ -346,7 +369,8 @@ function recommendDecks() {{
             coreScore,
             itemScore,
             traitScore,
-            metaScore
+            metaScore,
+            completion
         }};
     }});
 
@@ -354,7 +378,6 @@ function recommendDecks() {{
     const top = scored.slice(0, 5);
 
     drawCharts(top);
-
     document.getElementById("tableArea").innerHTML = makeTable(top);
 
     const box = document.getElementById("results");
@@ -367,10 +390,15 @@ function recommendDecks() {{
         div.innerHTML = `
             <div class="rank">${{index + 1}}위 추천 덱 / 점수: ${{r.finalScore.toFixed(2)}}</div>
 
-            <div class="grid">
-                <div class="stat"><p>평균 등수</p><strong>${{r.avg_place}}</strong></div>
-                <div class="stat"><p>TOP4률</p><strong>${{r.top4_rate}}%</strong></div>
-                <div class="stat"><p>1등률</p><strong>${{r.win_rate}}%</strong></div>
+            <h3>덱 완성도: ${{r.completion.toFixed(1)}}%</h3>
+            ${{progressBar(r.completion)}}
+
+            <div class="reason-grid">
+                <div class="reason-box"><p>기물</p><strong>${{r.unitScore.toFixed(0)}}%</strong></div>
+                <div class="reason-box"><p>핵심 기물</p><strong>${{r.coreScore.toFixed(0)}}%</strong></div>
+                <div class="reason-box"><p>아이템</p><strong>${{r.itemScore.toFixed(0)}}%</strong></div>
+                <div class="reason-box"><p>시너지</p><strong>${{r.traitScore.toFixed(0)}}%</strong></div>
+                <div class="reason-box"><p>통계</p><strong>${{r.metaScore.toFixed(0)}}%</strong></div>
             </div>
 
             <p><b>메인 캐리:</b> ${{r.main_carry}} / <b>메인 탱커:</b> ${{r.main_tank}}</p>
@@ -381,13 +409,19 @@ function recommendDecks() {{
             <p><b>부족한 기물</b></p>
             ${{r.missing.map(x => `<span class="tag">${{x}}</span>`).join("")}}
 
+            <p><b>아이템 착용 추천</b></p>
+            ${{makeItemRecommend(r, currentItems)}}
+
+            <p><b>시너지 활성화 현황</b></p>
+            ${{makeTraitStatus(r, currentTraits)}}
+
             <p><b>추천 이유</b></p>
             <ul>
                 <li>현재 기물 ${{r.matched.length}}명이 추천 덱과 일치합니다.</li>
-                <li>기물 적합도 ${{r.unitScore.toFixed(1)}}점, 핵심 기물 적합도 ${{r.coreScore.toFixed(1)}}점입니다.</li>
+                <li>덱 완성도는 ${{r.completion.toFixed(1)}}%입니다.</li>
                 <li>아이템 적합도는 ${{r.itemScore.toFixed(1)}}점입니다.</li>
                 <li>시너지 적합도는 ${{r.traitScore.toFixed(1)}}점입니다.</li>
-                <li>실제 경기 데이터의 평균 등수, TOP4률, 1등률을 함께 반영했습니다.</li>
+                <li>평균 등수 ${{r.avg_place}}, TOP4률 ${{r.top4_rate}}%, 1등률 ${{r.win_rate}}% 데이터를 반영했습니다.</li>
             </ul>
         `;
 
@@ -403,5 +437,5 @@ function recommendDecks() {{
 with open(OUTPUT, "w", encoding="utf-8") as f:
     f.write(html)
 
-print("시각화 포함 덱 추천기 사이트 생성 완료!")
+print("덱 추천기 사이트 생성 완료!")
 print(OUTPUT)
