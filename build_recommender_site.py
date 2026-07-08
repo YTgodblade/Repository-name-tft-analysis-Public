@@ -10,7 +10,7 @@ data = []
 
 for _, row in df.iterrows():
     data.append({
-        "score": float(row.get("stability_score", 0)),
+        "meta_score": float(row.get("stability_score", 0)),
         "units": str(row.get("units_kr", "")),
         "core_units": str(row.get("core_units_kr", "")),
         "core_items": str(row.get("core_items_kr", "")),
@@ -29,6 +29,8 @@ html = f"""
 <head>
 <meta charset="UTF-8">
 <title>TFT 덱 추천기</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <style>
 body {{
     margin: 0;
@@ -38,26 +40,13 @@ body {{
 }}
 
 header {{
-    padding: 28px;
+    padding: 34px;
+    text-align: center;
     background: #111827;
-    text-align: center;
-}}
-
-nav {{
-    text-align: center;
-    padding: 14px;
-    background: #020617;
-}}
-
-nav a {{
-    color: #facc15;
-    margin: 0 14px;
-    text-decoration: none;
-    font-weight: bold;
 }}
 
 main {{
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 30px auto;
     padding: 20px;
 }}
@@ -69,7 +58,7 @@ main {{
     margin-bottom: 24px;
 }}
 
-textarea, input {{
+textarea {{
     width: 100%;
     padding: 12px;
     border-radius: 10px;
@@ -89,6 +78,24 @@ button {{
     border-radius: 12px;
     font-weight: bold;
     cursor: pointer;
+}}
+
+.grid {{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}}
+
+.stat {{
+    background: #020617;
+    border-radius: 14px;
+    padding: 18px;
+    text-align: center;
+}}
+
+.stat strong {{
+    color: #facc15;
+    font-size: 24px;
 }}
 
 .result {{
@@ -113,18 +120,39 @@ button {{
     margin: 4px;
 }}
 
+table {{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}}
+
+th, td {{
+    border-bottom: 1px solid #334155;
+    padding: 10px;
+    text-align: center;
+}}
+
+th {{
+    background: #1e293b;
+    color: #facc15;
+}}
+
+.chart-box {{
+    height: 360px;
+    margin-top: 20px;
+}}
+
 .small {{
     color: #9ca3af;
 }}
 </style>
 </head>
-<body>
 
+<body>
 <header>
     <h1>TFT 데이터 기반 덱 추천기</h1>
     <p>기물, 아이템, 시너지를 입력하면 실제 경기 데이터를 바탕으로 추천 덱을 계산합니다.</p>
 </header>
-
 
 <main>
     <section class="card">
@@ -143,13 +171,30 @@ button {{
     </section>
 
     <section class="card">
-        <h2>추천 결과</h2>
+        <h2>추천 결과 시각화</h2>
+        <div class="chart-box">
+            <canvas id="scoreChart"></canvas>
+        </div>
+        <div class="chart-box">
+            <canvas id="detailChart"></canvas>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>추천 TOP5 표</h2>
+        <div id="tableArea" class="small">입력 후 추천 받기를 눌러주세요.</div>
+    </section>
+
+    <section class="card">
+        <h2>상세 추천 결과</h2>
         <div id="results" class="small">입력 후 추천 받기를 눌러주세요.</div>
     </section>
 </main>
 
 <script>
 const comps = {json.dumps(data, ensure_ascii=False)};
+let scoreChart = null;
+let detailChart = null;
 
 function splitInput(text) {{
     return text.split(",").map(x => x.trim()).filter(x => x.length > 0);
@@ -169,6 +214,99 @@ function matchScore(current, target) {{
     return count / target.length * 100;
 }}
 
+function drawCharts(top) {{
+    const labels = top.map((_, i) => (i + 1) + "위");
+
+    if (scoreChart) scoreChart.destroy();
+    if (detailChart) detailChart.destroy();
+
+    scoreChart = new Chart(document.getElementById("scoreChart"), {{
+        type: "bar",
+        data: {{
+            labels: labels,
+            datasets: [{{
+                label: "추천 점수",
+                data: top.map(x => x.finalScore)
+            }}]
+        }},
+        options: {{
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {{
+                y: {{
+                    beginAtZero: true
+                }}
+            }}
+        }}
+    }});
+
+    const best = top[0];
+
+    detailChart = new Chart(document.getElementById("detailChart"), {{
+        type: "bar",
+        data: {{
+            labels: ["기물", "핵심 기물", "아이템", "시너지", "덱 통계"],
+            datasets: [{{
+                label: "1위 추천 덱 적합도",
+                data: [
+                    best.unitScore,
+                    best.coreScore,
+                    best.itemScore,
+                    best.traitScore,
+                    best.metaScore
+                ]
+            }}]
+        }},
+        options: {{
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {{
+                y: {{
+                    beginAtZero: true,
+                    max: 100
+                }}
+            }}
+        }}
+    }});
+}}
+
+function makeTable(top) {{
+    let html = `
+    <table>
+        <thead>
+            <tr>
+                <th>순위</th>
+                <th>점수</th>
+                <th>메인 캐리</th>
+                <th>메인 탱커</th>
+                <th>평균 등수</th>
+                <th>TOP4률</th>
+                <th>1등률</th>
+                <th>표본 수</th>
+            </tr>
+        </thead>
+        <tbody>
+    `;
+
+    top.forEach((r, i) => {{
+        html += `
+        <tr>
+            <td>${{i + 1}}위</td>
+            <td>${{r.finalScore.toFixed(2)}}</td>
+            <td>${{r.main_carry}}</td>
+            <td>${{r.main_tank}}</td>
+            <td>${{r.avg_place}}</td>
+            <td>${{r.top4_rate}}%</td>
+            <td>${{r.win_rate}}%</td>
+            <td>${{r.games}}</td>
+        </tr>
+        `;
+    }});
+
+    html += "</tbody></table>";
+    return html;
+}}
+
 function recommendDecks() {{
     const currentUnits = splitInput(document.getElementById("unitsInput").value);
     const currentItems = splitInput(document.getElementById("itemsInput").value);
@@ -184,9 +322,9 @@ function recommendDecks() {{
         const coreScore = matchScore(currentUnits, coreUnits);
         const itemScore = matchScore(currentItems, items);
         const traitScore = matchScore(currentTraits, traits);
-        const metaScore = Math.min(comp.score, 220) / 220 * 100;
+        const metaScore = Math.min(comp.meta_score, 220) / 220 * 100;
 
-        let finalScore =
+        const finalScore =
             unitScore * 0.30 +
             coreScore * 0.25 +
             traitScore * 0.20 +
@@ -205,14 +343,19 @@ function recommendDecks() {{
             missing,
             matched,
             unitScore,
+            coreScore,
             itemScore,
-            traitScore
+            traitScore,
+            metaScore
         }};
     }});
 
     scored.sort((a, b) => b.finalScore - a.finalScore);
-
     const top = scored.slice(0, 5);
+
+    drawCharts(top);
+
+    document.getElementById("tableArea").innerHTML = makeTable(top);
 
     const box = document.getElementById("results");
     box.innerHTML = "";
@@ -223,8 +366,14 @@ function recommendDecks() {{
 
         div.innerHTML = `
             <div class="rank">${{index + 1}}위 추천 덱 / 점수: ${{r.finalScore.toFixed(2)}}</div>
+
+            <div class="grid">
+                <div class="stat"><p>평균 등수</p><strong>${{r.avg_place}}</strong></div>
+                <div class="stat"><p>TOP4률</p><strong>${{r.top4_rate}}%</strong></div>
+                <div class="stat"><p>1등률</p><strong>${{r.win_rate}}%</strong></div>
+            </div>
+
             <p><b>메인 캐리:</b> ${{r.main_carry}} / <b>메인 탱커:</b> ${{r.main_tank}}</p>
-            <p><b>평균 등수:</b> ${{r.avg_place}} / <b>TOP4률:</b> ${{r.top4_rate}}% / <b>1등률:</b> ${{r.win_rate}}% / <b>표본:</b> ${{r.games}}판</p>
 
             <p><b>완성 덱</b></p>
             ${{r.units.map(x => `<span class="tag">${{x}}</span>`).join("")}}
@@ -235,10 +384,10 @@ function recommendDecks() {{
             <p><b>추천 이유</b></p>
             <ul>
                 <li>현재 기물 ${{r.matched.length}}명이 추천 덱과 일치합니다.</li>
-                <li>기물 적합도: ${{r.unitScore.toFixed(1)}}점</li>
-                <li>아이템 적합도: ${{r.itemScore.toFixed(1)}}점</li>
-                <li>시너지 적합도: ${{r.traitScore.toFixed(1)}}점</li>
-                <li>실제 경기 평균 등수와 TOP4률을 함께 반영했습니다.</li>
+                <li>기물 적합도 ${{r.unitScore.toFixed(1)}}점, 핵심 기물 적합도 ${{r.coreScore.toFixed(1)}}점입니다.</li>
+                <li>아이템 적합도는 ${{r.itemScore.toFixed(1)}}점입니다.</li>
+                <li>시너지 적합도는 ${{r.traitScore.toFixed(1)}}점입니다.</li>
+                <li>실제 경기 데이터의 평균 등수, TOP4률, 1등률을 함께 반영했습니다.</li>
             </ul>
         `;
 
@@ -254,5 +403,5 @@ function recommendDecks() {{
 with open(OUTPUT, "w", encoding="utf-8") as f:
     f.write(html)
 
-print("덱 추천기 사이트 생성 완료!")
+print("시각화 포함 덱 추천기 사이트 생성 완료!")
 print(OUTPUT)
